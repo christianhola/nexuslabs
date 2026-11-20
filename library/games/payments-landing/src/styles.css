@@ -1,0 +1,206 @@
+@import 'tailwindcss';
+
+/*
+  Ledgerly design tokens. A cool mist-grey page, deep petrol navy for ink and
+  the dark band, and one teal brand colour. `teal` is the bright brand fill
+  (large type, card faces, icons); `teal-ink` is the AA-safe version used
+  wherever teal carries small text, such as button labels and eyebrows.
+  Everything rounded is a squircle (global rule below), so radii run a step
+  larger than a plain border-radius would.
+*/
+@theme {
+  --font-sans: 'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --color-page: #ffffff;
+  --color-mist: #eef3f4;
+  --color-mist-2: #f5f8f9;
+  --color-mist-3: #e4ecee;
+  --color-line: #dde6e9;
+  --color-line-strong: #c5d3d8;
+  --color-ink: #0c2733;
+  --color-ink-2: #2c434d;
+  --color-muted: #52666f;
+  --color-faint: #5d6f77;
+  --color-teal: #2b8a96;
+  --color-teal-ink: #1f6f79;
+  --color-teal-deep: #185c65;
+  --color-teal-50: #e4f1f2;
+  --color-teal-100: #cbe5e8;
+  --color-navy: #0b3647;
+  --color-navy-2: #0f4357;
+  --color-navy-3: #165068;
+  --color-navy-line: rgb(255 255 255 / 0.1);
+  --color-on-navy: #e7f1f3;
+  --color-on-navy-muted: #a9c1c9;
+  --color-success: #17784f;
+  --color-success-50: #e3f4ec;
+  --color-warning: #8a5a00;
+  --color-warning-50: #fdf3dc;
+  --color-danger: #b4322b;
+  --color-danger-50: #fbe9e7;
+
+  --radius-control: 12px;
+  --radius-control-sm: 10px;
+  --radius-card: 24px;
+  --radius-card-sm: 18px;
+  --radius-panel: 32px;
+
+  --shadow-card: 0 1px 2px rgb(12 39 51 / 0.04), 0 12px 40px -12px rgb(12 39 51 / 0.12);
+  --shadow-float: 0 2px 6px rgb(12 39 51 / 0.05), 0 30px 70px -24px rgb(12 39 51 / 0.28);
+  --shadow-focus: 0 0 0 3px rgb(43 138 150 / 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 600ms;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 1.8s ease-out infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-spin-slow: spin 1s linear infinite;
+  --animate-draw: draw 1.6s var(--ease-out) both;
+  --animate-tick: tick 30s linear forwards;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgb(43 138 150 / 0.45); }
+    100% { box-shadow: 0 0 0 10px rgb(43 138 150 / 0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes draw {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes tick {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+  }
+}
+
+@layer base {
+  * {
+    corner-shape: squircle;
+  }
+  .round {
+    corner-shape: round;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 96px;
+    background: var(--color-page);
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-page);
+    font-feature-settings: 'ss01', 'cv11';
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-teal-100);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+  }
+  [data-force='focus'] {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role='button'],
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, var(--color-mist-3) 0%, var(--color-mist) 40%, var(--color-mist-3) 80%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes flow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(1400%); }
+}
+
+/* Range slider: a 40px hit area with an 8px filled track. */
+.range::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-teal) var(--pct), var(--color-mist-3) var(--pct));
+}
+.range::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-mist-3);
+}
+.range::-moz-range-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-teal);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -7px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 3px solid white;
+  background: var(--color-teal-ink);
+  box-shadow: 0 1px 4px rgb(12 39 51 / 0.3);
+}
+.range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 3px solid white;
+  background: var(--color-teal-ink);
+  box-shadow: 0 1px 4px rgb(12 39 51 / 0.3);
+}
+.range:focus-visible {
+  outline: none;
+}
+.range:focus-visible::-webkit-slider-thumb {
+  box-shadow: var(--shadow-focus);
+}

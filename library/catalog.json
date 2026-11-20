@@ -1,0 +1,2446 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-12T18:42:03.300Z",
+  "templates": [
+    {
+      "id": "saas-landing",
+      "name": "Landing page",
+      "description": "A warm, animated marketing page with a live product mock, feature bento, pricing, FAQ and a demo email form.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:landing-page",
+        "marketing",
+        "landing",
+        "dark"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/saas-landing-c96dc6533657.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/saas-landing-b76afdfd7d32.tar.gz",
+        "sha256": "b76afdfd7d3294ae068d9b1c57c3cffc52130c796356022baf3b0a3e838f9a89",
+        "bytes": 44243,
+        "files": 37
+      },
+      "version": "b76afdfd7d32"
+    },
+    {
+      "id": "store",
+      "name": "Store",
+      "description": "An editorial storefront with a catalogue, filters, product pages, a bag and a demo checkout.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:store",
+        "ecommerce",
+        "store",
+        "catalogue"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/store-37c44cca720b.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/store-98f37f4b2b9e.tar.gz",
+        "sha256": "98f37f4b2b9e0ea3194c0c4cc7e832c35a97302450a0deed47058b882f352037",
+        "bytes": 2421400,
+        "files": 42
+      },
+      "version": "98f37f4b2b9e"
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio",
+      "description": "A creative personal site with case studies, parallax work grid, services and a demo contact form.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:portfolio",
+        "portfolio",
+        "personal",
+        "creative"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/portfolio-47e9907d6050.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/portfolio-1fe1866ef3bd.tar.gz",
+        "sha256": "1fe1866ef3bddf2efaa4f010070dd106e124924fb42b815fe837a2af47f35055",
+        "bytes": 1717271,
+        "files": 33
+      },
+      "version": "1fe1866ef3bd"
+    },
+    {
+      "id": "study",
+      "name": "Study app",
+      "description": "Decks and flashcards with learn and match modes, mastery tracking, streaks and progress, per user.",
+      "kind": "app",
+      "integrations": [
+        "auth",
+        "database",
+        "storage"
+      ],
+      "tags": [
+        "category:saas",
+        "education",
+        "flashcards",
+        "app"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/study-61856d5e3316.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/study-b43703becdfd.tar.gz",
+        "sha256": "b43703becdfd227234d061f2ca5fee0f127a5aeacc518ad34e13c259991cafb6",
+        "bytes": 58192,
+        "files": 39
+      },
+      "version": "b43703becdfd"
+    },
+    {
+      "id": "ai-chat",
+      "name": "AI chat",
+      "description": "A chat assistant on the Freebuff API: conversations, streamed Markdown replies, a model picker and a daily limit, per user. Bring your own API key.",
+      "kind": "app",
+      "integrations": [
+        "auth",
+        "database"
+      ],
+      "tags": [
+        "category:saas",
+        "ai",
+        "chat",
+        "assistant",
+        "app"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/ai-chat-2298f627ba4d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/ai-chat-050035825ce6.tar.gz",
+        "sha256": "050035825ce6e11f4002c9e581e0cd952560efa9a38915c27703bf5a69c5a41f",
+        "bytes": 68187,
+        "files": 41
+      },
+      "version": "050035825ce6"
+    },
+    {
+      "id": "crm",
+      "name": "CRM",
+      "description": "Contacts, companies, a drag-and-drop deal board, tasks, notes and files, scoped to the signed-in user.",
+      "kind": "app",
+      "integrations": [
+        "auth",
+        "database",
+        "storage"
+      ],
+      "tags": [
+        "category:saas",
+        "dashboard",
+        "crm",
+        "business"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/crm-590a971c72f9.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/crm-978215999e84.tar.gz",
+        "sha256": "978215999e842461283596b175831211009946b96358266188f307b384ae40dd",
+        "bytes": 72198,
+        "files": 47
+      },
+      "version": "978215999e84"
+    },
+    {
+      "id": "chess",
+      "name": "Chess",
+      "description": "A quiet multiplayer chess room with guest games, private invitations, clocks, a practice opponent and Freebuff account stats.",
+      "kind": "app",
+      "integrations": [
+        "auth",
+        "database"
+      ],
+      "tags": [
+        "category:game",
+        "game",
+        "chess",
+        "multiplayer"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/chess-cb7e23863fae.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/chess-1c41cef3ca2f.tar.gz",
+        "sha256": "1c41cef3ca2fad354bf52ed9a1e24564d595d9484228eee6ad92266fef139a09",
+        "bytes": 59203,
+        "files": 28
+      },
+      "version": "1c41cef3ca2f"
+    },
+    {
+      "id": "orbit",
+      "name": "Orbit",
+      "description": "A pastel multiplayer cell arena with guest rooms, skins and optional Freebuff sign-in. Runs on its own Cloudflare game server.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:game",
+        "game",
+        "multiplayer",
+        "canvas",
+        "cloudflare"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/orbit-5468276fdfc5.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/orbit-a767a45e92e9.tar.gz",
+        "sha256": "a767a45e92e95be627aa7e375893e18550f88cc9b7132ae85a3fe52e3c18eade",
+        "bytes": 51231,
+        "files": 20
+      },
+      "version": "a767a45e92e9"
+    },
+    {
+      "id": "flappy-bird",
+      "name": "Flappy Bird",
+      "description": "An illustrated arcade game with responsive flight physics, anonymous play, and a verified leaderboard with optional Freebuff sign-in.",
+      "kind": "app",
+      "integrations": [
+        "auth",
+        "database"
+      ],
+      "tags": [
+        "game",
+        "arcade",
+        "casual",
+        "2d"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/flappy-bird-cbc68ec97ae7.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/flappy-bird-bfd1bfb9ab3b.tar.gz",
+        "sha256": "bfd1bfb9ab3ba274b8637622dc52d14e21966097acbf44d84da558e52d5202d5",
+        "bytes": 37866,
+        "files": 21
+      },
+      "version": "bfd1bfb9ab3b"
+    },
+    {
+      "id": "coil",
+      "name": "Coil",
+      "description": "A polished multiplayer snake arena with guest play, six colors and smooth mouse, keyboard and touch controls. Runs on its own Cloudflare Durable Object game server.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "game",
+        "multiplayer",
+        "snake",
+        "canvas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/coil-c04b6a1f9c6d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/coil-329fa979ec11.tar.gz",
+        "sha256": "329fa979ec11a99ced0b7200e54732a48bec2de6ac54cb1f807d8b829effda5f",
+        "bytes": 46520,
+        "files": 22
+      },
+      "version": "329fa979ec11"
+    },
+    {
+      "id": "bedwars",
+      "name": "Buffcraft",
+      "description": "A voxel bed-wars game on Freebuff Sites: four-player browser-hosted casual multiplayer, islands, beds, shops, bots and a practice sandbox. Also includes optional Node and Electron builds.",
+      "kind": "app",
+      "integrations": [
+        "auth"
+      ],
+      "tags": [
+        "category:game",
+        "game",
+        "multiplayer",
+        "voxel",
+        "3d"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/bedwars-f561275d9314.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/bedwars-926bb30081cd.tar.gz",
+        "sha256": "926bb30081cdba6f3ee40c95dfcda5a465ae39d1b56ef0a9fee68531afa20754",
+        "bytes": 4685010,
+        "files": 439
+      },
+      "version": "926bb30081cd"
+    },
+    {
+      "id": "crosscut",
+      "name": "Crosscut",
+      "description": "A solo voxel shooter with five bots, rifle spray, fast knife movement and bunny hopping. Runs on Freebuff Sites with browser-local records.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:game",
+        "game",
+        "single-player",
+        "voxel",
+        "shooter"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/crosscut-01fb308ae408.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/crosscut-1a535c3b7dcd.tar.gz",
+        "sha256": "1a535c3b7dcd14c8643166fb0e99c95484efac811ebeac4770ab5c45b7d3d414",
+        "bytes": 43182,
+        "files": 25
+      },
+      "version": "1a535c3b7dcd"
+    },
+    {
+      "id": "tasks",
+      "name": "Tasky",
+      "description": "A calm to-do app over a landscape: smart lists, due dates, subtasks, repeats, tags, drag to reorder and a command palette, saved in the browser.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:saas",
+        "productivity",
+        "todo",
+        "tasks"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/tasks-9d0c08590638.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/tasks-dd4fb1956dda.tar.gz",
+        "sha256": "dd4fb1956dda022fb9420cf12c7ea93787991adfc34cb0e63460fabe7a715bd4",
+        "bytes": 94153,
+        "files": 68
+      },
+      "version": "dd4fb1956dda"
+    },
+    {
+      "id": "study-planner",
+      "name": "Study planner",
+      "description": "Plan for a test and spread study sessions across the days before it: drag between days, focus timer, week and month views, progress stats, saved in this browser.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:saas",
+        "education",
+        "planner",
+        "calendar"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/study-planner-1e26bd4234f2.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/study-planner-b286ef352467.tar.gz",
+        "sha256": "b286ef3524672ecef487cdb0005b476be765a619f03306fcb1d4aaf290eebea9",
+        "bytes": 85336,
+        "files": 65
+      },
+      "version": "b286ef352467"
+    },
+    {
+      "id": "shopify-storefront",
+      "name": "Shopify storefront",
+      "description": "Brutalist editorial storefront with a Shopify connect wizard: masonry catalogue, collections, product pages, wishlist and a slide-in bag. Demo products until you connect.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:store",
+        "ecommerce",
+        "shopify",
+        "store",
+        "brutalist"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/shopify-storefront-bddc69e57508.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/shopify-storefront-14c6cead2612.tar.gz",
+        "sha256": "14c6cead26129d0826245cf7ca86aa860668d28b8fff23ec54651f09a740dacd",
+        "bytes": 90753,
+        "files": 40
+      },
+      "version": "14c6cead2612"
+    },
+    {
+      "id": "fintech-landing",
+      "name": "Fintech landing",
+      "description": "Pure-black fintech marketing site: glossy card over a spinning coin, feature deep dives, pricing with a fee calculator, company, blog and contact pages.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:landing-page",
+        "marketing",
+        "landing",
+        "fintech",
+        "dark"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/fintech-landing-35c6de91bf4d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/fintech-landing-6d43f2ae515a.tar.gz",
+        "sha256": "6d43f2ae515ab108a555e651c50661bf3036c88da24a8d96657c34f0cda6611a",
+        "bytes": 102857,
+        "files": 77
+      },
+      "version": "6d43f2ae515a"
+    },
+    {
+      "id": "waitlist",
+      "name": "Waitlist",
+      "description": "Coming-soon page with a working waitlist: email capture into D1, queue position, referral boosts, a status page and an owner admin view.",
+      "kind": "site",
+      "integrations": [
+        "database"
+      ],
+      "tags": [
+        "category:landing-page",
+        "marketing",
+        "waitlist",
+        "launch"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/waitlist-a33b411edd8d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/waitlist-b558b2cd5ead.tar.gz",
+        "sha256": "b558b2cd5ead9003325be8674d63670d758d82b0fdc1f5a31dd6d3ec0f38edf7",
+        "bytes": 76714,
+        "files": 54
+      },
+      "version": "b558b2cd5ead"
+    },
+    {
+      "id": "blog",
+      "name": "Blog",
+      "description": "Editorial blog and media site: featured story, topics, articles with contents and reading progress, podcasts, resources, dark mode, RSS and sitemap.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:portfolio",
+        "blog",
+        "editorial",
+        "media",
+        "newsletter"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/blog-ed66f23ecd17.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/blog-392cb6934bd1.tar.gz",
+        "sha256": "392cb6934bd186fff29ea5c811bc40cbbf857333da998f05c6d93c1abf67faf3",
+        "bytes": 2452101,
+        "files": 69
+      },
+      "version": "392cb6934bd1"
+    },
+    {
+      "id": "customer-health",
+      "name": "Customer health",
+      "description": "Customer-success dashboard: ARR-at-risk KPIs, a beeswarm of accounts by health with a draggable risk line, watchlist, renewals, playbooks and live score weights. Uses sample accounts and browser-local data.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:saas",
+        "dashboard",
+        "analytics",
+        "saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/customer-health-6338ce841cf0.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/customer-health-6f7b56e201ca.tar.gz",
+        "sha256": "6f7b56e201caba146e52df800a80af1ba17df7e470188f9db4d1e103cad7eca3",
+        "bytes": 95998,
+        "files": 76
+      },
+      "version": "6f7b56e201ca"
+    },
+    {
+      "id": "moodboard",
+      "name": "Moodboard",
+      "description": "Infinite-canvas moodboard: drop or paste images, notes, text and extracted palettes; snap, resize, rotate, present and export. Saves in the browser.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:saas",
+        "design",
+        "canvas",
+        "creative"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/moodboard-10537a792680.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/moodboard-a9e508afed13.tar.gz",
+        "sha256": "a9e508afed13dadca5a9032d09680d3cf1290697e18a5e4ba8b29f60b9c80fd3",
+        "bytes": 2805128,
+        "files": 70
+      },
+      "version": "a9e508afed13"
+    },
+    {
+      "id": "bug-tracker",
+      "name": "Bug tracker",
+      "description": "Triage: a dark bug tracker with a landing page and a working app: grouped issue list, board, command palette, inbox and insights. Saves in this browser.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:saas",
+        "productivity",
+        "issues",
+        "kanban",
+        "dark"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/bug-tracker-8da9697df289.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/bug-tracker-3b66e319802a.tar.gz",
+        "sha256": "3b66e319802a7275970650e5969f3b359f0703b6fef00ebc1b363264f2cb54ef",
+        "bytes": 89790,
+        "files": 67
+      },
+      "version": "3b66e319802a"
+    },
+    {
+      "id": "desk-booking",
+      "name": "Desk booking",
+      "description": "Hybrid-office landing page plus an app to book desks on a floor map, meeting rooms, parking and lockers, check in and plan your week. Demo bookings stay in this browser.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:saas",
+        "workplace",
+        "booking",
+        "floor-plan"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/desk-booking-f1e1cbd5b71b.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/desk-booking-853c6f3384f1.tar.gz",
+        "sha256": "853c6f3384f1ae867fecb594befe80d00804b86450bdd571576f3f70344cbb5f",
+        "bytes": 86125,
+        "files": 71
+      },
+      "version": "853c6f3384f1"
+    },
+    {
+      "id": "estate-agent",
+      "name": "Estate agent",
+      "description": "An independent estate agent's site: slow cinematic hero, filterable listings with a map, property pages with gallery, floor plan and mortgage calculator, and a valuation flow.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:landing-page",
+        "real-estate",
+        "property",
+        "listings"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/estate-agent-d5126af5e8b1.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/estate-agent-3776c92767ed.tar.gz",
+        "sha256": "3776c92767edc9243af8492a4c0c10c156bbb59c7cb0f80c9750be1b8dcfbd19",
+        "bytes": 2172976,
+        "files": 88
+      },
+      "version": "3776c92767ed"
+    },
+    {
+      "id": "architecture-studio",
+      "name": "Architecture studio",
+      "description": "Plinth Studio: architecture studio site with a bold split hero, stacked project cards over concrete photography, filterable work, project pages with lightbox, studio, services, journal, careers applications and a four-step project brief.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "architecture",
+        "studio",
+        "portfolio",
+        "projects",
+        "careers",
+        "editorial",
+        "monochrome",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/architecture-studio-1c8cbc7f32c5.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/architecture-studio-2bb2fdce4eb3.tar.gz",
+        "sha256": "2bb2fdce4eb30fa193cc1d91a2e428e744d69e26a3b90d5f15222ee691316eb1",
+        "bytes": 2261573,
+        "files": 89
+      },
+      "version": "2bb2fdce4eb3"
+    },
+    {
+      "id": "designer-portfolio",
+      "name": "Designer portfolio",
+      "description": "Industrial designer's portfolio: full-screen product render carousel with a huge name, works grid and list with filters, case studies with a gallery viewer, services, about, journal, contact form with a saved draft, and a live style guide.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "portfolio",
+        "industrial-design",
+        "product-design",
+        "studio",
+        "case-studies",
+        "minimal",
+        "category:portfolio"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/designer-portfolio-067c43e8a3f2.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/designer-portfolio-de6b1e034722.tar.gz",
+        "sha256": "de6b1e034722e3836e95a9a16ad6947d6f14ab45de8e1a694d02cf3e46fd1a42",
+        "bytes": 2212787,
+        "files": 74
+      },
+      "version": "de6b1e034722"
+    },
+    {
+      "id": "fusion-energy",
+      "name": "Fusion energy",
+      "description": "Tidewell Fusion: dark deep-tech site for a maritime fusion company. SVG reactor and ships, technology explorer, voyage calculator, careers with applications, news and a multi-step early-access form.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "deep-tech",
+        "energy",
+        "climate",
+        "startup",
+        "dark",
+        "careers",
+        "calculator",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/fusion-energy-6b7afd56bc84.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/fusion-energy-755d890fd090.tar.gz",
+        "sha256": "755d890fd09049c85e194842e4844220750fcba0ca2f4bacccfd4a9b98ca8833",
+        "bytes": 1101603,
+        "files": 70
+      },
+      "version": "755d890fd090"
+    },
+    {
+      "id": "talent-agency",
+      "name": "Talent agency",
+      "description": "Bravura Talent: cinematic talent agency site with a full-bleed logotype hero and camera HUD, filterable roster, artist profiles with reel and booking, work, journal, a three-step representation form and a saved shortlist.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "talent-agency",
+        "entertainment",
+        "roster",
+        "booking",
+        "dark",
+        "cinematic",
+        "film",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/talent-agency-f91df4e9ffe7.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/talent-agency-47b2f8d40d8a.tar.gz",
+        "sha256": "47b2f8d40d8a154be0028b248e7d4ebff07fb60379b38472ab99f5c32ac5b62f",
+        "bytes": 2901346,
+        "files": 101
+      },
+      "version": "47b2f8d40d8a"
+    },
+    {
+      "id": "creative-agency",
+      "name": "Creative agency",
+      "description": "A bold studio site with iridescent 3D objects, huge uppercase type and white, violet and black panels: services, work with case studies, studio, careers with applications and a three-step project brief.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "agency",
+        "studio",
+        "portfolio",
+        "marketing",
+        "case-studies",
+        "careers",
+        "3d",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/creative-agency-73afa74a5ca1.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/creative-agency-9cfa9b585770.tar.gz",
+        "sha256": "9cfa9b5857703cfbb06b46f53eb9569dbb086df4cc54b61bf485f7974e696850",
+        "bytes": 2048605,
+        "files": 60
+      },
+      "version": "9cfa9b585770"
+    },
+    {
+      "id": "skincare-shop",
+      "name": "Skincare shop",
+      "description": "Dewlab: skincare storefront with a photo hero and floating product cards, catalogue filters by concern and skin type, product pages with reviews, a skin quiz that builds a routine, wishlist, bag drawer, demo checkout and order history.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "ecommerce",
+        "store",
+        "skincare",
+        "beauty",
+        "checkout",
+        "quiz",
+        "reviews",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/skincare-shop-a44501d6ee3d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/skincare-shop-38de4d230996.tar.gz",
+        "sha256": "38de4d2309961c21036e4f53605a02d405df71374bd387e436eac44fd7ca648b",
+        "bytes": 654246,
+        "files": 61
+      },
+      "version": "38de4d230996"
+    },
+    {
+      "id": "motorcycle-shop",
+      "name": "Motorcycle shop",
+      "description": "Ironvale Moto: motorcycle maker store with a model carousel, spec bento and colour picker, configurator with packs and finance, gear shop, cart drawer, demo checkout, garage, and test ride, service and event booking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "store",
+        "ecommerce",
+        "motorcycles",
+        "automotive",
+        "configurator",
+        "booking",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/motorcycle-shop-a766882d67e3.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/motorcycle-shop-20ea62fc2354.tar.gz",
+        "sha256": "20ea62fc23544ab25c80832b9a80e3528fa5c4b7376ae65d0a969fe22a907c79",
+        "bytes": 7073641,
+        "files": 98
+      },
+      "version": "20ea62fc2354"
+    },
+    {
+      "id": "food-ordering",
+      "name": "Food ordering",
+      "description": "Forkfast: a bold fast-food ordering site with promo cards, top picks, categories and live flash deals, plus a menu with filters, dish builder, cart, demo checkout with promo codes, live order tracking and reviews.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "food",
+        "restaurant",
+        "delivery",
+        "ordering",
+        "menu",
+        "checkout",
+        "ecommerce",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/food-ordering-c49fe915922c.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/food-ordering-5364f2092886.tar.gz",
+        "sha256": "5364f2092886ca94f735fdbc9dd44d345b3eb8f750ea7fba339e03eba45e20d6",
+        "bytes": 2396962,
+        "files": 60
+      },
+      "version": "5364f2092886"
+    },
+    {
+      "id": "restaurant-chain",
+      "name": "Restaurant group",
+      "description": "Ember & Salt: a multi-location restaurant site with an editorial wordmark hero, filterable menu, six rooms with a map and live hours, three-step table booking, events with seat booking, private dining, gift cards and careers.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "restaurant",
+        "hospitality",
+        "food",
+        "menu",
+        "reservations",
+        "locations",
+        "events",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/restaurant-chain-2bff399b0900.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/restaurant-chain-ee6c97e42c19.tar.gz",
+        "sha256": "ee6c97e42c19ba25c69c78dacc6e753d02d3353904f00a43343dd85b2d81dc25",
+        "bytes": 2708791,
+        "files": 60
+      },
+      "version": "ee6c97e42c19"
+    },
+    {
+      "id": "bar-lounge",
+      "name": "Bar & lounge",
+      "description": "Velvet Hour: a cocktail bar and lounge site with an events lineup and ticket booking, table reservations with live time slots, private event spaces and enquiries, a menu with dietary filters, a gallery and a visit page.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "hospitality",
+        "bar",
+        "events",
+        "reservations",
+        "menu",
+        "nightlife",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/bar-lounge-21f5e1633948.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/bar-lounge-dacfebcfbc2b.tar.gz",
+        "sha256": "dacfebcfbc2bb1ba7840cda0a63304f81c5520d658977e4fc85e32f2de0b9309",
+        "bytes": 1885130,
+        "files": 79
+      },
+      "version": "dacfebcfbc2b"
+    },
+    {
+      "id": "kitchenware-shop",
+      "name": "Kitchenware shop",
+      "description": "Copperleaf Kitchen: warm kitchenware storefront in cream, teal and mustard with a collage homepage, shop with filters, product pages, bag drawer, demo checkout with discount codes, orders, wishlist and cooking-class booking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "ecommerce",
+        "store",
+        "kitchenware",
+        "cookware",
+        "checkout",
+        "booking",
+        "warm",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/kitchenware-shop-7e4160b75a79.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/kitchenware-shop-d9e576c4e051.tar.gz",
+        "sha256": "d9e576c4e05195de0e70d67cc2c0ae0e1f76a11b05010ab2974fc9cef802fcdf",
+        "bytes": 1511712,
+        "files": 61
+      },
+      "version": "d9e576c4e051"
+    },
+    {
+      "id": "luxury-hotel",
+      "name": "Luxury hotel",
+      "description": "Aurelle Heights: alpine luxury hotel site with a framed glass hero and booking bar, rooms and suites with galleries, a three-step booking flow with live prices and offer codes, dining and spa reservations, experiences, offers and My stays.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "hotel",
+        "hospitality",
+        "travel",
+        "booking",
+        "spa",
+        "luxury",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/luxury-hotel-a14d115d4868.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/luxury-hotel-3064653d5315.tar.gz",
+        "sha256": "3064653d531575e779bbf60e3b424d8d88fc6436f36a4039a622b3a0e027123d",
+        "bytes": 3882395,
+        "files": 91
+      },
+      "version": "3064653d5315"
+    },
+    {
+      "id": "yacht-club",
+      "name": "Yacht club",
+      "description": "Harbourline Club: luxury yacht club site with an open-water hero, race calendar and entries, membership application, events with booking, news, marina berth requests and a members portal.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "yacht-club",
+        "marina",
+        "sailing",
+        "membership",
+        "events",
+        "luxury",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/yacht-club-d272a57b845e.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/yacht-club-5657997d20f7.tar.gz",
+        "sha256": "5657997d20f7db1f9c0887cd997dc3b4a1bcdda60414841afd5b1b862b171b45",
+        "bytes": 2690239,
+        "files": 83
+      },
+      "version": "5657997d20f7"
+    },
+    {
+      "id": "tour-operator",
+      "name": "Tour operator",
+      "description": "Sandline Journeys: Egypt tour operator site where the pyramids rise through the hero headline, with a tour finder, tour pages with live departures, a 3-step booking request, destinations with a season chart, reviews and My trips.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "travel",
+        "tour-operator",
+        "booking",
+        "egypt",
+        "itinerary",
+        "reviews",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/tour-operator-83df6fda5b78.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/tour-operator-7cfdea6e9baa.tar.gz",
+        "sha256": "7cfdea6e9baa5d735f5944f0d7152f1e00fb66c5201240da7250699e27b58815",
+        "bytes": 3448521,
+        "files": 75
+      },
+      "version": "7cfdea6e9baa"
+    },
+    {
+      "id": "interior-showroom",
+      "name": "Interior showroom",
+      "description": "Halde Haus: an interior design studio and furniture showroom with a dark editorial hero, process carousel, filterable collection, product pages, quote list, projects with lightbox, journal and a three-step visit booking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "interior-design",
+        "furniture",
+        "showroom",
+        "editorial",
+        "booking",
+        "catalogue",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/interior-showroom-a3a2feb95965.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/interior-showroom-b19ec5090712.tar.gz",
+        "sha256": "b19ec5090712dcc6716522cde12fc5d86cc057e8ead546ded004a87d58b02811",
+        "bytes": 2080121,
+        "files": 79
+      },
+      "version": "b19ec5090712"
+    },
+    {
+      "id": "insurance-landing",
+      "name": "Insurance landing",
+      "description": "Covewise: airy car-insurance site with a live policy dashboard in a blue-sky hero, four-step quote flow with priced result, plans and comparison, claim filing and tracking, a policyholder account, reviews and a help centre.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "insurance",
+        "landing",
+        "quote-flow",
+        "dashboard",
+        "pricing",
+        "claims",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/insurance-landing-4600559669e3.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/insurance-landing-ef80aeb71b48.tar.gz",
+        "sha256": "ef80aeb71b4814495de153391e5753283da97267bba6f8afee17ef45f6628afa",
+        "bytes": 738995,
+        "files": 78
+      },
+      "version": "ef80aeb71b48"
+    },
+    {
+      "id": "messaging-saas",
+      "name": "Messaging SaaS",
+      "description": "Relaytext: midnight-navy site for a two-way SMS product with a 3D-render hero and URL-to-AI-demo field, live phone, inbox, campaign and flow mocks, pricing with bill estimator, customers, blog, FAQ and sign-up flows.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "saas",
+        "sms",
+        "messaging",
+        "landing",
+        "ai",
+        "pricing",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/messaging-saas-395217143a26.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/messaging-saas-03fd7a5e7ed8.tar.gz",
+        "sha256": "03fd7a5e7ed8d27413cbee8316c05447cf94d4f6aef2909e783e40f92eb4aca4",
+        "bytes": 747593,
+        "files": 96
+      },
+      "version": "03fd7a5e7ed8"
+    },
+    {
+      "id": "product-analytics",
+      "name": "Product analytics",
+      "description": "Pulseboard: a product-analytics SaaS site with a painted meadow hero and a live product mock in the grass, plus features with working funnel, retention and alert demos, pricing calculator, docs, changelog, status page, sign up and log in.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "saas",
+        "analytics",
+        "landing",
+        "product-mock",
+        "pricing",
+        "docs",
+        "dashboard",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/product-analytics-962eabf2a063.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/product-analytics-67871a6eaa38.tar.gz",
+        "sha256": "67871a6eaa38454c18d0468370dc91df88b851b6e7803882e244db7f36884c8c",
+        "bytes": 872401,
+        "files": 83
+      },
+      "version": "67871a6eaa38"
+    },
+    {
+      "id": "language-school",
+      "name": "Language school",
+      "description": "Lingotree: a playful lilac language-school site with a giant sticker wordmark, draggable hero tags, course catalogue and pages, teachers, pricing, a scored placement test, three-step free-trial booking and a My lessons page.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "education",
+        "language-school",
+        "courses",
+        "booking",
+        "placement-test",
+        "playful",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/language-school-1e2ab0812181.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/language-school-11d7f521e2e9.tar.gz",
+        "sha256": "11d7f521e2e9b8fc441d6f51420757761fbd058a75cf41f2bc3a32bbb3359317",
+        "bytes": 811443,
+        "files": 75
+      },
+      "version": "11d7f521e2e9"
+    },
+    {
+      "id": "ai-study-assistant",
+      "name": "AI study assistant",
+      "description": "Cramly: neon-green AI study assistant with a glass file-stack hero landing page, plus a working demo app: upload library, a scripted tutor that cites page numbers, spaced-repetition flashcards and practice quizzes. No model calls.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "ai",
+        "education",
+        "study",
+        "flashcards",
+        "quiz",
+        "chat",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/ai-study-assistant-a1abc0e062fe.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/ai-study-assistant-471ba55b3ca8.tar.gz",
+        "sha256": "471ba55b3ca8a1b5836a7350f1f49697306ea71587613bda00a5296604c9ab08",
+        "bytes": 550174,
+        "files": 89
+      },
+      "version": "471ba55b3ca8"
+    },
+    {
+      "id": "charity-impact",
+      "name": "Charity impact",
+      "description": "Brightwater Fund: a bold nonprofit site with a split photo-and-orange campaign hero, impact stats, campaigns with live progress, a three-step demo donate flow (one-time or monthly, no payment), donor history, impact report, stories and volunteer forms.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "charity",
+        "nonprofit",
+        "donations",
+        "fundraising",
+        "campaigns",
+        "volunteer",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/charity-impact-858a9bd2b54b.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/charity-impact-9d64f8ead297.tar.gz",
+        "sha256": "9d64f8ead297e35fe0612e10797dc1ecf3598381085b4c58641236e9fc6bf0a6",
+        "bytes": 1269255,
+        "files": 54
+      },
+      "version": "9d64f8ead297"
+    },
+    {
+      "id": "wellness-retreat",
+      "name": "Wellness retreat",
+      "description": "Summit Stillness: mountain wellness retreat site with a snowy hero, season-switching activities, chalet amenities, retreat pages with live arrival dates, a three-step booking with running total, gallery, journal and saved bookings.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "retreat",
+        "wellness",
+        "travel",
+        "hospitality",
+        "booking",
+        "mountains",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/wellness-retreat-2823f3a4e455.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/wellness-retreat-1be1d43fb82d.tar.gz",
+        "sha256": "1be1d43fb82d8a8be34afc95a18f484f2dfd29eef6e3c4ec9fffcccb898370ef",
+        "bytes": 2945873,
+        "files": 79
+      },
+      "version": "1be1d43fb82d"
+    },
+    {
+      "id": "music-venue",
+      "name": "Music venue",
+      "description": "Low Frequency: a dark nightlife and live music venue site with event listings and filters, event pages with demo ticketing and checkout, My tickets with transfer and refund, a month calendar, VIP table enquiries, a merch bag and visit info.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "music-venue",
+        "nightlife",
+        "events",
+        "ticketing",
+        "concerts",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/music-venue-5646e4488368.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/music-venue-9e7dbb7ba4da.tar.gz",
+        "sha256": "9e7dbb7ba4da6e9e48cca0ee38049be7e651908ecc7ed74b7385dabe478f47a1",
+        "bytes": 1406900,
+        "files": 80
+      },
+      "version": "9e7dbb7ba4da"
+    },
+    {
+      "id": "conference",
+      "name": "Conference",
+      "description": "Assembly: a bold conference site with a filterable two-day agenda, saved sessions with clash warnings and calendar export, speaker profiles, a three-step demo ticket checkout with promo codes, a recordings library, venue, sponsor and FAQ pages.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "events",
+        "conference",
+        "agenda",
+        "speakers",
+        "tickets",
+        "checkout",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/conference-dc5605319a93.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/conference-a9a29475eb82.tar.gz",
+        "sha256": "a9a29475eb82f5f6ec97a8a2cafc8ba7b75d917a9fa455cfca41f62d75a9cacb",
+        "bytes": 1125671,
+        "files": 87
+      },
+      "version": "a9a29475eb82"
+    },
+    {
+      "id": "restaurant",
+      "name": "Restaurant",
+      "description": "Saffron Table: a chef-driven restaurant in cream and rust with a full-width wordmark hero, a menu list that opens into dish photos, tasting menus with a pairing calculator, chef's table seats, a wine list, takeaway ordering and reservations.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "restaurant",
+        "food",
+        "reservations",
+        "tasting-menu",
+        "wine",
+        "takeaway",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/restaurant-3df055f0ecfa.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/restaurant-c729bc21047f.tar.gz",
+        "sha256": "c729bc21047f732aa0405f656854297edc0478a8b05511a5882b943e3aeee81a",
+        "bytes": 2733931,
+        "files": 68
+      },
+      "version": "c729bc21047f"
+    },
+    {
+      "id": "burger-delivery",
+      "name": "Burger delivery",
+      "description": "Stackd: a loud single-brand burger site with a line-art storefront hero, menu with combos, an illustrated build-your-burger, store locator with map, loyalty rewards with a wallet, catering quotes, demo checkout and live order tracking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "food",
+        "restaurant",
+        "burger",
+        "delivery",
+        "ordering",
+        "rewards",
+        "catering",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/burger-delivery-ca10bab4e608.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/burger-delivery-d3b71e28ac4f.tar.gz",
+        "sha256": "d3b71e28ac4f7bdfd970bfc81d302acb7bceda9d50088d825381fca4189e121d",
+        "bytes": 2107821,
+        "files": 55
+      },
+      "version": "d3b71e28ac4f"
+    },
+    {
+      "id": "travel-landing",
+      "name": "Travel planner",
+      "description": "Wayfare: dark night-teal travel site with a trip catalogue and filter pills, trip pages with live departures and booking requests, a destination explorer with season bars, trip builder, travel journal, deals with countdowns and a trip quiz.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "travel",
+        "trips",
+        "booking",
+        "itinerary",
+        "journal",
+        "deals",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/travel-landing-662dc7c779a6.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/travel-landing-957a8510bfe5.tar.gz",
+        "sha256": "957a8510bfe5f8aa827e96361b55799145d3101fb9a79fc46f09668f4c09339a",
+        "bytes": 2331918,
+        "files": 66
+      },
+      "version": "957a8510bfe5"
+    },
+    {
+      "id": "yacht-rental",
+      "name": "Yacht rental",
+      "description": "Bluewake Charters: luxury yacht rental marketplace with a framed hero and search bar, a fleet browser with filters, yacht pages with specs, crew and an availability calendar, a four-step charter booking with extras, destinations and My trips.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "yacht",
+        "charter",
+        "rental",
+        "marketplace",
+        "booking",
+        "travel",
+        "luxury",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/yacht-rental-5ebc0e269271.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/yacht-rental-d2c666b0af9e.tar.gz",
+        "sha256": "d2c666b0af9e617585db2509e43ce72873a3ef36b1caeebd4af24db187df0716",
+        "bytes": 2178041,
+        "files": 92
+      },
+      "version": "d2c666b0af9e"
+    },
+    {
+      "id": "interior-studio",
+      "name": "Interior studio",
+      "description": "Linen & Oak: a service-led interior design studio with a huge wordmark over a full-bleed room, fixed-fee packages with a fee estimator, a room-by-room portfolio with an ideas board, before and after, a style quiz and a four-step consultation booking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "interior-design",
+        "studio",
+        "services",
+        "portfolio",
+        "quiz",
+        "booking",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/interior-studio-674d50882770.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/interior-studio-0d2224b5176f.tar.gz",
+        "sha256": "0d2224b5176f307a90a286c3718bf2ebec5aa4fbc99937cb00a76286a01f2e47",
+        "bytes": 2595116,
+        "files": 72
+      },
+      "version": "0d2224b5176f"
+    },
+    {
+      "id": "luxury-real-estate",
+      "name": "Luxury real estate",
+      "description": "Crestmoor Estates: a bold red-and-monochrome property agency with a cut-out tower hero and black search bar, listings with a map and saved searches, property pages with viewings, new developments, agent directory, valuation tool and market insights.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "real-estate",
+        "property",
+        "agency",
+        "listings",
+        "valuation",
+        "luxury",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/luxury-real-estate-acdb367b426d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/luxury-real-estate-ad17b35b46ee.tar.gz",
+        "sha256": "ad17b35b46ee2ea5f57e1d3c3267fe195ddd445d5abccb841accb3dc2cbe6e23",
+        "bytes": 2830008,
+        "files": 78
+      },
+      "version": "ad17b35b46ee"
+    },
+    {
+      "id": "architecture-portfolio",
+      "name": "Architecture portfolio",
+      "description": "Atelier Norr: quiet greyscale architecture practice portfolio with a construction-line photo hero and filmstrip project selector, a sortable project index with pins, project pages with lightbox and plans, essays, exhibitions, awards and studio.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "architecture",
+        "portfolio",
+        "editorial",
+        "minimal",
+        "monochrome",
+        "studio",
+        "category:portfolio"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/architecture-portfolio-f0c67bf15003.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/architecture-portfolio-189104e530d5.tar.gz",
+        "sha256": "189104e530d53e3119dd4f290f46fdf8d3e76d3a3bc960ceeedb5f28b878d054",
+        "bytes": 2222978,
+        "files": 72
+      },
+      "version": "189104e530d5"
+    },
+    {
+      "id": "payments-landing",
+      "name": "Payments landing",
+      "description": "Ledgerly: light teal payments site with a live invoice widget in the hero, a send-money calculator with a live FX quote and rate lock, a merchant checkout demo with test cards, developer API docs with a working console, and a pricing calculator.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "fintech",
+        "payments",
+        "money-transfer",
+        "checkout",
+        "api-docs",
+        "pricing",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/payments-landing-2b95b2d36174.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/payments-landing-0ab9d6d1ae7f.tar.gz",
+        "sha256": "0ab9d6d1ae7fc0d11f73137bfc876a9788bf88c8e8f15b18fa80fcc26ec30a99",
+        "bytes": 468600,
+        "files": 87
+      },
+      "version": "0ab9d6d1ae7f"
+    },
+    {
+      "id": "coding-assessment",
+      "name": "Coding assessment",
+      "description": "Codetrial: dark teal technical-hiring SaaS with a working product: a timed challenge with an in-browser editor, tests run in a Web Worker and a scripted pair assistant, candidate reports with code playback, a question library and assessment builder.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "saas",
+        "hiring",
+        "coding",
+        "code-editor",
+        "developer-tools",
+        "ai",
+        "dark",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/coding-assessment-984e6d6c8ac3.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/coding-assessment-42342856492b.tar.gz",
+        "sha256": "42342856492bfa0e139a1485d9069a48feb2a8b9f9ddaf68b2d73ac1721155b1",
+        "bytes": 497101,
+        "files": 77
+      },
+      "version": "42342856492b"
+    },
+    {
+      "id": "team-platform",
+      "name": "Team platform",
+      "description": "Branchwork: an employee-app SaaS site with a live isometric line-art hero, a product page with a working org chart, team directory, news feed, chat, checklists and pulse survey, an ROI calculator, customer stories, integrations, pricing and demo booking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "saas",
+        "hr",
+        "internal-comms",
+        "org-chart",
+        "directory",
+        "pricing",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/team-platform-990e8aae7638.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/team-platform-bb65e8f30698.tar.gz",
+        "sha256": "bb65e8f306985a6653e95711a41720125b13673ec27af052299615461abb84ae",
+        "bytes": 858031,
+        "files": 84
+      },
+      "version": "bb65e8f30698"
+    },
+    {
+      "id": "course-platform",
+      "name": "Course platform",
+      "description": "Coursekit: a B2B course platform site with a live hero product mock, a working drag-to-reorder course builder with live quiz codes and publish, creator analytics, a storefront designer with demo checkout, pricing with a fee calculator and integrations.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "saas",
+        "online-courses",
+        "course-builder",
+        "creators",
+        "analytics",
+        "storefront",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/course-platform-9d10f59e0e7b.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/course-platform-e73d51e0f063.tar.gz",
+        "sha256": "e73d51e0f063d39cc61b520a13148c63250c0f8dccad84e418720630d9f79be2",
+        "bytes": 693919,
+        "files": 96
+      },
+      "version": "e73d51e0f063"
+    },
+    {
+      "id": "e-learning",
+      "name": "Online school",
+      "description": "Brightpath Academy: a playful dark online-school site with glossy 3D shapes over a blackboard hero, a programme finder, programme pages with curriculum, intakes and a fees calculator, admissions, a five-step application, and a student hub with timetable and grades.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "education",
+        "online-school",
+        "admissions",
+        "application",
+        "timetable",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/e-learning-9a1cccf6fe9e.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/e-learning-9117dc54a85f.tar.gz",
+        "sha256": "9117dc54a85fe7b477959d94fb8cd6968569d1468f1322ebe6546e10c85e0b39",
+        "bytes": 1146927,
+        "files": 70
+      },
+      "version": "9117dc54a85f"
+    },
+    {
+      "id": "online-courses",
+      "name": "Online courses",
+      "description": "Skillharbor: a self-paced course marketplace with a photo hero, filterable catalogue, course pages with curriculum previews and reviews, cart and demo checkout, My learning with progress, a lesson player with notes and quizzes, and certificates.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "education",
+        "courses",
+        "marketplace",
+        "checkout",
+        "lesson-player",
+        "certificates",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/online-courses-a84f9096ec81.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/online-courses-70d0b8b8c9d1.tar.gz",
+        "sha256": "70d0b8b8c9d1662439f8ac61ef99598199c487c0ac23a42485b63b82415398c2",
+        "bytes": 1256961,
+        "files": 81
+      },
+      "version": "70d0b8b8c9d1"
+    },
+    {
+      "id": "nonprofit",
+      "name": "Community non-profit",
+      "description": "Common Ground: a minimal, community-led non-profit on near-black with a teal glow: programmes, a local chapters map, volunteer shifts and events with sign-up, start-a-chapter applications, an annual report, resources library and newsletter archive.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "nonprofit",
+        "community",
+        "volunteering",
+        "events",
+        "annual-report",
+        "dark",
+        "minimal",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/nonprofit-1fbd8f8e5aae.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/nonprofit-e04aa93dd30b.tar.gz",
+        "sha256": "e04aa93dd30bfd70b9dcb6af5157bebb773ff13f3847fc5de668e855283688fe",
+        "bytes": 1041163,
+        "files": 55
+      },
+      "version": "e04aa93dd30b"
+    },
+    {
+      "id": "recycling-campaign",
+      "name": "Recycling campaign",
+      "description": "Loopwise: a playful recycling campaign site with a speckled serif hero over an open bin, a drag-and-drop sorting game, what-goes-where search, collection days by postcode with calendar export, a drop-off map, a household pledge and school resources.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "campaign",
+        "environment",
+        "recycling",
+        "game",
+        "map",
+        "education",
+        "playful",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/recycling-campaign-fdcca8dcf6bc.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/recycling-campaign-5adaf40db91b.tar.gz",
+        "sha256": "5adaf40db91ba51107a9f82d065b30b6afd679c0205f7327448921d92d2889b7",
+        "bytes": 624568,
+        "files": 62
+      },
+      "version": "5adaf40db91b"
+    },
+    {
+      "id": "climate-story",
+      "name": "Climate data story",
+      "description": "Thawline: a scroll-driven environmental data story with a framed charcoal-portrait hero, four chapters of scrollytelling SVG charts, a methodology page, a data explorer with CSV download, a field-notes journal and a take-action page.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "data-story",
+        "scrollytelling",
+        "journalism",
+        "climate",
+        "charts",
+        "editorial",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/climate-story-7ef93931a00d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/climate-story-bd9658ad8de1.tar.gz",
+        "sha256": "bd9658ad8de1da6588cbe0003b7268363e2fdd2f4d4d89411075d3fb611422df",
+        "bytes": 1570828,
+        "files": 52
+      },
+      "version": "bd9658ad8de1"
+    },
+    {
+      "id": "fundraising",
+      "name": "Fundraising platform",
+      "description": "Raiseright: a peer-to-peer fundraising platform with a photo hero, browse with search and cause filters, a start-a-fundraiser wizard, fundraiser pages with goal progress, updates and donor wall, a demo donate flow (no payment), teams, leaderboard and dashboard.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "fundraising",
+        "peer-to-peer",
+        "donations",
+        "crowdfunding",
+        "teams",
+        "nonprofit",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/fundraising-461a1dd35827.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/fundraising-bc7d8a44e90b.tar.gz",
+        "sha256": "bc7d8a44e90b4435378c64a46e256eda807121b29028282d244cbe026710ad53",
+        "bytes": 1707884,
+        "files": 57
+      },
+      "version": "bc7d8a44e90b"
+    },
+    {
+      "id": "conservation",
+      "name": "Conservation",
+      "description": "Canopy Trust: a forest and wildlife conservation charity site with a photo carousel hero, expanding impact panels, a project map of protected areas, species profiles, a certified-products finder, a demo adopt-an-acre flow, membership and research reports.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "nonprofit",
+        "conservation",
+        "environment",
+        "wildlife",
+        "map",
+        "donations",
+        "green",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/conservation-0a8cd049a82e.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/conservation-8576018d812e.tar.gz",
+        "sha256": "8576018d812ee4af2f220df3cd5a5b6175b7f546c4bd4c7e6856547320159d79",
+        "bytes": 2744066,
+        "files": 70
+      },
+      "version": "8576018d812e"
+    },
+    {
+      "id": "boutique-hotel",
+      "name": "Boutique hotel",
+      "description": "The Larkspur: a small city boutique hotel with an editorial photo-and-serif home, rooms compared side by side, direct booking with perks, a hand-drawn neighbourhood map, a bar and café with a live events calendar, packages, gift stays and a guest journal.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "hotel",
+        "boutique",
+        "hospitality",
+        "booking",
+        "neighbourhood-guide",
+        "events",
+        "editorial",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/boutique-hotel-658571682855.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/boutique-hotel-35a899a718e6.tar.gz",
+        "sha256": "35a899a718e6c9a8ed19edc5f7f3ace904f151feae03561d161593b7b710568c",
+        "bytes": 2329381,
+        "files": 77
+      },
+      "version": "35a899a718e6"
+    },
+    {
+      "id": "exhibition",
+      "name": "Exhibition",
+      "description": "Vantage Hall: a gallery and museum site on a hairline column grid with a serif exhibition hero, exhibition pages with an audio guide, timed-entry booking with a demo checkout, collection search, an interactive floor plan, events and membership.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "museum",
+        "gallery",
+        "art",
+        "audio-guide",
+        "tickets",
+        "floor-plan",
+        "editorial",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/exhibition-f1c3b09658ed.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/exhibition-564ffb9041e7.tar.gz",
+        "sha256": "564ffb9041e73fe34964714d1fbc57cf4191746a07d1d4463b86e0de2a5c90d7",
+        "bytes": 2562492,
+        "files": 71
+      },
+      "version": "564ffb9041e7"
+    },
+    {
+      "id": "events-studio",
+      "name": "Events studio",
+      "description": "Fretwork Events: a dark event production agency site with a lime-highlight photo hero, hover-swapping city list and sliding project cards, filterable case studies with a shortlist, services, a five-step brief builder with live budget estimate and venue partners.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "events",
+        "agency",
+        "activations",
+        "portfolio",
+        "budget-estimator",
+        "venues",
+        "dark",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/events-studio-662b7e2c21da.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/events-studio-9e5e3cd18abd.tar.gz",
+        "sha256": "9e5e3cd18abdd1d4d7a3c4b35b44b7adfcc99d822378ea2c2d891ed7f1c4bcee",
+        "bytes": 1321232,
+        "files": 56
+      },
+      "version": "9e5e3cd18abd"
+    },
+    {
+      "id": "theatre",
+      "name": "Theatre",
+      "description": "The Lantern Theatre: an editorial theatre site with a collage hero, season listings with filters, show pages with cast and creative team, an interactive seat-map booking with price bands and demo checkout, My tickets, membership, donations, learning and access pages.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "theatre",
+        "arts",
+        "events",
+        "ticketing",
+        "seat-map",
+        "membership",
+        "editorial",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/theatre-c28da84924d0.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/theatre-6c17148c4cd7.tar.gz",
+        "sha256": "6c17148c4cd766df3b7e42249511fa3ff4c116d4884be91d2bdebc180fb5c315",
+        "bytes": 1295806,
+        "files": 67
+      },
+      "version": "6c17148c4cd7"
+    },
+    {
+      "id": "wedding-planner",
+      "name": "Wedding planner",
+      "description": "Ever & Aye: a framed editorial wedding planner site with a tilted hero print, services and packages with a fee estimate, real-wedding stories with a lightbox, venue finder with shortlist, budget planner, guest list with RSVPs, checklist and consultation booking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "wedding",
+        "events",
+        "planner",
+        "booking",
+        "rsvp",
+        "budget",
+        "editorial",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/wedding-planner-757cf5375b95.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/wedding-planner-aea2b4aadc93.tar.gz",
+        "sha256": "aea2b4aadc936ac81d6cd30f5038ade037aa86c6aab8231894888b4dea0494bf",
+        "bytes": 2549194,
+        "files": 90
+      },
+      "version": "aea2b4aadc93"
+    },
+    {
+      "id": "marathon",
+      "name": "City marathon",
+      "description": "Harbour City Marathon: a periwinkle city-marathon site with a live countdown and hero carousel, race entry with a demo checkout, an interactive SVG course map with elevation and aid stations, training plans and pace calculator, results search and runner tracking.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "event",
+        "marathon",
+        "running",
+        "sports",
+        "course-map",
+        "results",
+        "training",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/marathon-65ef04b16f35.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/marathon-74044f68d315.tar.gz",
+        "sha256": "74044f68d315d19853f8ccc5195f54c8b09c735559b01f463c3a7d86c2da9cad",
+        "bytes": 1426774,
+        "files": 77
+      },
+      "version": "74044f68d315"
+    },
+    {
+      "id": "baby-tracker",
+      "name": "Nestling",
+      "description": "A free baby tracker for newborns: a cream-and-plum landing page with a live phone demo, sign-in-free onboarding, feed, sleep, diaper and pumping logs with live timers, a 24-hour timeline history with CSV import and export, pricing and a searchable FAQ.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "baby",
+        "parenting",
+        "tracker",
+        "health",
+        "timeline",
+        "timers",
+        "onboarding",
+        "pricing",
+        "faq",
+        "pastel",
+        "localstorage",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/baby-tracker-807fc04b6704.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/baby-tracker-b276ee06dfbe.tar.gz",
+        "sha256": "b276ee06dfbe9ce5c89b3710588c209bb67eeb77a5f9478f015349b3471a41ec",
+        "bytes": 544482,
+        "files": 53
+      },
+      "version": "b276ee06dfbe"
+    },
+    {
+      "id": "car-auction",
+      "name": "Gridline Auctions",
+      "description": "A weekly online car auction with a framed coastal-road hero, text-me signup and a run-order lot strip, plus lot pages with a live bid ladder and soft close, an upcoming-shows calendar with reminders, a searchable results archive, how it works and a sell-your-car form.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "auction",
+        "cars",
+        "automotive",
+        "bidding",
+        "live",
+        "marketplace",
+        "calendar",
+        "results",
+        "forms",
+        "serif",
+        "light",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/car-auction-29e0b2ee95d9.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/car-auction-888b84fa85ff.tar.gz",
+        "sha256": "888b84fa85ffd6a21f22bc7578efcb1173e283bfedf10b168ce29f4d31881a95",
+        "bytes": 1912975,
+        "files": 72
+      },
+      "version": "888b84fa85ff"
+    },
+    {
+      "id": "mac-utility",
+      "name": "Voltbar",
+      "description": "Dark green-glow site for a Mac menu bar app: serif hero with a working demo desktop and live battery menu, features, an interactive alert settings demo, changelog with filters and email signup, pricing with demo checkout, and a download thank-you page.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "landing",
+        "mac",
+        "app",
+        "utility",
+        "dark",
+        "pricing",
+        "changelog",
+        "download",
+        "settings",
+        "interactive",
+        "serif",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/mac-utility-dae5a279a39d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/mac-utility-0e3f929b780b.tar.gz",
+        "sha256": "0e3f929b780bd299990f7faafae18489bb7c4f3ba3343ff2836c75acc0fdcef6",
+        "bytes": 1235852,
+        "files": 52
+      },
+      "version": "0e3f929b780b"
+    },
+    {
+      "id": "usage-billing",
+      "name": "Meterly",
+      "description": "Near-black monochrome site for usage-based billing for AI companies, with a live product card in a satin photo hero, plus a working dashboard (revenue, usage meters, customers), pricing with a bill estimator, a docs quickstart with an API console, and a changelog.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "saas",
+        "billing",
+        "fintech",
+        "ai",
+        "dashboard",
+        "pricing",
+        "docs",
+        "changelog",
+        "dark",
+        "monochrome",
+        "developer",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/usage-billing-10bead1b2358.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/usage-billing-7885ef613201.tar.gz",
+        "sha256": "7885ef613201d20e44659582df170f03ac1c6bb28bec6de45ad9fb1a79af4eba",
+        "bytes": 697954,
+        "files": 69
+      },
+      "version": "7885ef613201"
+    },
+    {
+      "id": "music-library",
+      "name": "Hushtrack",
+      "description": "A royalty-free music library with a big serif hero and photo case-study rail, a track browser with filters and a working player, track pages with mutable stems and WAV preview downloads, playlists, pricing with contact sales and a licensing FAQ with a coverage checker.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "music",
+        "audio",
+        "player",
+        "creators",
+        "licensing",
+        "pricing",
+        "playlists",
+        "filters",
+        "saas",
+        "marketing",
+        "light",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/music-library-2dced9fe1a7f.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/music-library-7ca696222623.tar.gz",
+        "sha256": "7ca69622262304a6f56ce9fbc808069e3180509c9ed491c2c1c54fbd3a661ad9",
+        "bytes": 778557,
+        "files": 65
+      },
+      "version": "7ca696222623"
+    },
+    {
+      "id": "bookmark-library",
+      "name": "Keepsake",
+      "description": "Off-white bookmark library with a lime-highlight hero and a live search demo, plus a working app: save links with a line of why, tags, collections, item pages and plain-sentence search that turns dates, tags and collections into chips. Pricing and waitlist included.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "bookmarks",
+        "library",
+        "search",
+        "productivity",
+        "saas",
+        "landing",
+        "waitlist",
+        "pricing",
+        "collections",
+        "tags",
+        "light",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/bookmark-library-002d25ce252e.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/bookmark-library-a8cac645666d.tar.gz",
+        "sha256": "a8cac645666ddae9611b1a9a40a79e116e0862b0953b446df78507ce5ba3e719",
+        "bytes": 1019543,
+        "files": 78
+      },
+      "version": "a8cac645666d"
+    },
+    {
+      "id": "newsletter-platform",
+      "name": "Inkwell",
+      "description": "Dark newsletter platform site with an all-caps pink hero and a layered product collage, plus a working block editor, a templates gallery that loads into the editor, an analytics dashboard on a Worker API, monetization with payouts and offers, and pricing with a subscriber slider.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "newsletter",
+        "saas",
+        "dark",
+        "editor",
+        "templates",
+        "analytics",
+        "dashboard",
+        "monetization",
+        "pricing",
+        "creator",
+        "landing",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/newsletter-platform-70c29a565216.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/newsletter-platform-f0a1489caced.tar.gz",
+        "sha256": "f0a1489caced9caa5c2df130db4000db2e9f199c54f9817f64f6cd0e734eff95",
+        "bytes": 804862,
+        "files": 80
+      },
+      "version": "f0a1489caced"
+    },
+    {
+      "id": "maker-shop",
+      "name": "Stitch & Tan",
+      "description": "A one-person handmade leather shop with a handwritten hero and draggable cut-out pieces, a chat thread that leads to custom orders, product grid with filters, product pages with leather and initials, a cart drawer, a custom-order request form and the maker's story.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "shop",
+        "ecommerce",
+        "handmade",
+        "leather",
+        "maker",
+        "custom-orders",
+        "cart",
+        "product-grid",
+        "story",
+        "script-type",
+        "light",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/maker-shop-4a4d38b63495.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/maker-shop-4e4c945568f7.tar.gz",
+        "sha256": "4e4c945568f7fd6735b69bd35c8915be63a288d21c681ca7d32b977ed45c94ae",
+        "bytes": 1023539,
+        "files": 48
+      },
+      "version": "4e4c945568f7"
+    },
+    {
+      "id": "fractional-hr",
+      "name": "Fractional HR",
+      "description": "Peoplefirst Partners: a warm fractional Head of People site with a glowing pill-button hero and outcome marquee, services with plan pricing, an interactive 90-day plan with saved ticks, filterable case studies, and a three-step free HR audit booking with live time slots.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "consulting",
+        "hr",
+        "people-ops",
+        "fractional",
+        "startup",
+        "services",
+        "booking",
+        "case-studies",
+        "pricing",
+        "landing",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/fractional-hr-aebb32cf1473.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/fractional-hr-0e2fe4a0f3ed.tar.gz",
+        "sha256": "0e2fe4a0f3edaf503b532a4c7a11345ce06bd8ec9d95120752539414c4697ce4",
+        "bytes": 741209,
+        "files": 65
+      },
+      "version": "0e2fe4a0f3ed"
+    },
+    {
+      "id": "screen-recorder",
+      "name": "Clipwise",
+      "description": "Clipwise: a warm near-black screen-recording site and app. A recording library with playlists and a simulated recorder, share pages with a player, transcript and timestamped comments, an agent terminal, integrations, pricing and download.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "video",
+        "screen-recording",
+        "saas",
+        "comments",
+        "agents",
+        "library",
+        "dark",
+        "landing",
+        "pricing",
+        "productivity",
+        "category:saas"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/screen-recorder-54f4607684eb.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/screen-recorder-0e271a04b452.tar.gz",
+        "sha256": "0e271a04b4527e4ac68b44d9321300d36736243a7aabe23160d70c1a34c4e777",
+        "bytes": 382793,
+        "files": 53
+      },
+      "version": "0e271a04b452"
+    },
+    {
+      "id": "voice-dictation",
+      "name": "Murmur",
+      "description": "A cream voice-to-text app site with a serif hero where rambling speech loops into a waveform and comes out as clean text. Includes a live dictation demo with tones and history, platform showcase, use cases, pricing with trial modal, download and changelog.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "landing",
+        "saas",
+        "voice",
+        "dictation",
+        "ai",
+        "productivity",
+        "demo",
+        "pricing",
+        "changelog",
+        "download",
+        "serif",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/voice-dictation-90cc43a5e988.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/voice-dictation-a370628816b1.tar.gz",
+        "sha256": "a370628816b10582cb53cd3f17ba794fc3572ca600164c3fe8cd029131716811",
+        "bytes": 584984,
+        "files": 58
+      },
+      "version": "a370628816b1"
+    },
+    {
+      "id": "creator-course",
+      "name": "Wild Margins",
+      "description": "A loud personal site for a design teacher selling a video course: torn-paper portrait hero with scribbled notes and low-poly jungle animals, curriculum with progress, locked lessons and demo enrolment, a lesson player, articles with margin notes, about and newsletter signup.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "course",
+        "creator",
+        "personal",
+        "education",
+        "playful",
+        "dark",
+        "illustration",
+        "articles",
+        "newsletter",
+        "video",
+        "portfolio",
+        "category:portfolio"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/creator-course-eecf0393ff69.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/creator-course-d7d4dd73755e.tar.gz",
+        "sha256": "d7d4dd73755ee5b0c75d55d084ffda12461a64d7526af5fec330018b5cc2529b",
+        "bytes": 1004418,
+        "files": 68
+      },
+      "version": "d7d4dd73755e"
+    },
+    {
+      "id": "hardware-product",
+      "name": "Tally Bar",
+      "description": "A pale studio site for a desk LED status display: a hero where the device's controls actually work, a configurator with a live LED message preview, specs, an app library with installs and a developer API, cart and demo checkout, and a support FAQ with a contact form.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "hardware",
+        "product",
+        "store",
+        "configurator",
+        "led",
+        "ecommerce",
+        "checkout",
+        "specs",
+        "apps",
+        "faq",
+        "light",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/hardware-product-c7770c202f08.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/hardware-product-9b9893bfaa12.tar.gz",
+        "sha256": "9b9893bfaa1269e38a566f3f9e5276fa8e073fca6e7c64cd0166cdbeb55e55dc",
+        "bytes": 319931,
+        "files": 53
+      },
+      "version": "9b9893bfaa12"
+    },
+    {
+      "id": "retirement-advisor",
+      "name": "Northbound Wealth",
+      "description": "A pen-and-ink retirement planning firm site: centred serif hero over a lake landscape with drifting clouds and a balloon, an illustrative retirement calculator, services and fees, advisor team with bios, articles with filters, and a schedule-a-meeting form with live time slots.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "finance",
+        "retirement",
+        "advisor",
+        "calculator",
+        "booking",
+        "illustration",
+        "serif",
+        "articles",
+        "team",
+        "marketing",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/retirement-advisor-b8b4aa73be08.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/retirement-advisor-4ad485c6d2a0.tar.gz",
+        "sha256": "4ad485c6d2a0dede2140ff43460b76752a8567e8916aaffa197d7cc70339692e",
+        "bytes": 2552277,
+        "files": 77
+      },
+      "version": "4ad485c6d2a0"
+    },
+    {
+      "id": "illustration-store",
+      "name": "Puffwork",
+      "description": "A store for inflatable abstract 3D illustrations: a white hero with floating knit, foil, velvet and glass objects around a huge headline, a filterable asset library, asset pages with a licence picker, bundles, a cart with demo checkout and downloads, and a licence page.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "store",
+        "ecommerce",
+        "digital-goods",
+        "3d",
+        "illustrations",
+        "licensing",
+        "filters",
+        "cart",
+        "bundles",
+        "white",
+        "playful",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/illustration-store-4b462528992d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/illustration-store-d15ace87f39a.tar.gz",
+        "sha256": "d15ace87f39a060111465a5800b5fe2adbb7e75f21af3fe745e9d698bddc4cba",
+        "bytes": 1460891,
+        "files": 58
+      },
+      "version": "d15ace87f39a"
+    },
+    {
+      "id": "retro-terminal",
+      "name": "Retro terminal",
+      "description": "Orange CRT product site for a coding agent: a working terminal home with arrow-key selling points, ASCII art and a command prompt (help, pricing, docs, about), plus docs, pricing with sign-up, changelog, shortcut overlay, three phosphor colours and an effects switch.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "landing",
+        "saas",
+        "developer-tools",
+        "terminal",
+        "retro",
+        "crt",
+        "dark",
+        "keyboard",
+        "docs",
+        "pricing",
+        "changelog",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/retro-terminal-c8a08deb66a8.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/retro-terminal-908cde351cbc.tar.gz",
+        "sha256": "908cde351cbc017c272d3f60ddb42135dab375690e938f5f8ed4517043a49f71",
+        "bytes": 57858,
+        "files": 54
+      },
+      "version": "908cde351cbc"
+    },
+    {
+      "id": "energy-api",
+      "name": "Gridwise",
+      "description": "A pale-mint site for an API connecting EVs, heat pumps and batteries to the grid, with dot-matrix hero columns, a live smart-charging scheduler, a quickstart that runs against a sandbox API, a searchable device directory, use cases, pricing and a contact sales form.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "energy",
+        "api",
+        "developer",
+        "docs",
+        "climate",
+        "saas",
+        "landing",
+        "pricing",
+        "directory",
+        "b2b",
+        "light",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/energy-api-f02c3c41a6cc.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/energy-api-27b687a51c2c.tar.gz",
+        "sha256": "27b687a51c2cd24a910cd99b26a9dae53671ad6fb59ffefacf451e2525dfc414",
+        "bytes": 1673139,
+        "files": 77
+      },
+      "version": "27b687a51c2c"
+    },
+    {
+      "id": "indie-game",
+      "name": "Look Out Below",
+      "description": "A hand-drawn, monochrome indie game site with a doodle-crowd title screen and an eyeball wordmark, a playable canvas mini-game with keyboard and touch controls and saved scores, a tutorial, an unlockable character gallery, a press kit with key requests, and a devlog.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "game",
+        "indie",
+        "hand-drawn",
+        "monochrome",
+        "canvas",
+        "mini-game",
+        "press-kit",
+        "devlog",
+        "characters",
+        "playful",
+        "localstorage",
+        "category:game"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/indie-game-13099dbdc1e6.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/indie-game-747bf6020e11.tar.gz",
+        "sha256": "747bf6020e1179132e912c347dd37d4f6e48a50efc258e4ce48c3c6dd490f346",
+        "bytes": 1749245,
+        "files": 48
+      },
+      "version": "747bf6020e11"
+    },
+    {
+      "id": "film-studio",
+      "name": "Lantern Pictures",
+      "description": "An independent film studio site with a disc-reel hero: films as spinning discs on pale paper with ruled credits and press quotes, a filterable film index, film pages with formats to buy, a shop for physical media and merch, a cart drawer with demo checkout, and a newsletter.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "film",
+        "studio",
+        "entertainment",
+        "editorial",
+        "shop",
+        "cart",
+        "catalogue",
+        "filters",
+        "newsletter",
+        "serif",
+        "light",
+        "category:landing-page"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/film-studio-ae1bf36f6de7.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/film-studio-19c4787a764d.tar.gz",
+        "sha256": "19c4787a764d838f680cae092cba4e6d3b518492b5305ed79260ff11750388eb",
+        "bytes": 2931940,
+        "files": 69
+      },
+      "version": "19c4787a764d"
+    },
+    {
+      "id": "farm-produce",
+      "name": "Cedrina Farm",
+      "description": "A Mediterranean family-farm shop in cream and maroon: tilted jars float over a hillside with curved serif type, plus a filterable larder, product pages with live stock, farm story, recipes, and a bag with promo codes and demo checkout.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "ecommerce",
+        "food",
+        "farm",
+        "shop",
+        "preserves",
+        "recipes",
+        "carousel",
+        "cart",
+        "checkout",
+        "editorial",
+        "serif",
+        "category:store"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/farm-produce-5e83075025ea.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/farm-produce-0146533593e7.tar.gz",
+        "sha256": "0146533593e7fba3e72fea068d870cc4572b1244d683a5ab04deaab07590989a",
+        "bytes": 3289458,
+        "files": 56
+      },
+      "version": "0146533593e7"
+    },
+    {
+      "id": "blank-website",
+      "name": "Blank website",
+      "description": "A clean page for your next website. Add your content, preview it live and publish with Freebuff.",
+      "kind": "site",
+      "integrations": [],
+      "tags": [
+        "category:starter",
+        "starter",
+        "minimal",
+        "website",
+        "html",
+        "css",
+        "javascript"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/blank-website-df08a0fe663a.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/blank-website-a54aa5b3e0bb.tar.gz",
+        "sha256": "a54aa5b3e0bb581479b806cd2e298dfcfcdd648575630aaad5cdc4ed3e2aaeda",
+        "bytes": 6607,
+        "files": 9
+      },
+      "version": "a54aa5b3e0bb"
+    },
+    {
+      "id": "hello-world-cli",
+      "name": "Command-line tool",
+      "description": "A small terminal tool with a greeting, options, help and tests. Start here for local utilities and developer tools.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:starter",
+        "starter",
+        "minimal",
+        "cli",
+        "terminal",
+        "typescript",
+        "bun"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/hello-world-cli-803a0119e04d.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/hello-world-cli-797ddf7dcd89.tar.gz",
+        "sha256": "797ddf7dcd89f90b7487138fbf31db2cdca3a73a272b3633adf48576296504fe",
+        "bytes": 2657,
+        "files": 7
+      },
+      "version": "797ddf7dcd89"
+    },
+    {
+      "id": "web-app",
+      "name": "Web app",
+      "description": "A small app with accounts and saved data. Start with a personal notes workspace, then build your own product. Publishes with Freebuff.",
+      "kind": "app",
+      "integrations": [
+        "auth",
+        "database"
+      ],
+      "tags": [
+        "category:starter",
+        "starter",
+        "minimal",
+        "web",
+        "accounts",
+        "data",
+        "react",
+        "sites"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/web-app-29018cb386d8.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/web-app-accf14ebd7aa.tar.gz",
+        "sha256": "accf14ebd7aa19af2170c73584588efe8f01606c83e395ab8ece21ce4dbba201",
+        "bytes": 26772,
+        "files": 19
+      },
+      "version": "accf14ebd7aa"
+    },
+    {
+      "id": "browser-extension",
+      "name": "Browser extension",
+      "description": "Add a tool to your browser. Starts with a popup that saves the current page to a private reading list on your device, ready to customize.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:starter",
+        "starter",
+        "minimal",
+        "extension",
+        "browser",
+        "chrome",
+        "typescript",
+        "wxt"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/browser-extension-c583a934e8c0.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/browser-extension-a77c0ba92b01.tar.gz",
+        "sha256": "a77c0ba92b013b8171f42c59371de34c41c64356a27e74bb10351fcf493f5af0",
+        "bytes": 22658,
+        "files": 12
+      },
+      "version": "a77c0ba92b01"
+    },
+    {
+      "id": "json-api",
+      "name": "API service",
+      "description": "A backend for your app, with JSON endpoints, input validation, health checks and an interactive explorer. Ready to publish with Freebuff.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:starter",
+        "starter",
+        "minimal",
+        "api",
+        "backend",
+        "json",
+        "typescript",
+        "hono",
+        "sites"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/json-api-5015263c8459.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/json-api-4d8c0342e942.tar.gz",
+        "sha256": "4d8c0342e94234b81813b89bb9a27062026554c005f5c5a8dc79b8cb6a06fa0c",
+        "bytes": 22039,
+        "files": 15
+      },
+      "version": "4d8c0342e942"
+    },
+    {
+      "id": "python-script",
+      "name": "Automation script",
+      "description": "Automate a task or process files. Starts with a working text-file summary, command-line options, JSON output and tests. Runs locally with no account setup.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:starter",
+        "starter",
+        "minimal",
+        "automation",
+        "script",
+        "python",
+        "files",
+        "terminal"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/python-script-ffa5636f6cca.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/python-script-e2746c9e7585.tar.gz",
+        "sha256": "e2746c9e758599763df223e2a1c99b83d247a5a7cc94ce1ed8ade12a42df9275",
+        "bytes": 2287,
+        "files": 5
+      },
+      "version": "e2746c9e7585"
+    },
+    {
+      "id": "bedwars-lite",
+      "name": "Voxel bed wars (simple)",
+      "description": "A small voxel bed-wars game against bots, all in the page: team islands over the void, beds to protect, building, melee with crits and sprint knockback, an iron shop and three bot levels.",
+      "kind": "app",
+      "integrations": [],
+      "tags": [
+        "category:game",
+        "game",
+        "bots",
+        "voxel",
+        "starter"
+      ],
+      "preview": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/previews/bedwars-lite-06e81cadbd54.jpg",
+      "archive": {
+        "url": "https://pub-0cfed6727a1844b7b9405419b66ad607.r2.dev/archives/bedwars-lite-18a477e8f9bf.tar.gz",
+        "sha256": "18a477e8f9bf87fca39fa721ce614c3edaf599590983233b054e1a233c06731a",
+        "bytes": 45507,
+        "files": 32
+      },
+      "version": "18a477e8f9bf"
+    }
+  ]
+}

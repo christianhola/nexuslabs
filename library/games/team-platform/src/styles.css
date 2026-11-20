@@ -1,0 +1,309 @@
+@import 'tailwindcss';
+
+/*
+  Branchwork design tokens. A white page with near-black ink, hairline grey
+  borders, line-art product drawings and one fresh mint green for the
+  primary action and "done" states. `mint` is a fill colour only; text that
+  needs to read as green uses `leaf` (AA on white). Everything rounded is a
+  squircle (see the base layer); circles opt out with .round.
+  src/lib/tokens.ts mirrors these values for the style guide.
+*/
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Canvas */
+  --color-page: #ffffff;
+  --color-backdrop: #f4f4f3;
+  --color-mist: #f6f6f5;
+  --color-mist-2: #efefed;
+  --color-card: #ffffff;
+  --color-line: #e6e6e3;
+  --color-line-strong: #d2d2ce;
+
+  /* Text */
+  --color-ink: #0f0f0f;
+  --color-body: #2a2a2a;
+  --color-muted: #525252;
+  --color-faint: #666664;
+
+  /* Accent */
+  --color-mint: #7ee07b;
+  --color-mint-hover: #6ed76b;
+  --color-mint-press: #5ecb5b;
+  --color-mint-soft: #e6f8e4;
+  --color-leaf: #1f7a2a;
+  --color-night: #111111;
+  --color-night-hover: #2b2b2b;
+
+  /* Status */
+  --color-ok: #1f7a2a;
+  --color-ok-soft: #e6f8e4;
+  --color-warn: #8a5a00;
+  --color-warn-soft: #fdf2d8;
+  --color-bad: #b42318;
+  --color-bad-soft: #fde8e6;
+
+  --radius-control: 10px;
+  --radius-button: 9px;
+  --radius-card: 20px;
+  --radius-card-sm: 14px;
+
+  --shadow-card: 0 1px 2px rgb(15 15 15 / 0.04), 0 8px 28px -16px rgb(15 15 15 / 0.14);
+  --shadow-raised: 0 2px 6px rgb(15 15 15 / 0.05), 0 22px 50px -24px rgb(15 15 15 / 0.24);
+  --shadow-pop: 0 14px 36px -10px rgb(15 15 15 / 0.22), 0 0 0 1px rgb(15 15 15 / 0.06);
+  --shadow-button: 0 1px 1px rgb(15 15 15 / 0.04), inset 0 -1px 0 rgb(15 15 15 / 0.05);
+
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --animate-bob: bob 6s ease-in-out infinite;
+  --animate-typing: typing 1.2s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-spin: spin 0.8s linear infinite;
+  --animate-pop-in: pop-in 0.5s var(--ease-brand) both;
+
+  @keyframes bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -7px; }
+  }
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.25; translate: 0 0; }
+    30% { opacity: 1; translate: 0 -2px; }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pop-in {
+    from { opacity: 0; scale: 0.92; }
+    to { opacity: 1; scale: 1; }
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    corner-shape: squircle;
+    border-color: var(--color-line);
+  }
+  .round,
+  .round::before,
+  .round::after {
+    corner-shape: round;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 96px;
+  }
+  body {
+    background: var(--color-page);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss03';
+  }
+  ::selection {
+    background: var(--color-mint);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role='button'],
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .ring-focus {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-mist-2) 25%, var(--color-mist) 50%, var(--color-mist-2) 75%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  /* Isometric planes for the line-art product drawings (HeroIso). */
+  .iso-left {
+    transform: matrix(0.866, 0.5, 0, 1, 0, 0);
+  }
+  .iso-top {
+    transform: matrix(0.866, 0.5, -0.866, 0.5, 0, 0);
+  }
+  .line-art {
+    border: 1.5px solid var(--color-ink);
+    background: var(--color-card);
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Range input used by <Slider>. */
+.range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-ink) var(--pct), var(--color-mist-2) var(--pct));
+}
+.range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-ink) var(--pct), var(--color-mist-2) var(--pct));
+}
+.range::-webkit-slider-thumb {
+  appearance: none;
+  margin-top: -9px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  corner-shape: round;
+  background: var(--color-mint);
+  border: 2px solid var(--color-ink);
+}
+.range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--color-mint);
+  border: 2px solid var(--color-ink);
+}
+.range:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Hand-drawn underline (Squiggle). */
+.squiggle-a,
+.squiggle-b {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 0.9s var(--ease-brand) 0.35s forwards;
+}
+.squiggle-b {
+  animation-delay: 0.9s;
+  animation-duration: 0.6s;
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .squiggle-a,
+  .squiggle-b {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}
+
+/* Hero drawing cards: pop in once, then bob gently. */
+.iso-card {
+  animation: pop-in 0.7s var(--ease-brand) both, bob 6s ease-in-out infinite;
+}
+.iso-card-still {
+  animation: pop-in 0.7s var(--ease-brand) both;
+}
+/* Hold still while someone points at or tabs into a card. */
+figure:hover .iso-card,
+figure:focus-within .iso-card {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .iso-card,
+  .iso-card-still {
+    animation: none;
+  }
+}
+
+/* Org chart connectors (OrgChart). */
+.org-tree,
+.org-tree ul {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.org-tree ul {
+  padding-top: 26px;
+}
+.org-tree li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 26px 7px 0;
+}
+.org-tree > li {
+  padding-top: 0;
+}
+.org-tree li::before,
+.org-tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 50%;
+  height: 26px;
+  border-top: 1.5px solid var(--color-ink);
+}
+.org-tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1.5px solid var(--color-ink);
+}
+.org-tree li:only-child::before,
+.org-tree li:only-child::after {
+  display: none;
+}
+.org-tree li:only-child {
+  padding-top: 0;
+}
+.org-tree li:first-child::before,
+.org-tree li:last-child::after {
+  border: 0 none;
+}
+.org-tree li:last-child::before {
+  border-right: 1.5px solid var(--color-ink);
+  border-radius: 0 12px 0 0;
+}
+.org-tree li:first-child::after {
+  border-radius: 12px 0 0 0;
+}
+.org-tree > li::before,
+.org-tree > li::after {
+  display: none;
+}
+.org-tree ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 26px;
+  border-left: 1.5px solid var(--color-ink);
+}

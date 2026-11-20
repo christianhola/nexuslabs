@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local development (it is git-ignored).
+# ADMIN_TOKEN unlocks /admin (the signup list and CSV export). Use a long
+# random value, e.g. `openssl rand -hex 24`. Leave it unset and /admin is
+# disabled. In production, set it as a secret on the site, never in code.
+ADMIN_TOKEN=

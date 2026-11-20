@@ -1,0 +1,83 @@
+name: Publicar solo el artefacto verificado
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-pages
+  cancel-in-progress: false
+
+env:
+  BASE_PREFIX: /plantillas-freebuff/
+  PUBLIC_REPO: christianhola/plantillas-freebuff
+  WHATSAPP_NUMBER: ${{ vars.WHATSAPP_NUMBER }}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Cachear demos y capturas
+        uses: actions/cache@v4
+        with:
+          path: |
+            library/demos
+            library/previews
+          key: demos-${{ runner.os }}-plantillas-freebuff-${{ hashFiles('library/scripts/build-library.mjs', 'library/scripts/gallery.mjs', 'library/gallery/package.json', 'library/gallery/bun.lock', 'library/catalog.json') }}
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('library/scripts/build-library.mjs', 'library/gallery/bun.lock') }}
+
+      - name: Compilar demos y galería
+        env:
+          BUILD_CONCURRENCY: 4
+        run: bun library/scripts/build-library.mjs --static
+
+      - name: Ensamblar el artefacto público
+        run: bun library/scripts/prepare-public.mjs
+
+      - name: Verificar que no haya fuente, mapas, catálogo ni secretos
+        run: bun library/scripts/verify-public.mjs
+
+      - name: Publicar en la rama gh-pages del repositorio público
+        env:
+          PUBLIC_DEPLOY_KEY: ${{ secrets.PUBLIC_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PUBLIC_DEPLOY_KEY:-}" ]; then
+            echo "Falta el secret PUBLIC_DEPLOY_KEY (deploy key de escritura del repo público)." >&2
+            exit 1
+          fi
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$PUBLIC_DEPLOY_KEY" > ~/.ssh/public_deploy_key
+          chmod 600 ~/.ssh/public_deploy_key
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/public_deploy_key -o IdentitiesOnly=yes"
+
+          work="$(mktemp -d)"
+          cp -R dist-public/. "$work/"
+          cd "$work"
+          git init -q -b gh-pages
+          git config user.name "NEXUS LABS"
+          git config user.email "nexus-labs@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy $(date -u +%Y-%m-%dT%H:%MZ) from ${GITHUB_SHA::7}"
+          git remote add origin "git@github.com:${PUBLIC_REPO}.git"
+          git push --force origin gh-pages
+
+      - name: Aviso de Pages
+        run: |
+          echo "Artefacto publicado en gh-pages. Pages debe estar configurado en:"
+          echo "  Branch: gh-pages · Folder: / (root)"

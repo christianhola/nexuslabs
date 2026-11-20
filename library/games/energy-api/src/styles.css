@@ -1,0 +1,203 @@
+@import 'tailwindcss';
+
+/*
+  Gridwise design tokens. A pale mint page, near-black ink, white and
+  deeper-mint surfaces, and one bright "volt" green kept for fills, dots
+  and large display type. `leaf` is the AA-safe green for small text on
+  mint or white. `forest` is the dark band behind code and the closing CTA.
+  Everything rounded is a squircle (global rule below), so radii run a step
+  larger than a plain border-radius would.
+*/
+@theme {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --color-mint: #eefbe6;
+  --color-mint-2: #e3f5d8;
+  --color-mint-3: #d4ecc6;
+  --color-paper: #ffffff;
+  --color-paper-2: #f7fdf3;
+  --color-line: #d7e8cc;
+  --color-line-strong: #bcd3ae;
+  --color-ink: #1c1e1b;
+  --color-ink-2: #393d36;
+  --color-muted: #545b50;
+  --color-faint: #677061;
+  --color-dot: rgb(28 30 27 / 0.2);
+  --color-volt: #b9ec6c;
+  --color-volt-2: #a6de52;
+  --color-leaf: #2f6a1d;
+  --color-leaf-deep: #245216;
+  --color-forest: #142016;
+  --color-forest-2: #1c2b1e;
+  --color-forest-3: #26382a;
+  --color-forest-line: rgb(238 251 230 / 0.12);
+  --color-on-forest: #eaf6e1;
+  --color-on-forest-muted: #a9bba3;
+  --color-success: #2f6a1d;
+  --color-success-50: #ddf3cf;
+  --color-warning: #85570a;
+  --color-warning-50: #fbf0d6;
+  --color-danger: #b02e24;
+  --color-danger-50: #fbe7e3;
+
+  --radius-pill: 999px;
+  --radius-control: 14px;
+  --radius-control-sm: 12px;
+  --radius-card: 22px;
+  --radius-card-sm: 16px;
+  --radius-media: 14px;
+  --radius-panel: 30px;
+
+  --shadow-card: 0 1px 2px rgb(28 30 27 / 0.04), 0 10px 32px -14px rgb(28 30 27 / 0.14);
+  --shadow-float: 0 2px 6px rgb(28 30 27 / 0.06), 0 30px 70px -26px rgb(28 30 27 / 0.32);
+  --shadow-inset: inset 0 0 0 1px rgb(28 30 27 / 0.08);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 260ms;
+  --duration-slow: 700ms;
+
+  --animate-breathe: breathe 6s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 1.8s ease-out infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-spin-fast: spin 0.8s linear infinite;
+  --animate-rise: rise 0.7s var(--ease-out) both;
+  --animate-flow: flow 2.4s linear infinite;
+
+  @keyframes breathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 rgb(166 222 82 / 0.6); }
+    100% { box-shadow: 0 0 0 8px rgb(166 222 82 / 0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes flow {
+    from { stroke-dashoffset: 24; }
+    to { stroke-dashoffset: 0; }
+  }
+}
+
+@layer base {
+  * {
+    corner-shape: squircle;
+  }
+  .round {
+    corner-shape: round;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 88px;
+    background: var(--color-mint);
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-mint);
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-volt);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  [data-force='focus'] {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  .on-forest :focus-visible,
+  .on-forest [data-force='focus'] {
+    outline-color: var(--color-volt);
+  }
+  button:not(:disabled),
+  [role='button'],
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+  input[type='search']::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, var(--color-mint-3) 0%, var(--color-mint-2) 40%, var(--color-mint-3) 80%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* The dot-matrix texture of the hero columns. */
+@utility dots {
+  background-image: radial-gradient(circle at center, var(--color-dot) 1.1px, transparent 1.5px);
+  background-size: 7px 7px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Range slider: a 40px hit area with a 6px filled track. */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 40px;
+  width: 100%;
+}
+.range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-ink) var(--pct), var(--color-mint-3) var(--pct));
+}
+.range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-mint-3);
+}
+.range::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-ink);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 3px solid var(--color-paper);
+  background: var(--color-ink);
+  box-shadow: 0 1px 4px rgb(28 30 27 / 0.3);
+}
+.range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 3px solid var(--color-paper);
+  background: var(--color-ink);
+}

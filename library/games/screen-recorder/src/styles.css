@@ -1,0 +1,200 @@
+@import 'tailwindcss';
+
+/*
+  Clipwise design tokens.
+
+  A warm near-black with cream type, hairline frame lines and one ember accent
+  (the record dot, the glow behind the product shot). Dark only: the product is
+  a video tool and the reference is dark.
+*/
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+
+  --color-bg: #0e0d0c;
+  --color-surface: #141312;
+  --color-surface-2: #1a1918;
+  --color-raised: #22201e;
+  --color-line: rgb(255 244 228 / 0.075);
+  --color-line-strong: rgb(255 244 228 / 0.14);
+  --color-fg: #f4efe4;
+  --color-muted: #a7a197;
+  --color-faint: #8a847b;
+  --color-cream: #f4efe4;
+  --color-ink: #121110;
+  --color-ember: #e5484d;
+  --color-ember-text: #ff8a85;
+  /* Record-button fill: ember darkened so white label text passes AA (4.8:1). */
+  --color-record: #d13a40;
+  --color-ember-deep: #5a1a16;
+  --color-folder: #e1b345;
+  --color-ok: #4cc27a;
+  --color-ok-bg: rgb(76 194 122 / 0.16);
+  --color-scrim: rgb(6 5 4 / 0.7);
+
+  --radius-control: 999px;
+  --radius-card: 14px;
+  --radius-panel: 18px;
+  --radius-video: 18px;
+
+  --shadow-pop: 0 18px 40px -12px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 244 228 / 0.08);
+  --shadow-modal: 0 40px 120px -20px rgb(0 0 0 / 0.85), 0 0 0 1px rgb(255 244 228 / 0.1);
+  --shadow-video: 0 50px 120px -30px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 244 228 / 0.08);
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-rec-pulse: rec-pulse 1.4s ease-in-out infinite;
+  --animate-caret: caret 1.1s steps(1) infinite;
+  --animate-glow: glow 9s ease-in-out infinite alternate;
+  --animate-spin: spin 0.8s linear infinite;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes rec-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.82); }
+  }
+  @keyframes caret {
+    50% { opacity: 0; }
+  }
+  @keyframes glow {
+    from { opacity: 0.75; transform: translateX(-50%) scale(1); }
+    to { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200px 0; }
+    to { background-position: 200px 0; }
+  }
+}
+
+/*
+  State variants also match a `data-force` attribute, so the style guide can
+  render a real component pinned in its hover / pressed / focus state:
+  <Button data-force="hover">.
+*/
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &[data-force~='hover'] {
+    @slot;
+  }
+}
+@custom-variant active {
+  &:active {
+    @slot;
+  }
+  &[data-force~='active'] {
+    @slot;
+  }
+}
+@custom-variant focus-visible {
+  &:focus-visible {
+    @slot;
+  }
+  &[data-force~='focus'] {
+    @slot;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color-scheme: dark;
+  }
+  html,
+  body {
+    overflow-x: clip;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--color-bg);
+  }
+  ::selection {
+    background: var(--color-cream);
+    color: var(--color-ink);
+  }
+  :focus-visible,
+  [data-force~='focus'] {
+    outline: 2px solid var(--color-cream);
+    outline-offset: 2px;
+  }
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+  * {
+    scrollbar-color: var(--color-line-strong) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+@layer components {
+  /* Edge fade for the logo marquee. */
+  .fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 82%, transparent);
+  }
+  /* Fades the product composition into the page at the bottom. */
+  .fade-b {
+    mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+  }
+  .skel {
+    background: linear-gradient(90deg, var(--color-surface-2) 0, var(--color-raised) 80px, var(--color-surface-2) 160px);
+    background-size: 400px 100%;
+    animation: var(--animate-shimmer);
+    border-radius: 8px;
+  }
+  /* Dotted underline used on "product, sales & support". */
+  .dotted {
+    text-decoration: underline dotted;
+    text-decoration-color: rgb(244 239 228 / 0.45);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1.5px;
+  }
+  /* Grows a small control's touch target to 40px without changing its look. */
+  .hit {
+    position: relative;
+  }
+  .hit::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
