@@ -1,6 +1,6 @@
 # NEXUS LABS
 
-Sitio: https://christianhola.github.io/plantillas-freebuff/
+Sitio: https://christianhola.github.io/nexuslabs/
 
 Este repositorio contiene **solo el artefacto compilado** en la rama `gh-pages`.
 La fuente, los scripts, el catálogo y las capturas sin compilar viven en un
