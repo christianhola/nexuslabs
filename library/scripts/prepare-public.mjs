@@ -4,7 +4,8 @@
 // Usage:
 //   bun library/scripts/prepare-public.mjs
 //   BASE_PREFIX=/plantillas-freebuff/ bun library/scripts/prepare-public.mjs
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, statSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { extname } from 'node:path'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -46,6 +47,27 @@ for (const entry of ALLOW) {
   })
 }
 
+// The demos are prebuilt with the historic prefix baked into their HTML and
+// JavaScript. Rewrite it so the artefact works under any public prefix.
+const TEXT_EXTENSIONS = new Set(['.html', '.js', '.mjs', '.css', '.json', '.webmanifest', '.svg', '.xml', '.txt'])
+const LEGACY_BASE = '/plantillas-freebuff/'
+let rewritten = 0
+const reprefix = (dir) => {
+  for (const name of readdirSync(dir)) {
+    const path = join(dir, name)
+    if (statSync(path).isDirectory()) {
+      reprefix(path)
+      continue
+    }
+    if (!TEXT_EXTENSIONS.has(extname(name))) continue
+    const text = readFileSync(path, 'utf8')
+    if (!text.includes(LEGACY_BASE)) continue
+    writeFileSync(path, text.replaceAll(LEGACY_BASE, BASE))
+    rewritten += 1
+  }
+}
+if (BASE !== LEGACY_BASE) reprefix(OUT)
+
 const walk = (dir) => {
   for (const name of readdirSync(dir)) {
     const path = join(dir, name)
@@ -73,3 +95,4 @@ console.log(
   `prepare-public: ${files} archivos, ${(bytes / 1024 / 1024).toFixed(1)} MiB, ${demoCount} demos → ${OUT}`
 )
 console.log(`prepare-public: prefijo público ${BASE}`)
+if (rewritten) console.log(`prepare-public: ${rewritten} archivos reapuntados al prefijo actual`)

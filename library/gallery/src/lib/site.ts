@@ -3,7 +3,7 @@ export const CONTACT_EMAIL_ALT = "meridian@nexviro.art"
 export const INSTAGRAM = "____christian_noir"
 export const GITHUB = "https://github.com/christianhola/plantillas-freebuff"
 export const VIDEO_ID = "tKoDPOrLMX0"
-export const SITE_URL = "https://christianhola.github.io/plantillas-freebuff/"
+export const SITE_URL = "https://christianhola.github.io/Design-Nexus-labs-/"
 
 export function assetUrl(path: string) {
   if (/^(https?:)?\/\//.test(path)) return path
