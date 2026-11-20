@@ -15,7 +15,6 @@ import {
 import { toast } from "sonner"
 
 import { SectionHead } from "@/components/section-head"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -27,11 +26,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
 import { Input } from "@/components/ui/input"
 import {
   Pagination,
@@ -46,9 +40,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import { cap, data, statusTone, type Template } from "@/lib/data"
+import { data, type Template } from "@/lib/data"
 import { assetUrl, customRequest } from "@/lib/site"
-import { cn } from "@/lib/utils"
 
 const PAGE_SIZES = [12, 24, 48] as const
 
@@ -73,11 +66,11 @@ export function TemplateCard({
   }
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition duration-300 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-soft">
+    <article className="group flex flex-col">
       <Link
         to={detailHref}
         aria-label={`Abrir la ficha de ${template.name}`}
-        className="relative block overflow-hidden"
+        className="block overflow-hidden bg-muted/40"
       >
         <img
           src={assetUrl(template.preview)}
@@ -86,142 +79,83 @@ export function TemplateCard({
           height={440}
           loading={index < 3 ? "eager" : "lazy"}
           decoding="async"
-          className="aspect-[16/11] w-full object-cover object-top transition duration-700 group-hover:scale-[1.035]"
+          className="aspect-[16/11] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
         />
-        <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10 opacity-70" />
-        <Badge
-          variant="outline"
-          className={cn(
-            "absolute top-2.5 left-2.5 backdrop-blur-md",
-            statusTone[template.statusClass]
-          )}
-        >
-          {template.status}
-        </Badge>
-        <span className="absolute right-2.5 bottom-2.5 flex translate-y-1 items-center gap-1 rounded-full bg-background/90 px-2.5 py-1 text-[0.65rem] font-medium text-foreground opacity-0 backdrop-blur transition group-hover:translate-y-0 group-hover:opacity-100">
-          Ver ficha <ArrowUpRight className="size-3" />
-        </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-4">
-        <div className="flex items-center justify-between gap-2">
-          <HoverCard>
-            <HoverCardTrigger
-              render={
-                <button
-                  type="button"
-                  className="mono-label text-left text-[0.6rem] transition hover:text-foreground"
-                />
-              }
-            >
-              {template.industry}
-            </HoverCardTrigger>
-            <HoverCardContent align="start" className="w-64">
-              <p className="text-[0.72rem] font-medium">{template.name}</p>
-              <p className="mt-1 text-[0.7rem] leading-4 text-muted-foreground">
-                {template.description}
-              </p>
-              <dl className="mt-2.5 space-y-1 border-t border-border pt-2 text-[0.66rem] text-muted-foreground">
-                <div className="flex justify-between gap-3">
-                  <dt>Tipo</dt>
-                  <dd className="text-foreground/80">{template.kindLabel}</dd>
-                </div>
-                <div className="flex justify-between gap-3">
-                  <dt>Estado de la demo</dt>
-                  <dd className="text-foreground/80">{template.status}</dd>
-                </div>
-              </dl>
-            </HoverCardContent>
-          </HoverCard>
-          <span className="text-[0.6rem] tracking-[0.12em] text-muted-foreground/80 uppercase">
-            {template.kindLabel}
-          </span>
-        </div>
-
-        <h3 className="mt-1.5 font-display text-[1.5rem] leading-none">
-          <Link
-            to={detailHref}
-            className="transition hover:text-primary"
-          >
-            {template.name}
-          </Link>
-        </h3>
-
-        <p className="mt-2 line-clamp-2 text-[0.8rem] leading-5 text-muted-foreground">
-          {template.description}
+      <div className="flex items-baseline justify-between gap-3 pt-3.5">
+        <p className="mono-label truncate">{template.industry}</p>
+        <p className="shrink-0 text-[0.6rem] tracking-[0.14em] text-muted-foreground/70 uppercase">
+          {template.kindLabel}
         </p>
+      </div>
 
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {template.features.slice(0, 3).map((feature) => (
-            <span
-              key={feature}
-              className="rounded-full border border-border/80 px-2 py-0.5 text-[0.64rem] text-muted-foreground"
-            >
-              {cap(feature)}
-            </span>
-          ))}
-        </div>
+      <h3 className="mt-2 font-display text-[1.55rem] leading-[1.1]">
+        <Link to={detailHref} className="transition-colors hover:text-primary">
+          {template.name}
+        </Link>
+      </h3>
 
-        <div className="mt-auto flex items-center gap-1.5 pt-4">
-          <Button
-            size="sm"
-            className="h-8 gap-1.5 rounded-full px-3 text-[0.74rem]"
-            render={<a href={customRequest(template.name)} />}
-          >
-            <MessageCircle data-icon="inline-start" />
-            Personalizar
-          </Button>
-          <Badge
-            variant="outline"
-            className="h-8 gap-1 rounded-full px-3 text-[0.72rem] font-normal"
+      <p className="mt-1.5 line-clamp-2 text-[0.82rem] leading-6 text-muted-foreground">
+        {template.description}
+      </p>
+
+      <div className="mt-3 flex items-center gap-4 border-t border-border/70 pt-2.5 text-[0.74rem]">
+        <a
+          href={demoHref}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1 text-foreground/90 transition-colors hover:text-primary"
+        >
+          Ver demo
+          <ArrowUpRight className="size-3" />
+        </a>
+        <a
+          href={customRequest(template.name)}
+          className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <MessageCircle className="size-3" />
+          Personalizar
+        </a>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger
             render={
-              <a href={demoHref} target="_blank" rel="noreferrer">
-                Ver demo
-                <ArrowUpRight data-icon="inline-end" />
-              </a>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="ml-auto text-muted-foreground"
+                aria-label={`Más acciones para ${template.name}`}
+              >
+                <MoreHorizontal />
+              </Button>
             }
           />
-
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  className="ml-auto text-muted-foreground"
-                  aria-label={`Más acciones para ${template.name}`}
-                >
-                  <MoreHorizontal />
-                </Button>
-              }
-            />
-            <DropdownMenuContent align="end" className="w-60">
-              <DropdownMenuLabel>{template.name}</DropdownMenuLabel>
-              <DropdownMenuItem render={<Link to={detailHref} />}>
-                Abrir ficha completa
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                render={<a href={demoHref} target="_blank" rel="noreferrer" />}
-              >
-                Abrir la demo
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={copyLink}>
-                <Copy />
-                Copiar enlace
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                render={<a href={customRequest(template.name)} />}
-              >
-                <MessageCircle />
-                Pedir por correo
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+          <DropdownMenuContent align="end" className="w-60">
+            <DropdownMenuLabel>{template.name}</DropdownMenuLabel>
+            <DropdownMenuItem render={<Link to={detailHref} />}>
+              Abrir ficha completa
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              render={<a href={demoHref} target="_blank" rel="noreferrer" />}
+            >
+              Abrir la demo
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={copyLink}>
+              <Copy />
+              Copiar enlace
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem render={<a href={customRequest(template.name)} />}>
+              <MessageCircle />
+              Pedir por correo
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </article>
   )
+
 }
 
 function pageList(page: number, total: number) {
@@ -285,7 +219,7 @@ export function Catalog({
   }
 
   return (
-    <section className="relative border-y border-border bg-card/25 py-16 sm:py-20">
+    <section className="relative border-t border-border py-16 sm:py-20">
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
         {showHeading && (
           <SectionHead
@@ -387,7 +321,7 @@ export function Catalog({
 
         <div id="lista-plantillas" className="scroll-mt-24">
           {shown.length ? (
-            <div className="mt-7 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
               {shown.map((template, index) => (
                 <TemplateCard
                   key={template.id}
@@ -397,7 +331,7 @@ export function Catalog({
               ))}
             </div>
           ) : (
-            <div className="surface mt-7 flex flex-col items-center gap-3 rounded-2xl px-6 py-16 text-center">
+            <div className="mt-8 flex flex-col items-center gap-3 border-t border-border px-6 py-16 text-center">
               <p className="font-display text-2xl">
                 No hay plantillas con esos filtros.
               </p>

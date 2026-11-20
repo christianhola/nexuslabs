@@ -623,7 +623,7 @@ export function AssistantPage() {
 
   return (
     <div className="mx-auto w-full max-w-[780px] px-5 pt-10 sm:px-6 sm:pt-14">
-      <header className="flex items-end justify-between gap-6 border-b border-border pb-5">
+      <header className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
         <div className="min-w-0">
           <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Asistente
@@ -640,7 +640,7 @@ export function AssistantPage() {
         <button
           type="button"
           onClick={restart}
-          className="group mb-1 inline-flex shrink-0 items-center gap-1.5 text-[12px] text-muted-foreground transition-colors hover:text-foreground"
+          className="group inline-flex shrink-0 items-center gap-1.5 self-start text-[12px] text-muted-foreground transition-colors hover:text-foreground sm:mb-1 sm:self-auto"
         >
           <RotateCcw className="size-3.5" strokeWidth={1.5} />
           Nueva conversación
@@ -778,13 +778,13 @@ export function AssistantPage() {
                 ) : null}
 
                 {message.followUps?.length && !message.streaming ? (
-                  <div className="mt-1 flex flex-wrap gap-1.5">
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-border/70 pt-3">
                     {message.followUps.map((suggestion) => (
                       <button
                         key={suggestion}
                         type="button"
                         onClick={() => void ask(suggestion)}
-                        className="rounded-full border border-border px-2.5 py-1 text-left text-[12px] text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+                        className="text-left text-[12px] text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground/40"
                       >
                         {suggestion}
                       </button>
@@ -817,21 +817,6 @@ export function AssistantPage() {
         ) : null}
 
         <Transcript captions={captions} />
-
-        {messages.length <= 1 ? (
-          <div className="flex flex-wrap gap-1.5 px-4 pt-2.5 pb-0.5 sm:px-5">
-            {VOICE_SUGGESTIONS.map((suggestion) => (
-              <button
-                key={suggestion}
-                type="button"
-                onClick={() => void ask(suggestion)}
-                className="rounded-full border border-border px-2.5 py-1 text-[12px] text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        ) : null}
 
         <form
           className="px-4 py-3 sm:px-5"

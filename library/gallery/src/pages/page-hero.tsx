@@ -15,7 +15,6 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="paper-glow pointer-events-none absolute inset-0 -z-10" />
       <div className="mx-auto grid w-full max-w-[1240px] gap-8 px-5 pt-14 pb-12 sm:px-8 sm:pt-20 sm:pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div className="min-w-0">
           <BlurFade delay={0.02}>

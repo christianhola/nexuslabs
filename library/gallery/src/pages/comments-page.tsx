@@ -3,7 +3,6 @@ import {
   Heart,
   ImagePlus,
   Link2,
-  MessageSquare,
   Send,
   Trash2,
   UserRound,
@@ -23,22 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import {
-  Attachment,
-  AttachmentAction,
-  AttachmentActions,
-  AttachmentContent,
-  AttachmentDescription,
-  AttachmentMedia,
-  AttachmentTitle,
-} from "@/components/ui/attachment"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import {
-  Bubble,
-  BubbleContent,
-  BubbleReactions,
-} from "@/components/ui/bubble"
 import { Button } from "@/components/ui/button"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
@@ -217,31 +201,24 @@ export function CommentsPage() {
         }
         description="Sube una foto de tu portátil o pega un enlace de Google Drive: cuéntanos qué plantilla usaste, qué cambiaste y cómo quedó. También puedes poner tu foto de perfil y dar me gusta. Todo se guarda en tu navegador, sin cuentas ni servidores."
         aside={
-          <div className="flex gap-2">
-            <Badge variant="secondary" className="h-7 px-3 text-[0.72rem]">
-              {count} {count === 1 ? "comentario" : "comentarios"}
-            </Badge>
-            <Badge variant="outline" className="h-7 px-3 text-[0.72rem]">
-              {withImages} con imagen
-            </Badge>
-          </div>
+          <p className="text-[0.78rem] text-muted-foreground">
+            {count} {count === 1 ? "comentario" : "comentarios"} · {withImages}{" "}
+            con imagen
+          </p>
         }
       />
 
-      <div className="mx-auto grid w-full max-w-[1240px] gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+      <div className="mx-auto grid w-full max-w-[1240px] gap-12 px-5 py-12 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
         <form
           onSubmit={submit}
-          className="h-fit rounded-2xl border border-border bg-card p-5 shadow-soft lg:sticky lg:top-24"
+          className="h-fit border-t border-border pt-6 lg:sticky lg:top-24"
         >
-          <div className="flex items-center gap-2">
-            <MessageSquare className="size-4 text-primary" />
-            <h2 className="font-display text-2xl leading-none">
-              Deja tu comentario
-            </h2>
-          </div>
+          <h2 className="font-display text-2xl leading-none">
+            Deja tu comentario
+          </h2>
 
-          <div className="mt-5 flex items-center gap-3 rounded-xl border border-border bg-background/60 p-3">
-            <Avatar className="size-12">
+          <div className="mt-5 flex items-center gap-3">
+            <Avatar className="size-11">
               {avatar ? <AvatarImage src={avatar} alt="" /> : null}
               <AvatarFallback className="bg-primary/12 text-primary">
                 {avatar ? <UserRound className="size-5" /> : initials(name) || "Tú"}
@@ -250,8 +227,7 @@ export function CommentsPage() {
             <div className="min-w-0 flex-1">
               <p className="text-[0.78rem] font-medium">Tu foto de perfil</p>
               <p className="text-[0.66rem] leading-4 text-muted-foreground">
-                Se recorta y reduce en tu navegador. Aparecerá junto al
-                comentario.
+                Se recorta y reduce en tu navegador.
               </p>
             </div>
             <Button
@@ -274,7 +250,7 @@ export function CommentsPage() {
             />
           </div>
 
-          <div className="mt-4 grid gap-4">
+          <div className="mt-5 grid gap-4">
             <Field>
               <FieldLabel htmlFor="comment-name">Tu nombre</FieldLabel>
               <Input
@@ -337,7 +313,7 @@ export function CommentsPage() {
                 </div>
                 <Button
                   type="button"
-                  variant="secondary"
+                  variant="outline"
                   size="sm"
                   className="h-9 rounded-full"
                   onClick={applyLink}
@@ -349,35 +325,32 @@ export function CommentsPage() {
             </div>
 
             {image ? (
-              <Attachment orientation="vertical">
-                <AttachmentMedia variant="image">
-                  <img
-                    src={image}
-                    alt="Vista previa de la imagen del comentario"
-                    referrerPolicy="no-referrer"
-                  />
-                </AttachmentMedia>
-                <AttachmentContent>
-                  <AttachmentTitle>Captura adjunta</AttachmentTitle>
-                  <AttachmentDescription>Se guarda en este navegador</AttachmentDescription>
-                </AttachmentContent>
-                <AttachmentActions className="absolute top-1.5 right-1.5">
-                  <AttachmentAction
-                    aria-label="Quitar la imagen"
+              <div className="relative border-t border-border pt-3">
+                <img
+                  src={image}
+                  alt="Vista previa de la imagen del comentario"
+                  className="max-h-56 w-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="mt-2 flex items-center justify-between gap-3 text-[0.7rem] text-muted-foreground">
+                  <span>Captura adjunta · se guarda en este navegador</span>
+                  <button
+                    type="button"
                     onClick={() => setImage(null)}
-                    className="bg-background/90 backdrop-blur"
+                    className="inline-flex items-center gap-1 hover:text-foreground"
                   >
-                    <X />
-                  </AttachmentAction>
-                </AttachmentActions>
-              </Attachment>
+                    <X className="size-3.5" />
+                    Quitar
+                  </button>
+                </div>
+              </div>
             ) : null}
 
-            {busy ? <Skeleton className="h-28 w-full rounded-xl" /> : null}
+            {busy ? <Skeleton className="h-28 w-full" /> : null}
 
             <Button
               type="submit"
-              className="h-10 w-full gap-2 rounded-full"
+              className="mt-1 h-11 w-full gap-2 rounded-full"
               disabled={busy}
             >
               <Send data-icon="inline-start" />
@@ -392,144 +365,112 @@ export function CommentsPage() {
 
         <div>
           {comments.length ? (
-            <div className="grid gap-5">
+            <div className="grid gap-8">
               {comments.map((comment) => {
                 const liked = Boolean(comment.likedByMe)
                 return (
                   <article
                     key={comment.id}
-                    className="overflow-hidden rounded-2xl border border-border bg-card"
+                    className="border-t border-border pt-5"
                   >
                     {comment.image ? (
-                      <img
-                        src={comment.image}
-                        alt={`Proyecto compartido por ${comment.name}`}
-                        className="max-h-[26rem] w-full object-cover"
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                      />
+                      <a
+                        href={comment.image}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block overflow-hidden bg-muted/40"
+                      >
+                        <img
+                          src={comment.image}
+                          alt={`Proyecto compartido por ${comment.name}`}
+                          className="max-h-[26rem] w-full object-cover transition-transform duration-700 hover:scale-[1.01]"
+                          loading="lazy"
+                          referrerPolicy="no-referrer"
+                        />
+                      </a>
                     ) : null}
 
-                    <div className="flex gap-3 p-4">
-                      <Avatar className="mt-0.5 size-9">
-                        {comment.avatar ? (
-                          <AvatarImage src={comment.avatar} alt="" />
-                        ) : null}
-                        <AvatarFallback className="text-[0.65rem]">
-                          {initials(comment.name)}
-                        </AvatarFallback>
-                      </Avatar>
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 pt-3">
+                      <p className="flex items-center gap-2 text-[0.84rem] font-medium">
+                        <Avatar className="size-6">
+                          {comment.avatar ? (
+                            <AvatarImage src={comment.avatar} alt="" />
+                          ) : null}
+                          <AvatarFallback className="text-[0.58rem]">
+                            {initials(comment.name)}
+                          </AvatarFallback>
+                        </Avatar>
+                        {comment.name}
+                      </p>
+                      <p className="mono-label">
+                        {formatDate(comment.createdAt)}
+                      </p>
+                    </div>
 
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-                          <p className="text-[0.8rem] font-medium">
-                            {comment.name}
-                          </p>
-                          <p className="text-[0.64rem] text-muted-foreground">
-                            {formatDate(comment.createdAt)}
-                            {comment.image ? " · con imagen" : ""}
-                          </p>
-                        </div>
+                    <p className="mt-3 text-[0.9rem] leading-7 whitespace-pre-line">
+                      {comment.body}
+                    </p>
 
-                        <Bubble variant="muted" className="mt-1.5 max-w-full">
-                          <BubbleContent className="text-[0.84rem] leading-6">
-                            {comment.body}
-                          </BubbleContent>
-                          <BubbleReactions
-                            side="bottom"
-                            align="end"
-                            className="ring-card"
-                          >
-                            <button
-                              type="button"
-                              onClick={() => toggleLike(comment.id)}
-                              aria-pressed={liked}
-                              aria-label={`${liked ? "Quitar me gusta" : "Dar me gusta"} al comentario de ${comment.name}`}
-                              className={cn(
-                                "inline-flex items-center gap-1 rounded-full px-2 py-1 text-[0.68rem] transition",
-                                liked
-                                  ? "text-rose-500"
-                                  : "text-muted-foreground hover:text-foreground"
-                              )}
+                    <div className="mt-4 flex items-center justify-between gap-3 border-t border-border/70 pt-2.5">
+                      <button
+                        type="button"
+                        onClick={() => toggleLike(comment.id)}
+                        aria-pressed={liked}
+                        className={cn(
+                          "inline-flex items-center gap-1.5 rounded-full px-1 py-1 text-[0.74rem] transition-colors",
+                          liked
+                            ? "text-rose-500"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        <Heart
+                          className={cn("size-3.5", liked && "fill-current")}
+                        />
+                        {comment.likes ? comment.likes : "Me gusta"}
+                      </button>
+
+                      <AlertDialog>
+                        <AlertDialogTrigger
+                          render={
+                            <Button
+                              variant="ghost"
+                              size="icon-sm"
+                              className="text-muted-foreground hover:text-destructive"
+                              aria-label={`Borrar el comentario de ${comment.name}`}
                             >
-                              <Heart
-                                className={cn(
-                                  "size-3.5",
-                                  liked && "fill-current"
-                                )}
-                              />
-                              {comment.likes ?? 0}
-                            </button>
-                          </BubbleReactions>
-                        </Bubble>
-
-                        <div className="mt-4 flex items-center justify-between gap-3 border-t border-border pt-2.5">
-                          <button
-                            type="button"
-                            onClick={() => toggleLike(comment.id)}
-                            className={cn(
-                              "inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-[0.7rem] transition hover:bg-muted",
-                              liked
-                                ? "text-rose-500"
-                                : "text-muted-foreground hover:text-foreground"
-                            )}
-                          >
-                            <Heart
-                              className={cn("size-3.5", liked && "fill-current")}
-                            />
-                            {liked ? "Te gusta" : "Me gusta"}
-                            {comment.likes ? ` · ${comment.likes}` : ""}
-                          </button>
-
-                          <AlertDialog>
-                            <AlertDialogTrigger
-                              render={
-                                <Button
-                                  variant="ghost"
-                                  size="icon-sm"
-                                  className="text-muted-foreground hover:text-destructive"
-                                  aria-label={`Borrar el comentario de ${comment.name}`}
-                                >
-                                  <Trash2 />
-                                </Button>
-                              }
-                            />
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                  ¿Borrar este comentario?
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  Se quitará de este navegador, junto con su
-                                  imagen. Esta acción no se puede deshacer.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                                <AlertDialogAction
-                                  onClick={() => remove(comment.id)}
-                                >
-                                  Borrar
-                                </AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                        </div>
-                      </div>
+                              <Trash2 />
+                            </Button>
+                          }
+                        />
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              ¿Borrar este comentario?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Se quitará de este navegador, junto con su imagen.
+                              Esta acción no se puede deshacer.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => remove(comment.id)}>
+                              Borrar
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   </article>
                 )
               })}
             </div>
           ) : (
-            <div className="flex min-h-[22rem] flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-card/40 px-6 py-14 text-center">
-              <span className="flex size-12 items-center justify-center rounded-full border border-border bg-background">
-                <MessageSquare className="size-5 text-primary" />
-              </span>
-              <p className="mt-4 font-display text-2xl">
+            <div className="flex min-h-[20rem] flex-col justify-center border-t border-border py-14">
+              <p className="font-display text-2xl">
                 Todavía no hay comentarios.
               </p>
-              <p className="mt-2 max-w-sm text-[0.84rem] leading-6 text-muted-foreground">
+              <p className="mt-2 max-w-sm text-[0.86rem] leading-6 text-muted-foreground">
                 Sé la primera persona: sube una foto de tu proyecto y cuenta qué
                 plantilla usaste. Aparecerá aquí mismo, sin recargar.
               </p>

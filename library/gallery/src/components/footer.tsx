@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { ArrowUp, LayoutGrid, Mail } from "lucide-react"
+import { Mail } from "lucide-react"
 
 import { BrandMark } from "@/components/brand"
 import {
   GithubIcon,
   InstagramIcon,
 } from "@/components/social-icons"
-import { Dock, DockIcon } from "@/components/ui/dock"
 import { data } from "@/lib/data"
 import {
   CONTACT_EMAIL,
@@ -65,47 +63,30 @@ export function Footer() {
               Estudio de diseño y código. Plantillas completas, demos honestas y
               versiones a medida para negocios que quieren verse como son.
             </p>
-            <Dock
-              iconSize={34}
-              iconMagnification={46}
-              iconDistance={110}
-              className="mt-6 ml-0 w-fit gap-1 rounded-full border-border/80 bg-card/60 px-2 py-1.5"
-            >
-              <DockIcon className="border border-border bg-background">
+            <div className="mt-6 flex items-center gap-4 border-t border-border pt-5">
+              {[
+                { href: intro, label: "Correo", icon: Mail, external: false },
+                {
+                  href: instagramLink(),
+                  label: "Instagram",
+                  icon: InstagramIcon,
+                  external: true,
+                },
+                { href: GITHUB, label: "GitHub", icon: GithubIcon, external: true },
+              ].map((item) => (
                 <a
-                  href={intro}
-                  aria-label="Correo de NEXUS LABS"
-                  title="Correo"
-                  className="flex size-full items-center justify-center text-foreground/80 hover:text-primary"
+                  key={item.label}
+                  href={item.href}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : {})}
+                  className="inline-flex items-center gap-1.5 text-[0.76rem] text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  <Mail className="size-4" />
+                  <item.icon className="size-3.5" />
+                  {item.label}
                 </a>
-              </DockIcon>
-              <DockIcon className="border border-border bg-background">
-                <a
-                  href={instagramLink()}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Instagram de NEXUS LABS"
-                  title="Instagram"
-                  className="flex size-full items-center justify-center text-foreground/80 hover:text-primary"
-                >
-                  <InstagramIcon />
-                </a>
-              </DockIcon>
-              <DockIcon className="border border-border bg-background">
-                <a
-                  href={GITHUB}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Repositorio en GitHub"
-                  title="GitHub"
-                  className="flex size-full items-center justify-center text-foreground/80 hover:text-primary"
-                >
-                  <GithubIcon />
-                </a>
-              </DockIcon>
-            </Dock>
+              ))}
+            </div>
           </div>
 
           {columns.map((column) => (
@@ -166,7 +147,7 @@ export function Footer() {
         </div>
 
         <div aria-hidden="true" className="select-none overflow-hidden">
-          <p className="bg-gradient-to-b from-foreground/75 to-foreground/5 bg-clip-text text-[12.5vw] leading-[0.78] font-medium tracking-[-0.035em] text-transparent">
+          <p className="text-[12.5vw] leading-[0.78] font-medium tracking-[-0.035em] text-foreground/[0.06]">
             NEXUS LABS
           </p>
         </div>
@@ -191,81 +172,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
-}
-
-const floating = [
-  { label: "Catálogo", href: "/plantillas", icon: LayoutGrid, external: false },
-  { label: "Correo", href: intro, icon: Mail, external: true },
-  { label: "Instagram", href: instagramLink(), icon: InstagramIcon, external: true },
-  { label: "GitHub", href: GITHUB, icon: GithubIcon, external: true },
-  { label: "Volver al inicio", href: "/", icon: ArrowUp, external: false },
-]
-
-export function FloatingDock() {
-  const [show, setShow] = useState(false)
-
-  useEffect(() => {
-    let timer = 0
-    const onScroll = () => {
-      setShow(window.scrollY > 640)
-      window.clearTimeout(timer)
-      timer = window.setTimeout(() => setShow(false), 1200)
-    }
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => {
-      window.clearTimeout(timer)
-      window.removeEventListener("scroll", onScroll)
-    }
-  }, [])
-
-  return (
-    <div
-      className={`fixed bottom-4 left-1/2 z-40 hidden -translate-x-1/2 flex-col items-center gap-1.5 transition-all duration-500 sm:flex ${
-        show
-          ? "translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-4 opacity-0"
-      }`}
-    >
-      <span className="rounded-full border border-border/70 bg-background/70 px-2.5 py-1 text-[0.55rem] tracking-[0.24em] text-muted-foreground uppercase backdrop-blur">
-        Nexus Labs
-      </span>
-      <Dock
-        iconSize={34}
-        iconMagnification={46}
-        iconDistance={100}
-        className="mt-0 gap-1 rounded-full border-border/80 bg-background/80 px-2 py-1.5 shadow-soft backdrop-blur-xl"
-      >
-        {floating.map((item) => (
-          <DockIcon
-            key={item.label}
-            className="border border-border bg-card/80"
-          >
-            {item.external ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={item.label}
-                title={item.label}
-                className="flex size-full items-center justify-center text-foreground/75 hover:text-primary"
-              >
-                <item.icon className="size-4" />
-              </a>
-            ) : (
-              <Link
-                to={item.href}
-                aria-label={item.label}
-                title={item.label}
-                className="flex size-full items-center justify-center text-foreground/75 hover:text-primary"
-              >
-                <item.icon className="size-4" />
-              </Link>
-            )}
-          </DockIcon>
-        ))}
-      </Dock>
-    </div>
   )
 }

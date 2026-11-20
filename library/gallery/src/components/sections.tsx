@@ -6,24 +6,16 @@ import {
   Check,
   MessageCircle,
   Play,
-  Sparkles,
 } from "lucide-react"
 import { toast } from "sonner"
 
 import { SectionHead } from "@/components/section-head"
 import { InstagramIcon } from "@/components/social-icons"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Backlight } from "@/components/ui/backlight"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { DitherField } from "@/components/ui/dither-field"
-import { GlareHover } from "@/components/ui/glare-hover"
-import { HexagonPattern } from "@/components/ui/hexagon-pattern"
 import { Input } from "@/components/ui/input"
-import { Item, ItemContent, ItemMedia, ItemTitle, ItemDescription } from "@/components/ui/item"
-import { NoiseTexture } from "@/components/ui/noise-texture"
-import { TextAnimate } from "@/components/ui/text-animate"
 import { data } from "@/lib/data"
 import {
   customRequest,
@@ -69,25 +61,21 @@ export function Process({ showHeading = true }: { showHeading?: boolean }) {
           />
         )}
 
-        <div className={`grid gap-4 md:grid-cols-3 ${showHeading ? "mt-10" : ""}`}>
+        <div
+          className={`grid gap-8 border-t border-border md:grid-cols-3 md:gap-10 ${
+            showHeading ? "mt-10" : ""
+          }`}
+        >
           {steps.map((step, index) => (
-            <BlurFade key={step.title} delay={index * 0.07} inView>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
-                <DitherField
-                  pattern={step.pattern}
-                  color="var(--primary)"
-                  intensity={0.9}
-                  interactive={false}
-                  className="h-40 w-full opacity-90"
-                />
-                <div className="relative flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-2xl leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-[0.82rem] leading-6 text-muted-foreground">
-                    {step.copy}
-                  </p>
-                </div>
+            <BlurFade key={step.title} delay={index * 0.06} inView>
+              <article className="pt-5">
+                <p className="mono-label">0{index + 1}</p>
+                <h3 className="mt-3 font-display text-2xl leading-tight">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-[0.84rem] leading-6 text-muted-foreground">
+                  {step.copy}
+                </p>
               </article>
             </BlurFade>
           ))}
@@ -100,11 +88,11 @@ export function Process({ showHeading = true }: { showHeading?: boolean }) {
 export function Studio({ showHeading = true }: { showHeading?: boolean }) {
   const [playing, setPlaying] = useState(false)
   return (
-    <section id="estudio" className="border-y border-border bg-card/25 py-20 sm:py-24">
+    <section id="estudio" className="border-t border-border py-20 sm:py-24">
       <div className="mx-auto grid w-full max-w-[1240px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr]">
         <BlurFade inView>
           <div className="relative">
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-background shadow-soft">
+            <div className="overflow-hidden bg-muted/40">
               {playing ? (
                 <iframe
                   className="aspect-video w-full"
@@ -128,17 +116,11 @@ export function Studio({ showHeading = true }: { showHeading?: boolean }) {
                     loading="lazy"
                     className="aspect-video w-full object-cover"
                   />
-                  <span className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <span className="absolute inset-0 bg-black/20" />
                   <span className="absolute inset-0 flex items-center justify-center">
-                    <Backlight blur={12}>
-                      <span className="flex size-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl transition group-hover:scale-105">
-                        <Play className="ml-0.5 size-5 fill-current" />
-                      </span>
-                    </Backlight>
-                  </span>
-                  <span className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-[0.65rem] tracking-[0.16em] text-white/90 uppercase backdrop-blur">
-                    <Sparkles className="size-3" />
-                    Dentro del estudio
+                    <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-105">
+                      <Play className="ml-0.5 size-5 fill-current" />
+                    </span>
                   </span>
                 </button>
               )}
@@ -160,7 +142,7 @@ export function Studio({ showHeading = true }: { showHeading?: boolean }) {
             />
           )}
 
-          <div className={`grid gap-2 ${showHeading ? "mt-7" : ""}`}>
+          <div className={`grid border-t border-border ${showHeading ? "mt-7" : ""}`}>
             {[
               {
                 title: "Diseño con criterio editorial",
@@ -175,15 +157,15 @@ export function Studio({ showHeading = true }: { showHeading?: boolean }) {
                 copy: "Créditos y licencias de cada autor conservados en el repositorio.",
               },
             ].map((item) => (
-              <Item key={item.title} variant="outline" className="bg-background/60">
-                <ItemMedia variant="icon">
-                  <Check className="size-4 text-primary" />
-                </ItemMedia>
-                <ItemContent>
-                  <ItemTitle>{item.title}</ItemTitle>
-                  <ItemDescription>{item.copy}</ItemDescription>
-                </ItemContent>
-              </Item>
+              <div key={item.title} className="grid gap-1 border-b border-border py-3.5">
+                <p className="flex items-center gap-2 text-[0.88rem] font-medium">
+                  <Check className="size-3.5 text-primary" />
+                  {item.title}
+                </p>
+                <p className="pl-[1.4rem] text-[0.8rem] leading-6 text-muted-foreground">
+                  {item.copy}
+                </p>
+              </div>
             ))}
           </div>
 
@@ -261,51 +243,48 @@ export function Subscribe() {
   }
 
   return (
-    <section id="aviso" className="py-20 sm:py-24">
+    <section id="aviso" className="border-t border-border py-20 sm:py-24">
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
         <BlurFade inView>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-card">
-            <NoiseTexture className="opacity-[0.35] dark:opacity-40" />
-            <div className="relative grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div>
-                <p className="mono-label">Aviso de nuevas piezas</p>
-                <h2 className="mt-3 font-display text-3xl leading-[1.05] sm:text-4xl">
-                  Te avisamos cuando salga{" "}
-                  <span className="display-italic text-primary">la siguiente</span>.
-                </h2>
-                <p className="mt-3 max-w-md text-[0.85rem] leading-6 text-muted-foreground">
-                  Una nota corta, sin ruido: nuevas plantillas, mejoras y alguna
-                  que otra pieza de estudio. Nada de secuencias automáticas.
-                </p>
-              </div>
-
-              <form onSubmit={submit} className="space-y-3">
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="tu@correo.com"
-                    aria-label="Tu correo electrónico"
-                    className="h-11 flex-1 bg-background/80"
-                    required
-                  />
-                  <Button type="submit" className="h-11 gap-2 rounded-full px-5">
-                    Avisarme
-                    <ArrowUpRight data-icon="inline-end" />
-                  </Button>
-                </div>
-                <label className="flex items-start gap-2.5 text-[0.72rem] leading-4 text-muted-foreground">
-                  <Checkbox
-                    checked={consent}
-                    onCheckedChange={(checked) => setConsent(Boolean(checked))}
-                    className="mt-0.5"
-                    aria-label="Acepto que me escriban por correo"
-                  />
-                  Acepto que NEXUS LABS me escriba por correo sobre el aviso.
-                </label>
-              </form>
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="mono-label">Aviso de nuevas piezas</p>
+              <h2 className="mt-3 font-display text-3xl leading-[1.05] sm:text-4xl">
+                Te avisamos cuando salga{" "}
+                <span className="display-italic text-primary">la siguiente</span>.
+              </h2>
+              <p className="mt-3 max-w-md text-[0.86rem] leading-6 text-muted-foreground">
+                Una nota corta, sin ruido: nuevas plantillas, mejoras y alguna
+                que otra pieza de estudio. Nada de secuencias automáticas.
+              </p>
             </div>
+
+            <form onSubmit={submit} className="space-y-3">
+              <div className="flex flex-col gap-2 sm:flex-row">
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="tu@correo.com"
+                  aria-label="Tu correo electrónico"
+                  className="h-11 flex-1"
+                  required
+                />
+                <Button type="submit" className="h-11 gap-2 rounded-full px-5">
+                  Avisarme
+                  <ArrowUpRight data-icon="inline-end" />
+                </Button>
+              </div>
+              <label className="flex items-start gap-2.5 text-[0.72rem] leading-4 text-muted-foreground">
+                <Checkbox
+                  checked={consent}
+                  onCheckedChange={(checked) => setConsent(Boolean(checked))}
+                  className="mt-0.5"
+                  aria-label="Acepto que me escriban por correo"
+                />
+                Acepto que NEXUS LABS me escriba por correo sobre el aviso.
+              </label>
+            </form>
           </div>
         </BlurFade>
       </div>
@@ -383,7 +362,7 @@ export function Faq({ showHeading = true }: { showHeading?: boolean }) {
 
 export function Credits() {
   return (
-    <section className="border-y border-border bg-card/25 py-14">
+    <section className="border-t border-border py-14">
       <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-6 px-5 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-2xl">
           <p className="mono-label">Créditos y licencias</p>
@@ -428,63 +407,38 @@ export function FinalCta() {
   return (
     <section id="contacto" className="py-20 sm:py-24">
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
-        <GlareHover
-          background="var(--card)"
-          color="#e7c79b"
-          opacity={0.28}
-          angle={-28}
-          size={320}
-          duration={900}
-          className="relative overflow-hidden rounded-3xl border border-border shadow-soft"
-        >
-          <HexagonPattern
-            radius={28}
-            gap={10}
-            className="absolute inset-0 h-full w-full stroke-foreground/10 [mask-image:radial-gradient(80%_80%_at_70%_20%,black,transparent)]"
-          />
-          <div className="relative grid gap-8 p-8 sm:p-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <div>
-              <p className="mono-label">Tu versión, esta semana</p>
-              <TextAnimate
-                as="h2"
-                animation="blurInUp"
-                by="word"
-                startOnView
-                once
-                className="mt-3 font-display text-[2.6rem] leading-[0.98] sm:text-6xl"
-              >
-                Cuéntanos qué tienes en mente.
-              </TextAnimate>
-              <p className="mt-4 max-w-lg text-[0.9rem] leading-6 text-muted-foreground">
-                Elige una plantilla del catálogo o llega con una idea suelta.
-                Respondemos con alcance, plazo y una propuesta clara por
-                correo.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Button
-                className="h-12 gap-2 rounded-full text-[0.92rem]"
-                render={
-                  <a href={customRequest()} />
-                }
-              >
-                <MessageCircle data-icon="inline-start" />
-                Escribir por correo
-              </Button>
-              <Button
-                variant="outline"
-                className="h-12 gap-2 rounded-full bg-background/60"
-                render={<Link to="/plantillas" />}
-              >
-                Volver al catálogo
-                <ArrowUpRight data-icon="inline-end" />
-              </Button>
-              <p className="mt-1 text-center text-[0.68rem] text-muted-foreground">
-                info@nexviro.art · respuesta en horario de estudio
-              </p>
-            </div>
+        <div className="grid gap-8 border-t border-border pt-9 sm:pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div>
+            <p className="mono-label">Tu versión, esta semana</p>
+            <h2 className="mt-3 font-display text-[2.4rem] leading-[1] sm:text-6xl">
+              Cuéntanos qué tienes en mente.
+            </h2>
+            <p className="mt-4 max-w-lg text-[0.9rem] leading-6 text-muted-foreground">
+              Elige una plantilla del catálogo o llega con una idea suelta.
+              Respondemos con alcance, plazo y una propuesta clara por correo.
+            </p>
           </div>
-        </GlareHover>
+          <div className="flex flex-col gap-2">
+            <Button
+              className="h-12 gap-2 rounded-full text-[0.92rem]"
+              render={<a href={customRequest()} />}
+            >
+              <MessageCircle data-icon="inline-start" />
+              Escribir por correo
+            </Button>
+            <Button
+              variant="outline"
+              className="h-12 gap-2 rounded-full"
+              render={<Link to="/plantillas" />}
+            >
+              Volver al catálogo
+              <ArrowUpRight data-icon="inline-end" />
+            </Button>
+            <p className="mt-1 text-center text-[0.68rem] text-muted-foreground">
+              info@nexviro.art · respuesta en horario de estudio
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   )

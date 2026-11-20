@@ -6,9 +6,8 @@ import {
   useLocation,
 } from "react-router-dom"
 
-import { FloatingDock, Footer } from "@/components/footer"
+import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-import { SmoothCursor } from "@/components/ui/smooth-cursor"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { AssistantPage } from "@/pages/assistant-page"
@@ -42,7 +41,6 @@ export function App() {
     <BrowserRouter basename={base || "/"}>
       <TooltipProvider>
         <div className="relative min-h-dvh overflow-x-clip bg-background">
-          <SmoothCursor />
           <ScrollToTop />
           <Header />
           <main>
@@ -62,7 +60,6 @@ export function App() {
             </Routes>
           </main>
           <Footer />
-          <FloatingDock />
           <Toaster position="bottom-center" />
         </div>
       </TooltipProvider>

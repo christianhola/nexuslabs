@@ -14,12 +14,10 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Lens } from "@/components/ui/lens"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
-import { cap, data, statusTone } from "@/lib/data"
+import { cap, data } from "@/lib/data"
 import { assetUrl, mailLink, SCOPES, SITE_URL } from "@/lib/site"
-import { cn } from "@/lib/utils"
 
 export function TemplatePage() {
   const { id } = useParams()
@@ -51,7 +49,6 @@ export function TemplatePage() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-border">
-        <div className="paper-glow pointer-events-none absolute inset-0 -z-10" />
         <div className="mx-auto w-full max-w-[1240px] px-5 pt-8 pb-10 sm:px-8">
           <Link
             to="/plantillas"
@@ -72,42 +69,31 @@ export function TemplatePage() {
                 {template.description}
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge
-                variant="outline"
-                className={cn("h-6 px-2.5", statusTone[template.statusClass])}
-              >
-                {template.status}
-              </Badge>
-              <Badge variant="secondary" className="h-6 px-2.5">
-                {template.kindLabel}
-              </Badge>
+            <p className="mono-label flex flex-wrap items-center gap-x-2 gap-y-1 text-muted-foreground">
+              <span>{template.status}</span>
+              <span aria-hidden="true">·</span>
+              <span>{template.kindLabel}</span>
               {template.featured ? (
-                <Badge variant="outline" className="h-6 px-2.5">
-                  Selección NEXUS
-                </Badge>
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span className="text-primary">Selección NEXUS</span>
+                </>
               ) : null}
-            </div>
+            </p>
           </div>
         </div>
       </section>
 
       <div className="mx-auto grid w-full max-w-[1240px] gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
         <div className="min-w-0">
-          <div className="overflow-hidden rounded-2xl border border-border bg-card">
-            <Lens
-              zoomFactor={1.6}
-              lensSize={170}
-              ariaLabel={`Ampliar ${template.name}`}
-            >
-              <img
-                src={assetUrl(template.preview)}
-                alt={`Vista previa de ${template.name}`}
-                width={1200}
-                height={820}
-                className="aspect-[16/11] w-full object-cover object-top"
-              />
-            </Lens>
+          <div className="overflow-hidden bg-muted/40">
+            <img
+              src={assetUrl(template.preview)}
+              alt={`Vista previa de ${template.name}`}
+              width={1200}
+              height={820}
+              className="aspect-[16/11] w-full object-cover object-top"
+            />
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -168,7 +154,7 @@ export function TemplatePage() {
           </div>
 
           {template.needs.length ? (
-            <div className="mt-7 rounded-xl border border-amber-600/25 bg-amber-500/5 p-4">
+            <div className="mt-7 border-t border-amber-600/30 pt-3">
               <p className="flex items-center gap-2 text-[0.8rem] font-medium text-amber-800 dark:text-amber-200">
                 <AlertCircle className="size-3.5" />
                 Para producción necesitarás
@@ -181,13 +167,13 @@ export function TemplatePage() {
             </div>
           ) : null}
 
-          <p className="mt-4 rounded-xl border border-border bg-muted/40 p-4 text-[0.78rem] leading-6 text-muted-foreground">
+          <p className="mt-7 border-t border-border pt-4 text-[0.78rem] leading-6 text-muted-foreground">
             {template.demoNote}
           </p>
         </div>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+          <div className="border-t border-border pt-5">
             <p className="mono-label text-[0.6rem]">Tu versión personalizada</p>
             <h2 className="mt-2 font-display text-2xl leading-tight">
               Pide esta base con tu marca.
@@ -201,7 +187,7 @@ export function TemplatePage() {
               {SCOPES.map((option) => (
                 <label
                   key={option}
-                  className="flex cursor-pointer items-start gap-3 rounded-xl border border-border p-3 transition has-data-checked:border-primary/60 has-data-checked:bg-primary/5"
+                  className="flex cursor-pointer items-start gap-3 border-b border-border/70 py-2.5 text-muted-foreground transition has-data-checked:text-foreground"
                 >
                   <RadioGroupItem value={option} className="mt-0.5" />
                   <span className="min-w-0">
@@ -267,7 +253,7 @@ export function TemplatePage() {
       </div>
 
       {related.length ? (
-        <section className="border-t border-border bg-card/25 py-14">
+        <section className="border-t border-border py-14">
           <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
             <div className="flex items-end justify-between gap-4">
               <h2 className="font-display text-3xl">
@@ -280,7 +266,7 @@ export function TemplatePage() {
                 Ver todas
               </Link>
             </div>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
               {related.map((item, index) => (
                 <TemplateCard key={item.id} template={item} index={index} />
               ))}

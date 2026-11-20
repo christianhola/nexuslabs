@@ -16,7 +16,7 @@ function Closing({ title, copy }: { title: string; copy: string }) {
   return (
     <section className="py-14 sm:py-16">
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
-        <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center">
+        <div className="grid gap-5 border-t border-border pt-6 sm:grid-cols-[1fr_auto] sm:items-center">
           <div>
             <p className="font-display text-2xl leading-tight">{title}</p>
             <p className="mt-1.5 max-w-xl text-[0.84rem] leading-6 text-muted-foreground">
@@ -87,7 +87,7 @@ export function ProcessPage() {
         aside={
           <Button
             variant="outline"
-            className="h-10 gap-2 rounded-full bg-card/60"
+            className="h-10 gap-2 rounded-full"
             render={<a href={customRequest()} />}
           >
             Empezar un proyecto
@@ -143,15 +143,15 @@ export function StudioPage() {
         description="No vendemos volumen. Cada pieza del catálogo se instala, se abre, se recorre y se corrige antes de publicarse. Lo que ves en la demo es exactamente lo que recibes como base."
         aside={
           <div className="grid gap-2 text-[0.8rem]">
-            <p className="rounded-lg border border-border bg-card/70 px-3.5 py-2.5">
+            <p className="border-t border-border py-2.5">
               <span className="text-muted-foreground">Diseño: </span>
               editorial, fotografía y tipografía con criterio.
             </p>
-            <p className="rounded-lg border border-border bg-card/70 px-3.5 py-2.5">
+            <p className="border-t border-border py-2.5">
               <span className="text-muted-foreground">Código: </span>
               React, TypeScript y Tailwind, editable.
             </p>
-            <p className="rounded-lg border border-border bg-card/70 px-3.5 py-2.5">
+            <p className="border-t border-border py-2.5">
               <span className="text-muted-foreground">Origen: </span>
               créditos y licencias de cada autor, intactos.
             </p>
@@ -218,7 +218,7 @@ export function CreditsPage() {
             </p>
             <Button
               variant="outline"
-              className="h-10 w-fit gap-2 rounded-full bg-card/60"
+              className="h-10 w-fit gap-2 rounded-full"
               render={<a href={GITHUB} target="_blank" rel="noreferrer" />}
             >
               Créditos en GitHub

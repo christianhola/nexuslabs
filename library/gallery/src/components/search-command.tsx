@@ -6,26 +6,10 @@ import {
   CornerDownLeft,
   ImageIcon,
   Search,
-  Sparkles,
   X,
 } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
-import { Bubble, BubbleContent, BubbleGroup } from "@/components/ui/bubble"
 import { Button } from "@/components/ui/button"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card"
-import { Highlighter } from "@/components/ui/highlighter"
 import {
   InputGroup,
   InputGroupAddon,
@@ -33,7 +17,6 @@ import {
 } from "@/components/ui/input-group"
 import { Kbd } from "@/components/ui/kbd"
 import { Skeleton } from "@/components/ui/skeleton"
-import { TextReveal } from "@/components/ui/text-reveal"
 import { data, type Template } from "@/lib/data"
 import { searchTemplates, searchTransport } from "@/lib/search"
 import { assetUrl } from "@/lib/site"
@@ -58,88 +41,57 @@ function ResultCard({
   onNavigate: () => void
 }) {
   return (
-    <article className="group h-full overflow-hidden rounded-xl border border-border bg-background transition hover:border-primary/40">
+    <article className="group h-full pb-1">
       <Link
         to={`/plantillas/${template.id}`}
         onClick={onNavigate}
-        className="block overflow-hidden"
+        className="block overflow-hidden bg-muted/40"
       >
-        <div className="relative aspect-[16/10] overflow-hidden bg-muted">
-          <img
-            src={assetUrl(template.preview)}
-            alt={`Vista previa de ${template.name}`}
-            loading="lazy"
-            className="size-full object-cover object-top transition duration-500 group-hover:scale-[1.035]"
-          />
-          <span className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent opacity-70" />
-          <Badge
-            variant="outline"
-            className="absolute bottom-2 left-2 border-white/25 bg-black/35 text-[0.62rem] text-white backdrop-blur"
-          >
-            {template.kindLabel}
-          </Badge>
-        </div>
+        <img
+          src={assetUrl(template.preview)}
+          alt={`Vista previa de ${template.name}`}
+          loading="lazy"
+          className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+        />
       </Link>
 
-      <div className="p-3">
-        <HoverCard>
-          <HoverCardTrigger
-            render={
-              <button
-                type="button"
-                className="mono-label text-left text-[0.58rem] transition hover:text-foreground"
-              />
-            }
-          >
-            {template.industry}
-          </HoverCardTrigger>
-          <HoverCardContent align="start" className="w-64">
-            <p className="text-[0.72rem] font-medium">{template.name}</p>
-            <p className="mt-1 text-[0.7rem] leading-4 text-muted-foreground">
-              {template.description}
-            </p>
-            <p className="mt-2 border-t border-border pt-2 text-[0.64rem] text-muted-foreground">
-              {template.status} · {template.features.slice(0, 2).join(" · ")}
-            </p>
-          </HoverCardContent>
-        </HoverCard>
-
-        <div className="mt-1 flex items-start justify-between gap-2">
-          <Link
-            to={`/plantillas/${template.id}`}
-            onClick={onNavigate}
-            className="font-display text-[1.18rem] leading-tight transition hover:text-primary"
-          >
-            {template.name}
-          </Link>
-          <a
-            href={assetUrl(template.href)}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Abrir la demo de ${template.name}`}
-            className="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-          >
-            <ArrowUpRight className="size-3.5" />
-          </a>
-        </div>
-
-        <p className="mt-1 line-clamp-2 text-[0.72rem] leading-5 text-muted-foreground">
-          {template.description}
-        </p>
+      <p className="mono-label mt-2.5 text-[0.58rem]">
+        {template.industry} <span aria-hidden="true">·</span>{" "}
+        {template.kindLabel}
+      </p>
+      <div className="mt-1 flex items-start justify-between gap-2">
+        <Link
+          to={`/plantillas/${template.id}`}
+          onClick={onNavigate}
+          className="font-display text-[1.18rem] leading-tight transition-colors hover:text-primary"
+        >
+          {template.name}
+        </Link>
+        <a
+          href={assetUrl(template.href)}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Abrir la demo de ${template.name}`}
+          className="mt-1 inline-flex shrink-0 items-center gap-1 text-[0.68rem] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Demo
+          <ArrowUpRight className="size-3" />
+        </a>
       </div>
+
+      <p className="mt-1 line-clamp-2 text-[0.72rem] leading-5 text-muted-foreground">
+        {template.description}
+      </p>
     </article>
   )
 }
 
 function ResultSkeletons() {
   return (
-    <div className="mt-3 flex gap-3 overflow-hidden">
+    <div className="mt-3 grid grid-cols-2 gap-3">
       {[0, 1, 2].map((item) => (
-        <div
-          key={item}
-          className="w-[86%] shrink-0 rounded-xl border border-border bg-background p-2 sm:w-[48%]"
-        >
-          <Skeleton className="aspect-[16/10] w-full rounded-lg" />
+        <div key={item} className="w-1/2">
+          <Skeleton className="aspect-[16/10] w-full" />
           <div className="space-y-2 p-1 pt-3">
             <Skeleton className="h-3 w-1/3" />
             <Skeleton className="h-5 w-2/3" />
@@ -220,7 +172,7 @@ export function SearchCommand({ className }: { className?: string }) {
         onClick={() => setOpen(true)}
         aria-label="Buscar en el catálogo"
         className={cn(
-          "group flex h-10 w-full items-center gap-2 rounded-full border border-border bg-card/60 px-3 text-left text-[0.78rem] text-muted-foreground transition hover:border-primary/40 hover:bg-card hover:text-foreground",
+          "group flex h-10 w-full items-center gap-2 rounded-full border border-border px-3 text-left text-[0.78rem] text-muted-foreground transition-colors hover:border-foreground/25 hover:text-foreground",
           className
         )}
       >
@@ -235,7 +187,7 @@ export function SearchCommand({ className }: { className?: string }) {
 
       {open ? (
         <div
-          className="fixed inset-0 z-[80] flex items-start justify-center bg-black/45 px-3 pt-[7vh] pb-4 backdrop-blur-sm sm:px-5"
+          className="fixed inset-0 z-[80] flex items-start justify-center bg-background/85 px-3 pt-[7vh] pb-4 sm:px-5"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) close()
           }}
@@ -244,10 +196,10 @@ export function SearchCommand({ className }: { className?: string }) {
             role="dialog"
             aria-modal="true"
             aria-label="Buscador del catálogo"
-            className="flex max-h-[86dvh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
+            className="flex max-h-[86dvh] w-full max-w-3xl flex-col overflow-hidden border border-border bg-background"
           >
             <div className="border-b border-border p-3 sm:p-4">
-              <InputGroup className="h-12 rounded-xl border-transparent bg-muted/55 shadow-none focus-within:bg-background">
+              <InputGroup className="h-12 rounded-none border border-border bg-transparent shadow-none">
                 <InputGroupAddon>
                   <Search className="text-muted-foreground" />
                 </InputGroupAddon>
@@ -288,7 +240,7 @@ export function SearchCommand({ className }: { className?: string }) {
                 </InputGroupAddon>
               </InputGroup>
 
-              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
                 {suggestions.map((suggestion) => (
                   <button
                     key={suggestion}
@@ -297,7 +249,7 @@ export function SearchCommand({ className }: { className?: string }) {
                       setQuery(suggestion)
                       inputRef.current?.focus()
                     }}
-                    className="rounded-full border border-border bg-background px-2.5 py-1 text-[0.68rem] text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                    className="text-[0.68rem] text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground hover:decoration-foreground/40"
                   >
                     {suggestion}
                   </button>
@@ -308,44 +260,37 @@ export function SearchCommand({ className }: { className?: string }) {
               </div>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-4 sm:px-4">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-4 [scrollbar-width:thin] sm:px-4 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-border">
               {!query.trim() ? (
                 <div className="pb-2">
-                  <TextReveal className="px-2 text-center font-display text-[1.45rem] leading-tight text-muted-foreground sm:text-[1.7rem]">
+                  <p className="px-2 font-display text-[1.45rem] leading-tight text-foreground/80 sm:text-[1.7rem]">
                     Escribe un negocio y mira las páginas antes de abrirlas.
-                  </TextReveal>
+                  </p>
 
-                  <div className="mt-5 flex items-center gap-2 px-1">
-                    <Sparkles className="size-3.5 text-primary" />
-                    <p className="mono-label">Recomendadas para empezar</p>
+                  <p className="mono-label mt-5 px-1">Recomendadas para empezar</p>
+
+                  <div className="mt-3 grid gap-x-5 gap-y-6 sm:grid-cols-2">
+                    {featured.map((template) => (
+                      <ResultCard
+                        key={template.id}
+                        template={template}
+                        onNavigate={close}
+                      />
+                    ))}
                   </div>
-
-                  <Carousel className="mt-2.5">
-                    <CarouselContent>
-                      {featured.map((template) => (
-                        <CarouselItem key={template.id}>
-                          <ResultCard template={template} onNavigate={close} />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="-left-3" />
-                    <CarouselNext className="-right-3" />
-                  </Carousel>
 
                   <p className="mt-4 px-2 text-center text-[0.7rem] leading-5 text-muted-foreground">
                     La búsqueda corre en tu navegador sobre el catálogo.{" "}
-                    <Highlighter action="underline" color="var(--primary)">
+                    <span className="text-foreground">
                       Sin enviar tu consulta a ningún servidor.
-                    </Highlighter>
+                    </span>
                   </p>
                 </div>
               ) : (
-                <BubbleGroup className="gap-4">
-                  <Bubble align="end" variant="muted">
-                    <BubbleContent className="text-[0.82rem] leading-5">
-                      {query.trim()}
-                    </BubbleContent>
-                  </Bubble>
+                <div className="grid gap-5">
+                  <p className="border-l border-primary/60 pl-3 text-[0.82rem] leading-5 text-muted-foreground">
+                    {query.trim()}
+                  </p>
 
                   <div className="flex min-w-0 gap-2.5">
                     <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/12 text-[0.6rem] font-medium text-primary">
@@ -358,14 +303,12 @@ export function SearchCommand({ className }: { className?: string }) {
                           <Skeleton className="h-3 w-1/2" />
                         </div>
                       ) : (
-                        <Bubble variant="ghost">
-                          <BubbleContent className="text-[0.82rem] leading-6 text-foreground/90">
-                            {answer || "Buscando en el catálogo…"}
-                            {typing ? (
-                              <span className="ml-0.5 inline-block h-3.5 w-1.5 animate-pulse rounded-sm bg-primary align-middle" />
-                            ) : null}
-                          </BubbleContent>
-                        </Bubble>
+                        <p className="text-[0.82rem] leading-6 text-foreground/90">
+                          {answer || "Buscando en el catálogo…"}
+                          {typing ? (
+                            <span className="ml-0.5 inline-block h-3.5 w-1.5 animate-pulse bg-primary align-middle" />
+                          ) : null}
+                        </p>
                       )}
 
                       {showLoading ? (
@@ -379,64 +322,39 @@ export function SearchCommand({ className }: { className?: string }) {
                             </p>
                           </div>
 
-                          <Carousel className="mt-2.5">
-                            <CarouselContent>
-                              {results.map((template) => (
-                                <CarouselItem key={template.id}>
-                                  <ResultCard
-                                    template={template}
-                                    onNavigate={close}
-                                  />
-                                </CarouselItem>
-                              ))}
-                            </CarouselContent>
-                            <CarouselPrevious className="-left-3" />
-                            <CarouselNext className="-right-3" />
-                          </Carousel>
+                          <div className="mt-3 grid gap-x-5 gap-y-6 sm:grid-cols-2">
+                            {results.map((template) => (
+                              <ResultCard
+                                key={template.id}
+                                template={template}
+                                onNavigate={close}
+                              />
+                            ))}
+                          </div>
 
                           <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[0.68rem] text-muted-foreground">
                             Fuente:
-                            <HoverCard>
-                              <HoverCardTrigger
-                                render={
-                                  <button
-                                    type="button"
-                                    className="rounded-full border border-border bg-background px-2 py-0.5 text-[0.66rem] font-medium text-foreground transition hover:border-primary/40"
-                                  >
-                                    catálogo NEXUS
-                                  </button>
-                                }
-                              />
-                              <HoverCardContent className="flex w-64 flex-col gap-1">
-                                <p className="text-[0.74rem] font-medium">
-                                  Catálogo NEXUS LABS
-                                </p>
-                                <p className="text-[0.7rem] leading-5 text-muted-foreground">
-                                  {data.total} plantillas revisadas, con vista
-                                  previa, ficha y demo real. Los resultados se
-                                  ordenan por nombre, industria, etiquetas y
-                                  funciones.
-                                </p>
-                                <Link
-                                  to="/plantillas"
-                                  onClick={close}
-                                  className="mt-1 text-[0.68rem] text-muted-foreground underline underline-offset-4 hover:text-foreground"
-                                >
-                                  Ver el catálogo completo
-                                </Link>
-                              </HoverCardContent>
-                            </HoverCard>
+                            <span className="text-foreground">
+                              catálogo NEXUS
+                            </span>
                             <span>·</span>
-                            búsqueda local
+                            búsqueda local ·{" "}
+                            <Link
+                              to="/plantillas"
+                              onClick={close}
+                              className="underline underline-offset-4 hover:text-foreground"
+                            >
+                              ver el catálogo completo
+                            </Link>
                           </p>
                         </>
                       ) : (
-                        <div className="mt-3 rounded-xl border border-dashed border-border bg-background/60 p-4">
+                        <div className="mt-3 border-t border-border pt-3">
                           <p className="text-[0.8rem] leading-6">
                             No hay resultados para «{query.trim()}». Prueba con{" "}
-                            <Highlighter color="var(--primary)">
+                            <span className="text-foreground">
                               hotel, tienda o SaaS
-                            </Highlighter>
+                            </span>
                             , o pide una pieza nueva.
                           </p>
                           <Button
@@ -453,7 +371,7 @@ export function SearchCommand({ className }: { className?: string }) {
                       )}
                     </div>
                   </div>
-                </BubbleGroup>
+                </div>
               )}
             </div>
 

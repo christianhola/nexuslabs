@@ -122,15 +122,34 @@ export function ContactPage() {
             </Popover>
           </div>
 
-          <div className="mt-5 rounded-2xl border border-border bg-card p-3 shadow-soft sm:p-4">
+          <div className="mt-5 border-t border-border pt-4">
             <Calendar
               mode="single"
               selected={date}
               onSelect={setDate}
               disabled={{ before: today }}
               captionLayout="dropdown"
+              formatters={{
+                formatWeekdayName: (day) =>
+                  ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sá"][day.getDay()],
+                formatMonthDropdown: (month) =>
+                  [
+                    "enero",
+                    "febrero",
+                    "marzo",
+                    "abril",
+                    "mayo",
+                    "junio",
+                    "julio",
+                    "agosto",
+                    "septiembre",
+                    "octubre",
+                    "noviembre",
+                    "diciembre",
+                  ][month.getMonth()],
+              }}
               classNames={{ root: "mx-auto w-full max-w-[21rem]" }}
-              className="rounded-xl border-0 p-1 [--cell-size:2.2rem]"
+              className="rounded-none border-0 p-1 [--cell-size:2.2rem]"
             />
             <div className="mt-3 flex flex-col gap-3 border-t border-border px-2 pt-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0">
@@ -157,12 +176,12 @@ export function ContactPage() {
           </p>
         </div>
 
-        <div className="grid content-start gap-4">
+        <div className="grid content-start gap-5">
           <a
             href={customRequest()}
-            className="group flex items-start gap-3 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/40 hover:shadow-soft"
+            className="group flex items-start gap-3 border-t border-border pt-4"
           >
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-primary">
               <Mail className="size-4" />
             </span>
             <span className="min-w-0">
@@ -180,9 +199,9 @@ export function ContactPage() {
             href={instagramLink()}
             target="_blank"
             rel="noreferrer"
-            className="group flex items-start gap-3 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/40 hover:shadow-soft"
+            className="group flex items-start gap-3 border-t border-border pt-4"
           >
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-primary">
               <InstagramIcon />
             </span>
             <span className="min-w-0">
@@ -196,7 +215,7 @@ export function ContactPage() {
             </span>
           </a>
 
-          <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="border-t border-border pt-4">
             <p className="flex items-center gap-2 text-[0.85rem] font-medium">
               <Clock className="size-4 text-primary" />
               Horario de estudio
@@ -207,7 +226,7 @@ export function ContactPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-4">
+          <div className="border-t border-border pt-4">
             <p className="text-[0.85rem] font-medium">Para empezar, cuéntame</p>
             <ul className="mt-2 space-y-1.5 text-[0.78rem] leading-6 text-muted-foreground">
               <li>· Qué negocio tienes y a quién le vendes.</li>
@@ -218,7 +237,7 @@ export function ContactPage() {
             <div className="mt-3 flex flex-wrap gap-2">
               <Badge
                 variant="outline"
-                className="h-7 px-2.5 text-[0.7rem] font-normal"
+                className="h-7 rounded-full px-2.5 text-[0.7rem] font-normal"
                 render={
                   <a href={GITHUB} target="_blank" rel="noreferrer">
                     Repositorio

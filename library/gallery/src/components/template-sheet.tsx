@@ -8,7 +8,6 @@ import {
 } from "lucide-react"
 import { toast } from "sonner"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -20,12 +19,10 @@ import {
 } from "@/components/ui/drawer"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Lens } from "@/components/ui/lens"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
-import { cap, statusTone, type Template } from "@/lib/data"
+import { cap, type Template } from "@/lib/data"
 import { assetUrl, mailLink, SCOPES, SITE_URL } from "@/lib/site"
-import { cn } from "@/lib/utils"
 
 function SheetBody({
   template,
@@ -79,25 +76,27 @@ function SheetBody({
       </DrawerHeader>
 
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5">
-        <div className="overflow-hidden rounded-xl border border-border">
-          <Lens zoomFactor={1.6} lensSize={150} ariaLabel={`Ampliar ${template.name}`}>
-            <img
-              src={template.preview}
-              alt={`Vista previa de ${template.name}`}
-              width={960}
-              height={660}
-              className="aspect-[16/11] w-full object-cover object-top"
-            />
-          </Lens>
+        <div className="overflow-hidden bg-muted/40">
+          <img
+            src={template.preview}
+            alt={`Vista previa de ${template.name}`}
+            width={960}
+            height={660}
+            className="aspect-[16/11] w-full object-cover object-top"
+          />
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className={cn(statusTone[template.statusClass])}>
-            {template.status}
-          </Badge>
-          <Badge variant="secondary">{template.kindLabel}</Badge>
-          {template.featured && <Badge variant="outline">Selección NEXUS</Badge>}
-        </div>
+        <p className="mono-label mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-muted-foreground">
+          <span>{template.status}</span>
+          <span aria-hidden="true">·</span>
+          <span>{template.kindLabel}</span>
+          {template.featured ? (
+            <>
+              <span aria-hidden="true">·</span>
+              <span className="text-primary">Selección NEXUS</span>
+            </>
+          ) : null}
+        </p>
 
         <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-border py-4 text-[0.76rem]">
           <div>
@@ -134,7 +133,7 @@ function SheetBody({
         </div>
 
         {template.needs.length ? (
-          <div className="mt-5 rounded-xl border border-amber-600/25 bg-amber-500/5 p-3.5">
+          <div className="mt-5 border-t border-amber-600/30 pt-3">
             <p className="flex items-center gap-2 text-[0.76rem] font-medium text-amber-800 dark:text-amber-200">
               <AlertCircle className="size-3.5" />
               Para producción necesitarás
@@ -147,7 +146,7 @@ function SheetBody({
           </div>
         ) : null}
 
-        <p className="mt-4 rounded-xl border border-border bg-muted/40 p-3.5 text-[0.74rem] leading-5 text-muted-foreground">
+        <p className="mt-5 border-t border-border pt-3.5 text-[0.74rem] leading-5 text-muted-foreground">
           {template.demoNote}
         </p>
 
@@ -161,7 +160,7 @@ function SheetBody({
             {SCOPES.map((option) => (
               <label
                 key={option}
-                className="flex cursor-pointer items-start gap-3 rounded-xl border border-border p-3 transition has-data-checked:border-primary/60 has-data-checked:bg-primary/5"
+                className="flex cursor-pointer items-start gap-3 border-b border-border/70 py-2.5 text-muted-foreground transition has-data-checked:text-foreground"
               >
                 <RadioGroupItem value={option} className="mt-0.5" />
                 <span className="min-w-0">
