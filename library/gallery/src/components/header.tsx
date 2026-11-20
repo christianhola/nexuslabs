@@ -21,9 +21,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { waLink } from "@/lib/site"
+import { mailLink } from "@/lib/site"
 
-const intro = waLink(
+const intro = mailLink(
   "Hola NEXUS LABS 👋 Quiero una versión personalizada de una plantilla."
 )
 
@@ -226,9 +226,9 @@ export function Header() {
               ))}
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                render={<a href={intro} target="_blank" rel="noreferrer" />}
+                render={<a href={intro} />}
               >
-                Escribir por WhatsApp
+                Escribir por correo
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -36,7 +36,6 @@ export type GalleryData = {
   industries: Industry[]
   total: number
   apps: number
-  whatsapp: string
 }
 
 export const data = raw as unknown as GalleryData

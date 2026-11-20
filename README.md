@@ -3,7 +3,8 @@
 Sitio comercial de **NEXUS LABS**: una biblioteca navegable de 88 plantillas web
 reales (restaurantes, hoteles, tiendas, inmobiliaria, SaaS, educación, eventos,
 portafolios, causas y apps) con demo propia, ficha técnica honesta y un camino
-directo a WhatsApp para pedir una versión personalizada.
+directo por correo a `info@nexviro.art` (con copia a `meridian@nexviro.art`)
+para pedir una versión personalizada.
 
 **Sitio publicado:** https://christianhola.github.io/plantillas-freebuff/
 
@@ -14,7 +15,7 @@ directo a WhatsApp para pedir una versión personalizada.
   `Demo estática`, `App local` o `Requiere servicio externo`.
 - Cada tarjeta abre una ficha lateral con qué incluye, qué funciona sin servidor,
   qué necesita backend, crédito al autor y dos acciones: ver la demo completa o
-  solicitar una versión personalizada por WhatsApp.
+  solicitar una versión personalizada por correo.
 - Cada demo incluye una barra de NEXUS LABS con el nombre de la plantilla, vuelta
 al catálogo, aviso de que es una demo estática y un aviso de recuperación si la
 página no termina de cargar. Las apps con router propio respetan el prefijo
@@ -47,7 +48,6 @@ Variables útiles:
 | Variable | Para qué |
 | --- | --- |
 | `BASE_PREFIX` | Prefijo público del sitio (`/plantillas-freebuff/` en Pages). |
-| `WHATSAPP_NUMBER` | Número en formato internacional sin signos. Si falta, los botones abren WhatsApp con el mensaje ya escrito. Se configura en **Settings → Secrets and variables → Actions → Variables**. |
 | `BUILD_CONCURRENCY` | Plantillas compiladas en paralelo (4 en CI). |
 
 El build es incremental: las demos ya compiladas se saltan. Para forzar una
@@ -60,7 +60,7 @@ recompilación completa, añade `--force`. El workflow cachea `library/demos` y
 library/
   scripts/
     build-library.mjs   # descarga, compila y ensambla el sitio
-    gallery.mjs         # datos de la galería (industrias, fichas, WhatsApp)
+    gallery.mjs         # datos de la galería (industrias y fichas)
     serve.mjs           # servidor local
   gallery/              # app Vite + React 19 + Tailwind v4
     src/                # componentes shadcn/ui y Magic UI, tema y secciones

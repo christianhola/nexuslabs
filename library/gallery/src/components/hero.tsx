@@ -96,13 +96,7 @@ export function Hero() {
                 variant="outline"
                 size="lg"
                 className="h-11 gap-2 rounded-full px-5 text-[0.92rem]"
-                render={
-                  <a
-                    href={customRequest()}
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                }
+                render={<a href={customRequest()} />}
               >
                 <MessageCircle data-icon="inline-start" />
                 Pedir la mía
@@ -144,7 +138,7 @@ export function Hero() {
               {[
                 "Demos reales, no maquetas",
                 "Código y licencias originales",
-                "Personalización por WhatsApp",
+                "Personalización por correo",
                 "Sin servidor para explorar",
               ].map((item) => (
                 <Marker key={item} variant="border" className="pb-2 text-[0.8rem]">

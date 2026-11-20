@@ -15,7 +15,6 @@ concurrency:
 env:
   BASE_PREFIX: /plantillas-freebuff/
   PUBLIC_REPO: christianhola/plantillas-freebuff
-  WHATSAPP_NUMBER: ${{ vars.WHATSAPP_NUMBER }}
 
 jobs:
   publish:

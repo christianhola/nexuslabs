@@ -4,6 +4,7 @@ import {
   CalendarDays,
   Clock,
   Info,
+  Mail,
   MessageCircle,
   Send,
 } from "lucide-react"
@@ -27,8 +28,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { InstagramIcon, WhatsappIcon } from "@/components/social-icons"
-import { customRequest, GITHUB, instagramLink, INSTAGRAM, waLink } from "@/lib/site"
+import { InstagramIcon } from "@/components/social-icons"
+import {
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_ALT,
+  customRequest,
+  GITHUB,
+  instagramLink,
+  INSTAGRAM,
+  mailLink,
+} from "@/lib/site"
 
 const today = new Date()
 today.setHours(0, 0, 0, 0)
@@ -45,10 +54,11 @@ export function ContactPage() {
       }).format(date)
     : null
 
-  const message = waLink(
+  const message = mailLink(
     `Hola NEXUS LABS 👋 Quiero reservar una llamada${
       label ? ` el ${label}` : ""
-    } para hablar de un proyecto.`
+    } para hablar de un proyecto.`,
+    "NEXUS LABS · Reserva de llamada"
   )
 
   return (
@@ -61,13 +71,13 @@ export function ContactPage() {
             <span className="display-italic text-primary">próximo sitio</span>.
           </>
         }
-        description="Elige una fecha para una llamada corta de alcance, o escribe directamente por WhatsApp. Sin formularios que se pierdan ni secuencias automáticas: responde una persona."
+        description="Elige una fecha para una llamada corta de alcance, o escribe directamente por correo. Sin formularios que se pierdan ni secuencias automáticas: responde una persona."
         aside={
           <Button
             className="h-11 gap-2 rounded-full px-5"
-            render={<a href={customRequest()} target="_blank" rel="noreferrer" />}
+            render={<a href={customRequest()} />}
           >
-            <WhatsappIcon />
+            <Mail className="size-4" />
             Escribir ahora
           </Button>
         }
@@ -142,28 +152,26 @@ export function ContactPage() {
             </div>
           </div>
           <p className="mt-2 px-1 text-[0.68rem] leading-5 text-muted-foreground">
-            La reserva se confirma por WhatsApp. No se cobra nada y puedes
-            cambiar la fecha respondiendo al mismo mensaje.
+            La reserva se confirma por correo. No se cobra nada y puedes
+            cambiar la fecha respondiendo al mismo hilo.
           </p>
         </div>
 
         <div className="grid content-start gap-4">
           <a
             href={customRequest()}
-            target="_blank"
-            rel="noreferrer"
             className="group flex items-start gap-3 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/40 hover:shadow-soft"
           >
             <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <WhatsappIcon />
+              <Mail className="size-4" />
             </span>
             <span className="min-w-0">
               <span className="flex items-center gap-1.5 text-[0.85rem] font-medium">
-                WhatsApp
+                Correo
                 <ArrowUpRight className="size-3.5 text-muted-foreground transition group-hover:text-primary" />
               </span>
               <span className="mt-0.5 block text-[0.78rem] text-muted-foreground">
-                +1 849 478 9660 · mensaje ya redactado
+                {CONTACT_EMAIL} · copia a {CONTACT_EMAIL_ALT}
               </span>
             </span>
           </a>
@@ -235,18 +243,19 @@ export function ContactPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>¿Reservamos el {label}?</AlertDialogTitle>
             <AlertDialogDescription>
-              Se abrirá WhatsApp con el mensaje escrito. La cita queda
-              confirmada cuando el estudio responda, no al enviar el mensaje.
+              Se abrirá tu aplicación de correo con el mensaje escrito. La cita
+              queda confirmada cuando el estudio responda, no al enviar el
+              mensaje.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cambiar fecha</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
-                window.open(message, "_blank", "noopener,noreferrer")
+                window.location.href = message
               }}
             >
-              Abrir WhatsApp
+              Abrir correo
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

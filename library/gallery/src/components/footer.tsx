@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { ArrowUp, LayoutGrid } from "lucide-react"
+import { ArrowUp, LayoutGrid, Mail } from "lucide-react"
 
 import { BrandMark } from "@/components/brand"
 import {
   GithubIcon,
   InstagramIcon,
-  WhatsappIcon,
 } from "@/components/social-icons"
 import { Dock, DockIcon } from "@/components/ui/dock"
 import { data } from "@/lib/data"
 import {
+  CONTACT_EMAIL,
+  CONTACT_EMAIL_ALT,
   GITHUB,
   instagramLink,
   INSTAGRAM,
-  waLink,
-  WHATSAPP,
+  mailLink,
 } from "@/lib/site"
 
-const intro = waLink(
+const intro = mailLink(
   "Hola NEXUS LABS 👋 Quiero una versión personalizada de una plantilla."
 )
 
@@ -74,13 +74,11 @@ export function Footer() {
               <DockIcon className="border border-border bg-background">
                 <a
                   href={intro}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="WhatsApp de NEXUS LABS"
-                  title="WhatsApp"
+                  aria-label="Correo de NEXUS LABS"
+                  title="Correo"
                   className="flex size-full items-center justify-center text-foreground/80 hover:text-primary"
                 >
-                  <WhatsappIcon />
+                  <Mail className="size-4" />
                 </a>
               </DockIcon>
               <DockIcon className="border border-border bg-background">
@@ -134,12 +132,17 @@ export function Footer() {
               <li>
                 <a
                   href={intro}
-                  target="_blank"
-                  rel="noreferrer"
                   className="text-foreground transition hover:text-primary"
                 >
-                  +1 {WHATSAPP.slice(1, 4)} {WHATSAPP.slice(4, 7)}{" "}
-                  {WHATSAPP.slice(7)}
+                  {CONTACT_EMAIL}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={intro}
+                  className="text-muted-foreground transition hover:text-foreground"
+                >
+                  {CONTACT_EMAIL_ALT}
                 </a>
               </li>
               <li>
@@ -193,7 +196,7 @@ export function Footer() {
 
 const floating = [
   { label: "Catálogo", href: "/plantillas", icon: LayoutGrid, external: false },
-  { label: "WhatsApp", href: intro, icon: WhatsappIcon, external: true },
+  { label: "Correo", href: intro, icon: Mail, external: true },
   { label: "Instagram", href: instagramLink(), icon: InstagramIcon, external: true },
   { label: "GitHub", href: GITHUB, icon: GithubIcon, external: true },
   { label: "Volver al inicio", href: "/", icon: ArrowUp, external: false },

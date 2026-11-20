@@ -27,7 +27,7 @@ export function answerFor(input: string) {
   }
 
   if (has(value, ["precio", "cuesta", "cuanto", "presupuesto", "tarifa", "cobran"])) {
-    return `El precio depende del alcance, no de la plantilla: una landing con tu marca no cuesta lo mismo que una tienda con pagos o una app con cuentas. Por eso no hay una tarifa única publicada. Cuéntame qué necesitas —tipo de negocio, secciones y si hay pagos o cuentas— y el estudio te responde con alcance y precio concretos por WhatsApp.`
+    return `El precio depende del alcance, no de la plantilla: una landing con tu marca no cuesta lo mismo que una tienda con pagos o una app con cuentas. Por eso no hay una tarifa única publicada. Cuéntame qué necesitas —tipo de negocio, secciones y si hay pagos o cuentas— y el estudio te responde con alcance y precio concretos por correo.`
   }
 
   if (has(value, ["plantilla", "catalogo", "demo", "ejemplo", "industria"])) {
@@ -54,8 +54,8 @@ export function answerFor(input: string) {
     return `En /comentarios puedes dejar tu opinión y adjuntar una foto de tu portátil o un enlace de Google Drive. La imagen se reduce en el navegador y se guarda solo ahí: no viaja a ningún servidor. Puedes borrar tu comentario cuando quieras; el resto de la página no se recarga.`
   }
 
-  if (has(value, ["whatsapp", "contacto", "hablar", "escribir", "llamar", "agenda", "cita"])) {
-    return `Puedes escribir por WhatsApp al +1 849 478 9660 o usar la página /contacto, donde también puedes elegir una fecha para una llamada. El mensaje sale ya redactado; solo tienes que pulsar enviar. Respondemos en horario de estudio.`
+  if (has(value, ["whatsapp", "correo", "email", "contacto", "hablar", "escribir", "llamar", "agenda", "cita"])) {
+    return `Puedes escribir a info@nexviro.art (con copia a meridian@nexviro.art) o usar la página /contacto, donde también puedes elegir una fecha para una llamada. El mensaje sale ya redactado; solo tienes que pulsar enviar. Respondemos en horario de estudio.`
   }
 
   if (has(value, ["asistente", "ai", "ia", "quien eres", "que puedes", "modelo"])) {
@@ -63,10 +63,10 @@ export function answerFor(input: string) {
   }
 
   if (has(value, ["gracias", "perfecto", "genial", "vale"])) {
-    return `A ti. Si quieres el siguiente paso, abre /contacto y elige una fecha, o escribe por WhatsApp al +1 849 478 9660.`
+    return `A ti. Si quieres el siguiente paso, abre /contacto y elige una fecha, o escribe a info@nexviro.art.`
   }
 
-  return `Puedo ayudarte con el catálogo, los plazos, los pagos, el dominio, las licencias o los comentarios. Prueba con algo como «¿cuánto tarda una tienda?» o «¿qué plantilla va para un hotel?». Si tu duda es de un proyecto concreto, lo mejor es escribir por WhatsApp al +1 849 478 9660: ahí responde una persona.`
+  return `Puedo ayudarte con el catálogo, los plazos, los pagos, el dominio, las licencias o los comentarios. Prueba con algo como «¿cuánto tarda una tienda?» o «¿qué plantilla va para un hotel?». Si tu duda es de un proyecto concreto, lo mejor es escribir a info@nexviro.art: ahí responde una persona.`
 }
 
 const wait = (ms: number, signal?: AbortSignal) =>

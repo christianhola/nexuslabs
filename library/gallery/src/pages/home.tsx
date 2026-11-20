@@ -14,7 +14,7 @@ import { customRequest } from "@/lib/site"
 const promises = [
   "Demos reales, no maquetas",
   "Código y licencias originales",
-  "Personalización por WhatsApp",
+  "Personalización por correo",
 ]
 
 export function HomePage() {
@@ -127,12 +127,10 @@ export function HomePage() {
             <div className="flex flex-col gap-2">
               <Button
                 className="h-11 gap-2 rounded-full px-5"
-                render={
-                  <a href={customRequest()} target="_blank" rel="noreferrer" />
-                }
+                render={<a href={customRequest()} />}
               >
                 <MessageCircle data-icon="inline-start" />
-                Escribir por WhatsApp
+                Escribir por correo
               </Button>
               <Button
                 variant="outline"

@@ -6,9 +6,9 @@ import { Faq, Process, Studio } from "@/components/sections"
 import { Button } from "@/components/ui/button"
 import { PageHero } from "@/pages/page-hero"
 import { data } from "@/lib/data"
-import { GITHUB, customRequest, waLink } from "@/lib/site"
+import { GITHUB, customRequest, mailLink } from "@/lib/site"
 
-const talk = waLink(
+const talk = mailLink(
   "Hola NEXUS LABS 👋 Quiero hablar de un proyecto y entender alcance y plazos."
 )
 
@@ -26,10 +26,10 @@ function Closing({ title, copy }: { title: string; copy: string }) {
           <div className="flex flex-wrap gap-2">
             <Button
               className="h-10 gap-2 rounded-full"
-              render={<a href={talk} target="_blank" rel="noreferrer" />}
+              render={<a href={talk} />}
             >
               <MessageCircle data-icon="inline-start" />
-              WhatsApp
+              Correo
             </Button>
             <Button
               variant="outline"
@@ -88,7 +88,7 @@ export function ProcessPage() {
           <Button
             variant="outline"
             className="h-10 gap-2 rounded-full bg-card/60"
-            render={<a href={customRequest()} target="_blank" rel="noreferrer" />}
+            render={<a href={customRequest()} />}
           >
             Empezar un proyecto
             <ArrowUpRight data-icon="inline-end" />
@@ -178,7 +178,7 @@ export function FaqPage() {
             <span className="display-italic text-primary">razonables</span>.
           </>
         }
-        description="Alcance, demos, pagos, dominio y derechos. Si falta algo, pregunta por WhatsApp o al asistente: contestamos con el mismo criterio con el que construimos."
+        description="Alcance, demos, pagos, dominio y derechos. Si falta algo, pregunta por correo o al asistente: contestamos con el mismo criterio con el que construimos."
         aside={
           <Button
             className="h-10 gap-2 rounded-full"

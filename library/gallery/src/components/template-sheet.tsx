@@ -23,9 +23,8 @@ import { Input } from "@/components/ui/input"
 import { Lens } from "@/components/ui/lens"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
-import { assetUrl } from "@/lib/site"
 import { cap, statusTone, type Template } from "@/lib/data"
-import { SCOPES, SITE_URL, waLink } from "@/lib/site"
+import { assetUrl, mailLink, SCOPES, SITE_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 function SheetBody({
@@ -211,17 +210,15 @@ function SheetBody({
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
             <Button
               className="h-10 flex-1 gap-2 rounded-full"
-              render={
-                <a href={waLink(message)} target="_blank" rel="noreferrer" />
-              }
+              render={<a href={mailLink(message, `NEXUS LABS · ${template.name}`)} />}
               onClick={() =>
-                toast.success("Abriendo WhatsApp", {
+                toast.success("Abriendo correo", {
                   description: "El mensaje ya va escrito, solo pulsa enviar.",
                 })
               }
             >
               <MessageCircle data-icon="inline-start" />
-              Solicitar por WhatsApp
+              Solicitar por correo
             </Button>
             <Button
               variant="outline"
@@ -234,7 +231,7 @@ function SheetBody({
             </Button>
           </div>
           <p className="mt-2.5 text-center text-[0.68rem] text-muted-foreground">
-            Sin formularios que se pierdan: el mensaje llega directo a NEXUS
+            Sin formularios que se pierdan: el mensaje sale directo a NEXUS
             LABS.
           </p>
         </div>

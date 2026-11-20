@@ -30,8 +30,8 @@ import {
   GITHUB,
   instagramLink,
   INSTAGRAM,
+  mailLink,
   VIDEO_ID,
-  waLink,
 } from "@/lib/site"
 
 const steps = [
@@ -43,7 +43,7 @@ const steps = [
   {
     pattern: "waves" as const,
     title: "Cuéntanos tu versión",
-    copy: "Por WhatsApp defines alcance, marca, fotos y lo que necesitas conectar. Sin briefs eternos ni reuniones de relleno.",
+    copy: "Por correo defines alcance, marca, fotos y lo que necesitas conectar. Sin briefs eternos ni reuniones de relleno.",
   },
   {
     pattern: "aurora" as const,
@@ -250,9 +250,12 @@ export function Subscribe() {
     })
 
     const message = `Hola NEXUS LABS 👋 Quiero recibir el aviso de nuevas plantillas.\nMi correo: ${value}`
-    window.open(waLink(message), "_blank", "noopener,noreferrer")
+    window.location.href = mailLink(
+      message,
+      "NEXUS LABS · Aviso de nuevas plantillas"
+    )
     toast.success("Perfecto", {
-      description: "Te escribimos por WhatsApp para confirmar el aviso.",
+      description: "Abrimos tu correo para confirmar el aviso.",
     })
     setEmail("")
   }
@@ -297,9 +300,9 @@ export function Subscribe() {
                     checked={consent}
                     onCheckedChange={(checked) => setConsent(Boolean(checked))}
                     className="mt-0.5"
-                    aria-label="Acepto que me escriban por WhatsApp"
+                    aria-label="Acepto que me escriban por correo"
                   />
-                  Acepto que NEXUS LABS me escriba por WhatsApp sobre el aviso.
+                  Acepto que NEXUS LABS me escriba por correo sobre el aviso.
                 </label>
               </form>
             </div>
@@ -325,7 +328,7 @@ const faqs = [
   },
   {
     q: "¿Cuánto tarda una versión personalizada?",
-    a: "Depende del alcance: una landing con tu marca es un trabajo corto; una tienda con pagos o una app con cuentas es otro. Por WhatsApp te damos alcance y plazo concretos antes de empezar, sin sorpresas.",
+    a: "Depende del alcance: una landing con tu marca es un trabajo corto; una tienda con pagos o una app con cuentas es otro. Por correo te damos alcance y plazo concretos antes de empezar, sin sorpresas.",
   },
   {
     q: "¿Puedo usar mi propio dominio?",
@@ -356,7 +359,7 @@ export function Faq({ showHeading = true }: { showHeading?: boolean }) {
                 <span className="display-italic text-primary">razonables</span>.
               </>
             }
-            description="Si falta algo, pregúntalo por WhatsApp: contestamos con el mismo criterio con el que construimos."
+            description="Si falta algo, pregúntalo por correo: contestamos con el mismo criterio con el que construimos."
           />
         )}
         <BlurFade inView>
@@ -405,11 +408,10 @@ export function Credits() {
             className="rounded-full"
             render={
               <a
-                href={waLink(
-                  "Hola NEXUS LABS 👋 Quiero revisar un crédito de una plantilla del catálogo."
+                href={mailLink(
+                  "Hola NEXUS LABS 👋 Quiero revisar un crédito de una plantilla del catálogo.",
+                  "NEXUS LABS · Créditos del catálogo"
                 )}
-                target="_blank"
-                rel="noreferrer"
               />
             }
           >
@@ -456,22 +458,18 @@ export function FinalCta() {
               <p className="mt-4 max-w-lg text-[0.9rem] leading-6 text-muted-foreground">
                 Elige una plantilla del catálogo o llega con una idea suelta.
                 Respondemos con alcance, plazo y una propuesta clara por
-                WhatsApp.
+                correo.
               </p>
             </div>
             <div className="flex flex-col gap-2">
               <Button
                 className="h-12 gap-2 rounded-full text-[0.92rem]"
                 render={
-                  <a
-                    href={customRequest()}
-                    target="_blank"
-                    rel="noreferrer"
-                  />
+                  <a href={customRequest()} />
                 }
               >
                 <MessageCircle data-icon="inline-start" />
-                Escribir por WhatsApp
+                Escribir por correo
               </Button>
               <Button
                 variant="outline"
@@ -482,7 +480,7 @@ export function FinalCta() {
                 <ArrowUpRight data-icon="inline-end" />
               </Button>
               <p className="mt-1 text-center text-[0.68rem] text-muted-foreground">
-                +1 849 478 9660 · respuesta en horario de estudio
+                info@nexviro.art · respuesta en horario de estudio
               </p>
             </div>
           </div>

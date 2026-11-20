@@ -10,12 +10,11 @@ import { buildGalleryData } from './gallery.mjs'
 const LIB = join(dirname(fileURLToPath(import.meta.url)), '..')
 const GALLERY = join(LIB, 'gallery')
 const BASE_PREFIX = (process.env.BASE_PREFIX ?? '/').replace(/\/*$/, '/')
-const WHATSAPP = (process.env.WHATSAPP_NUMBER || '18494789660').replace(/\D/g, '')
 
 const cat = JSON.parse(readFileSync(join(LIB, 'catalog.json'), 'utf8'))
 const onDisk = readdirSync(join(LIB, 'demos')).filter((id) => existsSync(join(LIB, 'demos', id, 'index.html')))
 const published = cat.templates.filter((t) => onDisk.includes(t.id))
-const data = buildGalleryData({ templates: published, built: onDisk, whatsappNumber: WHATSAPP })
+const data = buildGalleryData({ templates: published, built: onDisk })
 writeFileSync(join(GALLERY, 'src', 'templates.json'), JSON.stringify(data))
 console.log(`Datos de la galería: ${data.items.length} plantillas, ${data.industries.length} industrias`)
 
@@ -99,7 +98,6 @@ writeFileSync(
       basePrefix: BASE_PREFIX,
       built: onDisk,
       failed: [],
-      whatsapp: Boolean(WHATSAPP),
     },
     null,
     2,

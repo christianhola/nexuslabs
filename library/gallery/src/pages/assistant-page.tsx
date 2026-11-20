@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/message"
 import { Textarea } from "@/components/ui/textarea"
 import { localTransport } from "@/lib/assistant"
-import { waLink } from "@/lib/site"
+import { mailLink } from "@/lib/site"
 
 const STORAGE_KEY = "nexus-assistant-session-v1"
 
@@ -264,11 +264,10 @@ export function AssistantPage() {
             className="h-8 gap-2 rounded-full px-2 text-[0.72rem]"
             render={
               <a
-                href={waLink(
-                  "Hola NEXUS LABS 👋 Vengo del asistente y quiero hablar con una persona."
+                href={mailLink(
+                  "Hola NEXUS LABS 👋 Vengo del asistente y quiero hablar con una persona.",
+                  "NEXUS LABS · Consulta desde el asistente"
                 )}
-                target="_blank"
-                rel="noreferrer"
               />
             }
           >

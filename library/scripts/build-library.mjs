@@ -30,17 +30,18 @@ const wanted = idsArg ? idsArg.slice('--ids='.length).split(',').map((s) => s.tr
 const force = args.includes('--force')
 const includeApps = args.includes('--static')
 const CONCURRENCY = Math.max(1, Number(process.env.BUILD_CONCURRENCY ?? 4))
-const WHATSAPP = process.env.WHATSAPP_NUMBER ?? '18494789660'
+const CONTACT_EMAIL = 'info@nexviro.art'
+const CONTACT_EMAIL_ALT = 'meridian@nexviro.art'
 const GALLERY = join(LIB, 'gallery')
 
 function escHtml(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 }
 
-function waHref(name, base) {
-  const number = String(WHATSAPP).replace(/\D/g, '')
+function mailHref(name, base) {
+  const subject = encodeURIComponent(`NEXUS LABS · ${name}`)
   const text = encodeURIComponent(`Hola NEXUS LABS 👋 Me interesa la plantilla «${name}» y quiero una versión personalizada. La vi en ${base}`)
-  return `https://wa.me/${number}?text=${text}`
+  return `mailto:${CONTACT_EMAIL}?cc=${encodeURIComponent(CONTACT_EMAIL_ALT)}&subject=${subject}&body=${text}`
 }
 
 function run(cmd, cmdArgs, cwd, timeout = 240_000) {
@@ -118,7 +119,7 @@ function rewriteRootAssets(dir, base) {
 }
 
 // Every demo gets a NEXUS LABS bar: a way back to the catalogue, an honest note
-// that the demo is static, and a WhatsApp shortcut. Root-absolute links inside the
+// that the demo is static, and an email shortcut. Root-absolute links inside the
 // demo (plain <a href="/about">) are kept within the demo's own folder.
 function injectDemoChrome(dir, base, template) {
   const indexPath = join(dir, 'index.html')
@@ -127,18 +128,18 @@ function injectDemoChrome(dir, base, template) {
   if (html.includes('id="fb-back"')) return
 
   const name = escHtml(template?.name ?? 'Demo')
-  const wa = waHref(template?.name ?? 'una plantilla', base)
+  const mail = mailHref(template?.name ?? 'una plantilla', base)
   const chrome = `
 <style>
-#fb-bar,#fb-wa{position:fixed;z-index:2147483647;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;border-radius:999px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#fb-bar,#fb-mail{position:fixed;z-index:2147483647;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;border-radius:999px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 #fb-bar{left:16px;bottom:16px;display:flex;align-items:center;gap:9px;padding:7px 13px 7px 8px;color:#f7f3ea;background:rgba(10,10,14,.78);border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:.94;transition:opacity .25s,transform .25s}
 #fb-bar:hover{opacity:1;transform:translateY(-1px)}
 #fb-bar .mark{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#f3ce9f,#d8a273);color:#17130d;display:grid;place-items:center;font-size:10px;font-weight:800}
 #fb-bar .back{color:#f7f3ea;text-decoration:none}
 #fb-bar .name{color:rgba(247,243,234,.55);font-weight:500;max-width:20ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-left:1px solid rgba(255,255,255,.18);padding-left:9px}
-#fb-wa{right:16px;bottom:16px;display:inline-flex;align-items:center;gap:7px;padding:11px 15px;color:#0c1a10;background:#8ee6a8;border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-#fb-wa:hover{background:#a3f0b9}
-#fb-wa svg{width:15px;height:15px}
+#fb-mail{right:16px;bottom:16px;display:inline-flex;align-items:center;gap:7px;padding:11px 15px;color:#17130d;background:#f3ce9f;border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#fb-mail:hover{background:#f8ddb9}
+#fb-mail svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 #fb-fallback{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;padding:24px;background:rgba(8,8,10,.86);backdrop-filter:blur(8px);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f7f3ea}
 #fb-fallback[hidden]{display:none}
 #fb-fallback .box{max-width:380px;background:#111116;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
@@ -147,14 +148,14 @@ function injectDemoChrome(dir, base, template) {
 #fb-fallback a,#fb-fallback button{display:inline-block;margin-right:8px;padding:10px 14px;border-radius:999px;font:600 12px/1 inherit;text-decoration:none;cursor:pointer}
 #fb-fallback .primary{background:#f3ce9f;color:#17130d;border:0}
 #fb-fallback .ghost{background:transparent;color:#f7f3ea;border:1px solid rgba(255,255,255,.2)}
-@media(max-width:620px){#fb-bar .name,#fb-wa span{display:none}#fb-wa{padding:12px}}
+@media(max-width:620px){#fb-bar .name,#fb-mail span{display:none}#fb-mail{padding:12px}}
 </style>
 <div id="fb-bar" role="navigation" aria-label="Navegación de la demo">
   <span class="mark" aria-hidden="true">N</span>
   <a class="back" id="fb-back" href="${BASE_PREFIX}">← Catálogo</a>
   <span class="name">${name} · demo estática</span>
 </div>
-<a id="fb-wa" href="${wa}" data-name="${name}" data-number="${String(WHATSAPP).replace(/\D/g, '')}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.3 4.8 4.94-1.3A9.9 9.9 0 1 0 12.04 2Zm5.77 14.03c-.24.68-1.4 1.3-1.93 1.34-.53.05-1.02.24-3.44-.72-2.9-1.14-4.72-4.14-4.86-4.34-.14-.2-1.15-1.53-1.15-2.92 0-1.39.73-2.07 1-2.36.26-.29.57-.36.76-.36l.55.01c.18 0 .41-.07.64.49.24.58.81 2 .88 2.14.07.15.12.32.02.51-.1.2-.2.32-.39.5-.19.18-.4.4-.57.54-.19.16-.39.34-.17.67.22.34.98 1.62 2.1 2.62 1.45 1.29 2.66 1.69 3.04 1.88.38.2.6.17.82-.1.22-.27.94-1.1 1.19-1.48.25-.38.5-.31.84-.19.34.12 2.16 1.02 2.53 1.2.37.19.62.28.71.44.1.16.1.94-.14 1.62Z"/></svg><span>Personalizar</span></a>
+<a id="fb-mail" href="${mail}" data-name="${name}" data-email="${CONTACT_EMAIL}" data-email-alt="${CONTACT_EMAIL_ALT}" rel="nofollow"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg><span>Escribir</span></a>
 <div id="fb-fallback" hidden role="alert">
   <div class="box">
     <b>Esta demo no terminó de cargar</b>
@@ -166,7 +167,7 @@ function injectDemoChrome(dir, base, template) {
 <script>(function(){var base=${JSON.stringify(base)};
 document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;if(!a)return;if(a.target&&a.target!=='_self')return;var h=a.getAttribute('href');if(h&&h.charAt(0)==='/'&&h.indexOf(base)!==0){e.preventDefault();location.href=base+h.slice(1);}},true);
 document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&!t.dataset.fbBroken){t.dataset.fbBroken='1';t.style.visibility='hidden';}},true);
-var w=document.getElementById('fb-wa');if(w){var n=w.getAttribute('data-name'),num=w.getAttribute('data-number');var msg='Hola NEXUS LABS 👋 Me interesa la plantilla «'+n+'» y quiero una versión personalizada. La vi en '+location.href;w.href='https://wa.me/'+num+'?text='+encodeURIComponent(msg);}
+var m=document.getElementById('fb-mail');if(m){var n=m.getAttribute('data-name'),to=m.getAttribute('data-email'),cc=m.getAttribute('data-email-alt');var subject='NEXUS LABS · '+n;var msg='Hola NEXUS LABS 👋 Me interesa la plantilla «'+n+'» y quiero una versión personalizada. La vi en '+location.href;m.href='mailto:'+to+'?cc='+encodeURIComponent(cc)+'&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(msg);}
 function guard(){var r=document.getElementById('root');if(!r||r.children.length)return;if((r.textContent||'').trim().length)return;var f=document.getElementById('fb-fallback');if(f)f.hidden=false;}
 setTimeout(guard,9000);window.addEventListener('load',function(){setTimeout(guard,3000)});
 })();</script>`
@@ -293,7 +294,7 @@ await Promise.all(Array.from({ length: Math.min(CONCURRENCY, targets.length || 1
 // Regenerate the gallery from whatever is actually on disk.
 const onDisk = readdirSync(join(LIB, 'demos')).filter((id) => existsSync(join(LIB, 'demos', id, 'index.html')))
 const published = cat.templates.filter((t) => onDisk.includes(t.id))
-const data = buildGalleryData({ templates: published, built: onDisk, whatsappNumber: WHATSAPP })
+const data = buildGalleryData({ templates: published, built: onDisk })
 writeFileSync(join(GALLERY, 'src', 'templates.json'), JSON.stringify(data))
 console.log(`Datos de la galería: ${data.items.length} plantillas, ${data.industries.length} industrias`)
 
@@ -307,7 +308,7 @@ if (galleryBuild.status !== 0) throw new Error('La galería no compiló')
 
 // build-gallery.mjs owns 404.html so demo deep links and the catalog share one
 // fallback. Writing another one here would overwrite that router hand-off.
-writeFileSync(join(LIB, 'library.json'), JSON.stringify({ generatedAt: new Date().toISOString(), basePrefix: BASE_PREFIX, built: onDisk, failed, whatsapp: Boolean(data.whatsapp) }, null, 2))
+writeFileSync(join(LIB, 'library.json'), JSON.stringify({ generatedAt: new Date().toISOString(), basePrefix: BASE_PREFIX, built: onDisk, failed }, null, 2))
 writeFileSync(join(LIB, '.nojekyll'), '')
 
 console.log(`\n${onDisk.length} demos listos, ${failed.length} fallos`)

@@ -166,13 +166,7 @@ export function TemplateCard({
           <Button
             size="sm"
             className="h-8 gap-1.5 rounded-full px-3 text-[0.74rem]"
-            render={
-              <a
-                href={customRequest(template.name)}
-                target="_blank"
-                rel="noreferrer"
-              />
-            }
+            render={<a href={customRequest(template.name)} />}
           >
             <MessageCircle data-icon="inline-start" />
             Personalizar
@@ -217,16 +211,10 @@ export function TemplateCard({
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                render={
-                  <a
-                    href={customRequest(template.name)}
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                }
+                render={<a href={customRequest(template.name)} />}
               >
                 <MessageCircle />
-                Pedir por WhatsApp
+                Pedir por correo
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

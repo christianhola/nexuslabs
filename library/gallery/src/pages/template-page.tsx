@@ -18,7 +18,7 @@ import { Lens } from "@/components/ui/lens"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Textarea } from "@/components/ui/textarea"
 import { cap, data, statusTone } from "@/lib/data"
-import { assetUrl, SCOPES, SITE_URL, waLink } from "@/lib/site"
+import { assetUrl, mailLink, SCOPES, SITE_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
 export function TemplatePage() {
@@ -249,20 +249,18 @@ export function TemplatePage() {
 
             <Button
               className="mt-4 h-10 w-full gap-2 rounded-full"
-              render={
-                <a href={waLink(message)} target="_blank" rel="noreferrer" />
-              }
+              render={<a href={mailLink(message, `NEXUS LABS · ${template.name}`)} />}
               onClick={() =>
-                toast.success("Abriendo WhatsApp", {
+                toast.success("Abriendo correo", {
                   description: "El mensaje ya va escrito, solo pulsa enviar.",
                 })
               }
             >
               <MessageCircle data-icon="inline-start" />
-              Solicitar por WhatsApp
+              Solicitar por correo
             </Button>
             <p className="mt-2.5 text-center text-[0.68rem] text-muted-foreground">
-              Sin formularios que se pierdan: el mensaje llega directo.
+              Sin formularios que se pierdan: el mensaje sale directo.
             </p>
           </div>
         </aside>

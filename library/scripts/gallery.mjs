@@ -286,8 +286,7 @@ function priorityOf(t) {
   return index === -1 ? 999 : index
 }
 
-export function buildGalleryData({ templates, built, whatsappNumber = '' }) {
-  const wa = String(whatsappNumber).replace(/\D/g, '')
+export function buildGalleryData({ templates, built }) {
   const cover = (industry) => {
     const id = industry.covers.find((x) => built.includes(x) && templates.some((t) => t.id === x))
     return id ? `previews/${id}.jpg` : null
@@ -340,6 +339,5 @@ export function buildGalleryData({ templates, built, whatsappNumber = '' }) {
     items,
     total: built.length,
     apps: items.filter((item) => item.kind === 'app').length,
-    whatsapp: wa,
   }
 }
