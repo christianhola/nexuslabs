@@ -4,7 +4,7 @@
 //
 // Usage:
 //   bun library/scripts/verify-public.mjs
-//   BASE_PREFIX=/plantillas-freebuff/ bun library/scripts/verify-public.mjs
+//   BASE_PREFIX=/nexuslabs/ bun library/scripts/verify-public.mjs
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { dirname, extname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url'
 const LIB = join(dirname(fileURLToPath(import.meta.url)), '..')
 const ROOT = join(LIB, '..')
 const OUT = process.env.PUBLIC_DIR ?? join(ROOT, 'dist-public')
-const BASE = (process.env.BASE_PREFIX ?? '/plantillas-freebuff/').replace(/\/*$/, '/')
+const BASE = (process.env.BASE_PREFIX ?? '/nexuslabs/').replace(/\/*$/, '/')
 const errors = []
 
 const fail = (message) => errors.push(message)

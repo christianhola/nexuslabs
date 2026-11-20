@@ -11,6 +11,8 @@ import {
 import { toast } from "sonner"
 
 import { PageHero } from "@/pages/page-hero"
+import { WhatsappIcon } from "@/components/social-icons"
+import { customRequestWhatsApp, WHATSAPP_LABEL } from "@/lib/site"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -360,6 +362,21 @@ export function CommentsPage() {
               Se guarda en este navegador. No se sube a ningún servidor y
               desaparece si borras los datos del sitio.
             </p>
+
+            <div className="mt-1 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-border pt-4">
+              <span className="text-[0.72rem] text-muted-foreground">
+                ¿Prefieres contarlo en privado?
+              </span>
+              <a
+                href={customRequestWhatsApp()}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-[0.76rem] font-medium text-foreground underline-offset-4 transition hover:text-primary hover:underline"
+              >
+                <WhatsappIcon className="size-3.5 text-emerald-500" />
+                {WHATSAPP_LABEL}
+              </a>
+            </div>
           </div>
         </form>
 

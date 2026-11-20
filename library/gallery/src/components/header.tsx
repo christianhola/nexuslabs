@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { Menu, MessageCircle } from "lucide-react"
 
 import { BrandMark, Wordmark } from "@/components/brand"
+import { WhatsappIcon } from "@/components/social-icons"
 import { SearchCommand } from "@/components/search-command"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { Button } from "@/components/ui/button"
@@ -21,7 +22,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import { mailLink } from "@/lib/site"
+import { customRequestWhatsApp, mailLink } from "@/lib/site"
 
 const intro = mailLink(
   "Hola NEXUS LABS 👋 Quiero una versión personalizada de una plantilla."
@@ -195,6 +196,17 @@ export function Header() {
             className="inline-flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted [&_svg]:size-4"
           />
 
+          <a
+            href={customRequestWhatsApp()}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Escribir por WhatsApp"
+            title="WhatsApp"
+            className="hidden size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted sm:inline-flex [&_svg]:size-4"
+          >
+            <WhatsappIcon />
+          </a>
+
           <Button
             size="sm"
             className="h-9 gap-2 rounded-full px-3.5"
@@ -225,6 +237,13 @@ export function Header() {
                 </DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />
+              <DropdownMenuItem
+                render={
+                  <a href={customRequestWhatsApp()} target="_blank" rel="noreferrer" />
+                }
+              >
+                Escribir por WhatsApp
+              </DropdownMenuItem>
               <DropdownMenuItem
                 render={<a href={intro} />}
               >

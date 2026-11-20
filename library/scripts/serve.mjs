@@ -50,9 +50,9 @@ const server = Bun.serve({
 
     // The production artifact is built for GitHub Pages under this prefix.
     // Strip it locally so the same HTML/CSS/JS can be audited at the root.
-    if (pathname === '/plantillas-freebuff') pathname = '/'
-    if (pathname.startsWith('/plantillas-freebuff/')) {
-      pathname = pathname.slice('/plantillas-freebuff'.length)
+    if (pathname === '/nexuslabs') pathname = '/'
+    if (pathname.startsWith('/nexuslabs/')) {
+      pathname = pathname.slice('/nexuslabs'.length)
     }
 
     if (pathname.endsWith('/')) pathname += 'index.html'

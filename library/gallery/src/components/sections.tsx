@@ -69,8 +69,7 @@ export function Process({ showHeading = true }: { showHeading?: boolean }) {
           {steps.map((step, index) => (
             <BlurFade key={step.title} delay={index * 0.06} inView>
               <article className="pt-5">
-                <p className="mono-label">0{index + 1}</p>
-                <h3 className="mt-3 font-display text-2xl leading-tight">
+                <h3 className="font-display text-2xl leading-tight">
                   {step.title}
                 </h3>
                 <p className="mt-2 text-[0.84rem] leading-6 text-muted-foreground">

@@ -5,6 +5,7 @@ import { BrandMark } from "@/components/brand"
 import {
   GithubIcon,
   InstagramIcon,
+  WhatsappIcon,
 } from "@/components/social-icons"
 import { data } from "@/lib/data"
 import {
@@ -14,6 +15,8 @@ import {
   instagramLink,
   INSTAGRAM,
   mailLink,
+  WHATSAPP_LABEL,
+  waLink,
 } from "@/lib/site"
 
 const intro = mailLink(
@@ -110,6 +113,19 @@ export function Footer() {
           <div>
             <p className="mono-label">Contacto directo</p>
             <ul className="mt-4 space-y-2.5 text-[0.82rem]">
+              <li>
+                <a
+                  href={waLink(
+                    "Hola NEXUS LABS 👋 Quiero una versión personalizada de una plantilla."
+                  )}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-foreground transition hover:text-primary"
+                >
+                  <WhatsappIcon className="size-3.5 text-emerald-500" />
+                  {WHATSAPP_LABEL}
+                </a>
+              </li>
               <li>
                 <a
                   href={intro}

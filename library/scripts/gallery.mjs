@@ -1,7 +1,7 @@
 // NEXUS LABS — data for the React gallery (shadcn/ui + Magic UI).
 // Takes the built templates and returns the payload the gallery renders.
 
-const REPO = 'https://github.com/christianhola/plantillas-freebuff'
+const REPO = 'https://github.com/christianhola/nexuslabs'
 const VIDEO_ID = 'tKoDPOrLMX0'
 
 const FEATURED = [

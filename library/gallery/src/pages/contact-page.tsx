@@ -28,15 +28,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { InstagramIcon } from "@/components/social-icons"
+import { InstagramIcon, WhatsappIcon } from "@/components/social-icons"
 import {
   CONTACT_EMAIL,
   CONTACT_EMAIL_ALT,
   customRequest,
+  customRequestWhatsApp,
   GITHUB,
   instagramLink,
   INSTAGRAM,
   mailLink,
+  WHATSAPP_LABEL,
 } from "@/lib/site"
 
 const today = new Date()
@@ -71,7 +73,7 @@ export function ContactPage() {
             <span className="display-italic text-primary">próximo sitio</span>.
           </>
         }
-        description="Elige una fecha para una llamada corta de alcance, o escribe directamente por correo. Sin formularios que se pierdan ni secuencias automáticas: responde una persona."
+        description="Elige una fecha para una llamada corta de alcance, o escribe directamente por correo o WhatsApp. Sin formularios que se pierdan ni secuencias automáticas: responde una persona."
         aside={
           <Button
             className="h-11 gap-2 rounded-full px-5"
@@ -177,6 +179,26 @@ export function ContactPage() {
         </div>
 
         <div className="grid content-start gap-5">
+          <a
+            href={customRequestWhatsApp()}
+            target="_blank"
+            rel="noreferrer"
+            className="group flex items-start gap-3 border-t border-border pt-4"
+          >
+            <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-primary">
+              <WhatsappIcon className="size-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="flex items-center gap-1.5 text-[0.85rem] font-medium">
+                WhatsApp
+                <ArrowUpRight className="size-3.5 text-muted-foreground transition group-hover:text-primary" />
+              </span>
+              <span className="mt-0.5 block text-[0.78rem] text-muted-foreground">
+                {WHATSAPP_LABEL} · respuesta el mismo día
+              </span>
+            </span>
+          </a>
+
           <a
             href={customRequest()}
             className="group flex items-start gap-3 border-t border-border pt-4"

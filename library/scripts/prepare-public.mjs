@@ -3,7 +3,7 @@
 //
 // Usage:
 //   bun library/scripts/prepare-public.mjs
-//   BASE_PREFIX=/plantillas-freebuff/ bun library/scripts/prepare-public.mjs
+//   BASE_PREFIX=/nexuslabs/ bun library/scripts/prepare-public.mjs
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { extname } from 'node:path'
 import { dirname, join } from 'node:path'
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url'
 const LIB = join(dirname(fileURLToPath(import.meta.url)), '..')
 const ROOT = join(LIB, '..')
 const OUT = join(ROOT, 'dist-public')
-const BASE = (process.env.BASE_PREFIX ?? '/plantillas-freebuff/').replace(/\/*$/, '/')
+const BASE = (process.env.BASE_PREFIX ?? '/nexuslabs/').replace(/\/*$/, '/')
 
 // Everything the site needs at runtime. Nothing else may be published.
 const ALLOW = ['index.html', '404.html', '.nojekyll', 'vite.svg', 'assets', 'demos', 'previews']
