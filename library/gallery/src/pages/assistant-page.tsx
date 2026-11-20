@@ -3,25 +3,22 @@ import { Link } from "react-router-dom"
 import {
   ArrowRight,
   ArrowUp,
-  CornerDownLeft,
-  ExternalLink,
-  MessageCircle,
+  ArrowUpRight,
   Mic,
   RotateCcw,
-  Sparkles,
   Square,
   Volume2,
 } from "lucide-react"
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Bubble, BubbleContent } from "@/components/ui/bubble"
-import { Button } from "@/components/ui/button"
-import { Message, MessageAvatar, MessageContent } from "@/components/ui/message"
 import { Shimmer } from "@/components/ui/shimmer"
 import { Textarea } from "@/components/ui/textarea"
 import { Reasoning, ToolTrace, type ToolTraceItem } from "@/components/assistant/trace"
-import { VoicePanel, type Caption } from "@/components/assistant/voice-panel"
+import {
+  PresentationLink,
+  Transcript,
+  VoiceBar,
+  type Caption,
+} from "@/components/assistant/voice-bar"
 import type { OrbState } from "@/components/ui/orb"
 import {
   planReply,
@@ -116,7 +113,8 @@ export function AssistantPage() {
   const [captions, setCaptions] = useState<Caption[]>([])
   const [playing, setPlaying] = useState(false)
 
-  const scroller = useRef<HTMLDivElement>(null)
+  const endRef = useRef<HTMLDivElement>(null)
+  const composerRef = useRef<HTMLDivElement>(null)
   const runRef = useRef(0)
   const busyRef = useRef(false)
   const micRef = useRef(false)
@@ -127,6 +125,8 @@ export function AssistantPage() {
   const askRef = useRef<(question: string) => void>(() => {})
 
   const busy = phase !== "idle"
+  const voiceVisible =
+    micOn || playing || captions.length > 0 || orb !== "idle" || Boolean(voiceError)
   const micSupported = useMemo(() => speechSupported.recognition(), [])
   const voiceAvailable = useMemo(() => speechSupported.synthesis(), [])
 
@@ -152,10 +152,14 @@ export function AssistantPage() {
     }
   }, [messages])
 
+  // Mantiene el final de la respuesta por encima del compositor pegajoso.
   useEffect(() => {
-    const node = scroller.current
-    if (node) node.scrollTop = node.scrollHeight
-  }, [messages, phase])
+    const end = endRef.current
+    const bar = composerRef.current
+    if (!end || !bar) return
+    const overlap = end.getBoundingClientRect().bottom + 24 - bar.getBoundingClientRect().top
+    if (overlap > 0) window.scrollBy({ top: overlap })
+  }, [messages, phase, captions.length, voiceVisible])
 
   useEffect(() => {
     micRef.current = micOn
@@ -184,7 +188,7 @@ export function AssistantPage() {
       const started = performance.now()
       const canSpeak = window.speechSynthesis.getVoices().length > 0
       if (!canSpeak) {
-        setCaptions((previous) => [
+        setCaptions(() => [
           {
             id,
             label,
@@ -618,355 +622,286 @@ export function AssistantPage() {
   /* ------------------------------ Vista ------------------------------ */
 
   return (
-    <div className="relative overflow-hidden">
-      <div className="paper-glow pointer-events-none absolute inset-0 -z-10" />
-      <div className="mx-auto w-full max-w-[1120px] px-5 py-10 sm:px-8 sm:py-14">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="mono-label flex items-center gap-2">
-              <Sparkles className="size-3 text-primary" />
-              Asistente NEXUS
-            </p>
-            <h1 className="mt-3 font-display text-[2.4rem] leading-[0.98] sm:text-5xl">
-              Pregunta, escucha y{" "}
-              <span className="display-italic text-primary">decide</span>.
-            </h1>
-            <p className="mt-3 max-w-xl text-[0.86rem] leading-6 text-muted-foreground">
-              Busca entre {data.total} plantillas, compara fichas y resuelve dudas
-              de alcance, plazos y licencias. Con voz: habla y te responde en voz
-              alta mientras ves la transcripción.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline" className="h-7 gap-1.5 px-3 text-[0.7rem]">
-              <span className="size-1.5 rounded-full bg-emerald-500" />
-              Voz + catálogo
-            </Badge>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-7 gap-1.5 rounded-full px-2.5 text-[0.7rem]"
-              onClick={restart}
-            >
-              <RotateCcw className="size-3" />
-              Nueva conversación
-            </Button>
-          </div>
+    <div className="mx-auto w-full max-w-[780px] px-5 pt-10 sm:px-6 sm:pt-14">
+      <header className="flex items-end justify-between gap-6 border-b border-border pb-5">
+        <div className="min-w-0">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Asistente
+          </p>
+          <h1 className="mt-2 font-display text-[1.9rem] leading-[1.05] tracking-tight sm:text-[2.2rem]">
+            Pregunta lo que <span className="display-italic text-primary">necesites</span>.
+          </h1>
+          <p className="mt-2 max-w-[52ch] text-[13px] leading-6 text-muted-foreground">
+            {data.total} plantillas, plazos, licencias y contacto. Escribe, o pulsa el
+            micrófono y habla.
+          </p>
         </div>
 
-        <div className="mt-7 grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,0.9fr)]">
-          <div className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
-            <div className="flex items-center gap-3 border-b border-border px-4 py-3">
-              <Avatar className="size-9">
-                <AvatarFallback className="bg-primary/15 text-[0.7rem] font-medium text-primary">
-                  NL
-                </AvatarFallback>
-              </Avatar>
-              <div className="min-w-0">
-                <p className="text-[0.82rem] font-medium">NEXUS LABS</p>
-                <p className="flex items-center gap-1.5 text-[0.66rem] text-muted-foreground">
-                  <span
-                    className={cn(
-                      "size-1.5 rounded-full",
-                      orb === "idle" ? "bg-emerald-500" : "bg-primary"
-                    )}
-                  />
-                  {phase === "thinking" ? (
-                    <Shimmer duration={1.4}>buscando en el catálogo…</Shimmer>
-                  ) : phase === "writing" ? (
-                    "escribiendo…"
-                  ) : orb === "talking" ? (
-                    "leyendo en voz alta…"
-                  ) : orb === "listening" ? (
-                    "te escucho"
-                  ) : (
-                    "en línea · respuestas del estudio"
-                  )}
-                </p>
-              </div>
-              <p className="ml-auto hidden items-center gap-1.5 text-[0.64rem] text-muted-foreground sm:flex">
-                <CornerDownLeft className="size-3" />
-                Enter envía · Shift+Enter salto
+        <button
+          type="button"
+          onClick={restart}
+          className="group mb-1 inline-flex shrink-0 items-center gap-1.5 text-[12px] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <RotateCcw className="size-3.5" strokeWidth={1.5} />
+          Nueva conversación
+        </button>
+      </header>
+
+      <section aria-live="polite" className="divide-y divide-border/60">
+        {messages.map((message) =>
+          message.role === "user" ? (
+            <div key={message.id} className="py-5">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                Tú
+              </p>
+              <p className="mt-1.5 whitespace-pre-wrap text-[15px] leading-[1.65]">
+                {message.text}
               </p>
             </div>
-
-            <div
-              ref={scroller}
-              aria-live="polite"
-              className="flex h-[min(64vh,38rem)] flex-col gap-5 overflow-y-auto overscroll-contain px-4 py-5 sm:px-5"
-            >
-              {messages.map((message) =>
-                message.role === "user" ? (
-                  <Message key={message.id} align="end">
-                    <MessageContent>
-                      <Bubble align="end" variant="muted">
-                        <BubbleContent className="text-[0.84rem] leading-6">
-                          {message.text}
-                        </BubbleContent>
-                      </Bubble>
-                    </MessageContent>
-                  </Message>
-                ) : (
-                  <Message key={message.id} className="animate-in fade-in slide-in-from-bottom-1 duration-300">
-                    <MessageAvatar>
-                      <Avatar className="size-8">
-                        <AvatarFallback className="bg-primary/15 text-[0.6rem] font-medium text-primary">
-                          NL
-                        </AvatarFallback>
-                      </Avatar>
-                    </MessageAvatar>
-                    <MessageContent className="min-w-0 gap-2.5">
-                      {message.reasoning ? (
-                        <Reasoning
-                          steps={message.reasoning.steps}
-                          open={message.reasoning.open}
-                          seconds={message.reasoning.seconds}
-                        />
-                      ) : null}
-
-                      {message.tools?.length ? (
-                        <ToolTrace tools={message.tools} />
-                      ) : null}
-
-                      {message.text ? (
-                        <p
-                          className={cn(
-                            "max-w-[56ch] text-[0.86rem] leading-6 whitespace-pre-wrap",
-                            message.streaming && "nx-caret"
-                          )}
-                        >
-                          {message.text.slice(0, Math.min(message.visible, message.text.length))}
-                        </p>
-                      ) : null}
-
-                      {message.streaming && !message.text ? (
-                        <p className="flex items-center gap-2 py-1 text-[0.78rem] text-muted-foreground">
-                          <Shimmer duration={1.5}>Redactando respuesta…</Shimmer>
-                        </p>
-                      ) : null}
-
-                      {message.cards?.length ? (
-                        <div className="flex flex-col gap-1.5 pt-1">
-                          {message.cards.map((template) => (
-                            <div
-                              key={template.id}
-                              className="group flex items-center gap-3 rounded-xl border border-border/80 bg-background/60 p-2 transition-colors hover:border-primary/40 hover:bg-primary/5"
-                            >
-                              <Link
-                                to={template.to}
-                                className="flex min-w-0 flex-1 items-center gap-3"
-                              >
-                                <img
-                                  src={assetUrl(template.preview)}
-                                  alt=""
-                                  loading="lazy"
-                                  className="h-11 w-16 shrink-0 rounded-md object-cover"
-                                />
-                                <span className="min-w-0">
-                                  <span className="block truncate text-[0.8rem] font-medium">
-                                    {template.name}
-                                  </span>
-                                  <span className="mono-label block truncate text-[0.56rem] tracking-[0.14em]">
-                                    {template.industry} · {template.kindLabel}
-                                  </span>
-                                </span>
-                              </Link>
-                              <a
-                                href={assetUrl(template.demo)}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                                aria-label={`Abrir la demo de ${template.name}`}
-                              >
-                                <ExternalLink className="size-3.5" />
-                              </a>
-                            </div>
-                          ))}
-                        </div>
-                      ) : null}
-
-                      {message.links?.length ? (
-                        <div className="flex flex-wrap gap-1.5 pt-0.5">
-                          {message.links.map((link) => (
-                            <Link
-                              key={link.to}
-                              to={link.to}
-                              className="inline-flex items-center gap-1 rounded-full border border-border px-2.5 py-1 text-[0.72rem] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-                            >
-                              {link.label}
-                              <ArrowRight className="size-3" />
-                            </Link>
-                          ))}
-                        </div>
-                      ) : null}
-
-                      {message.action ? (
-                        <div className="pt-0.5">
-                          {message.action.kind === "narrate" ? (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-8 gap-2 rounded-full px-3 text-[0.72rem]"
-                              onClick={() => void playPresentation()}
-                            >
-                              <Volume2 className="size-3.5" />
-                              {message.action.label}
-                            </Button>
-                          ) : (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="h-8 gap-2 rounded-full px-3 text-[0.72rem]"
-                              render={
-                                <a
-                                  href={mailLink(
-                                    message.action.message,
-                                    message.action.subject
-                                  )}
-                                />
-                              }
-                            >
-                              <MessageCircle className="size-3.5" />
-                              {message.action.label}
-                            </Button>
-                          )}
-                        </div>
-                      ) : null}
-
-                      {message.followUps?.length && !message.streaming ? (
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {message.followUps.map((suggestion) => (
-                            <button
-                              key={suggestion}
-                              type="button"
-                              onClick={() => void ask(suggestion)}
-                              className="rounded-full border border-dashed border-border px-2.5 py-1 text-left text-[0.71rem] text-muted-foreground transition-colors hover:border-primary/50 hover:bg-primary/5 hover:text-foreground"
-                            >
-                              {suggestion}
-                            </button>
-                          ))}
-                        </div>
-                      ) : null}
-                    </MessageContent>
-                  </Message>
-                )
-              )}
-            </div>
-
-            {messages.length <= 1 ? (
-              <div className="flex flex-wrap gap-1.5 border-t border-border px-4 pt-3 pb-1 sm:px-5">
-                {VOICE_SUGGESTIONS.map((suggestion) => (
-                  <button
-                    key={suggestion}
-                    type="button"
-                    onClick={() => void ask(suggestion)}
-                    className="rounded-full border border-border px-2.5 py-1 text-[0.71rem] text-muted-foreground transition-colors hover:border-primary/40 hover:bg-muted hover:text-foreground"
-                  >
-                    {suggestion}
-                  </button>
-                ))}
+          ) : (
+            <article key={message.id} className="py-5">
+              <div className="flex items-baseline justify-between gap-3">
+                <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  Nexus Labs
+                </p>
+                {message.streaming ? (
+                  <p className="text-[11px] text-muted-foreground">
+                    <Shimmer duration={1.4}>
+                      {phase === "thinking" ? "buscando en el catálogo…" : "escribiendo…"}
+                    </Shimmer>
+                  </p>
+                ) : null}
               </div>
-            ) : null}
 
-            <form
-              className="border-t border-border p-3 sm:p-4"
-              onSubmit={(event) => {
-                event.preventDefault()
-                void ask(input)
-              }}
-            >
-              <div className="flex w-full flex-col gap-2 rounded-2xl border border-border/80 bg-background/80 p-2 transition-colors focus-within:border-primary/40">
-                <div className="flex items-end gap-2">
-                  <Textarea
-                    value={input}
-                    onChange={(event) => setInput(event.target.value)}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter" && !event.shiftKey) {
-                        event.preventDefault()
-                        void ask(input)
-                      }
-                    }}
-                    placeholder={
-                      micOn ? "Te escucho… o escribe aquí" : "Pregunta lo que necesites…"
-                    }
-                    aria-label="Mensaje para el asistente"
-                    rows={1}
-                    className="max-h-32 min-h-10 flex-1 resize-none border-0 bg-transparent text-[0.85rem] shadow-none focus-visible:ring-0"
+              <div className="mt-2 flex flex-col gap-2.5">
+                {message.reasoning ? (
+                  <Reasoning
+                    steps={message.reasoning.steps}
+                    open={message.reasoning.open}
+                    seconds={message.reasoning.seconds}
                   />
-                  <button
-                    type="button"
-                    onClick={toggleMic}
-                    disabled={!micSupported}
-                    aria-pressed={micOn}
-                    aria-label={micLabel}
-                    title={micLabel}
+                ) : null}
+
+                {message.tools?.length ? <ToolTrace tools={message.tools} /> : null}
+
+                {message.text ? (
+                  <p
                     className={cn(
-                      "flex size-9 shrink-0 items-center justify-center rounded-full transition-colors",
-                      micOn
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                      !micSupported && "cursor-not-allowed opacity-40"
+                      "whitespace-pre-wrap text-[14.5px] leading-[1.7] text-foreground/90",
+                      message.streaming && "nx-caret"
                     )}
                   >
-                    <Mic className="size-4" />
-                  </button>
-                  {busy ? (
-                    <Button
+                    {message.text.slice(0, Math.min(message.visible, message.text.length))}
+                  </p>
+                ) : message.streaming ? null : null}
+
+                {message.cards?.length ? (
+                  <div className="mt-1 flex flex-col border-t border-border/60">
+                    {message.cards.map((template) => (
+                      <div
+                        key={template.id}
+                        className="flex items-center gap-3 border-b border-border/60 py-2.5"
+                      >
+                        <Link
+                          to={template.to}
+                          className="flex min-w-0 flex-1 items-center gap-3"
+                        >
+                          <img
+                            src={assetUrl(template.preview)}
+                            alt=""
+                            loading="lazy"
+                            className="h-9 w-14 shrink-0 rounded-sm object-cover"
+                          />
+                          <span className="min-w-0">
+                            <span className="block truncate text-[13.5px] font-medium tracking-tight">
+                              {template.name}
+                            </span>
+                            <span className="block truncate text-[10.5px] uppercase tracking-[0.14em] text-muted-foreground">
+                              {template.industry} · {template.kindLabel}
+                            </span>
+                          </span>
+                        </Link>
+                        <a
+                          href={assetUrl(template.demo)}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Abrir la demo de ${template.name}`}
+                          className="shrink-0 text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          <ArrowUpRight className="size-4" strokeWidth={1.5} />
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                {message.links?.length ? (
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                    {message.links.map((link) => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className="group inline-flex items-center gap-1 text-[12.5px] text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                        <ArrowRight
+                          className="size-3 transition-transform group-hover:translate-x-0.5"
+                          strokeWidth={1.5}
+                        />
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+
+                {message.action ? (
+                  message.action.kind === "narrate" ? (
+                    <button
                       type="button"
-                      size="icon"
-                      variant="secondary"
-                      className="size-9 shrink-0 rounded-full"
-                      onClick={stopWriting}
-                      aria-label="Detener la respuesta"
+                      onClick={() => void playPresentation()}
+                      className="inline-flex items-center gap-1.5 self-start text-[12.5px] text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      <Square className="size-3.5" />
-                    </Button>
+                      <Volume2 className="size-3.5" strokeWidth={1.5} />
+                      {message.action.label}
+                    </button>
                   ) : (
-                    <Button
-                      type="submit"
-                      size="icon"
-                      className="size-9 shrink-0 rounded-full"
-                      disabled={!input.trim()}
-                      aria-label="Enviar mensaje"
+                    <a
+                      href={mailLink(message.action.message, message.action.subject)}
+                      className="group inline-flex items-center gap-1.5 self-start text-[12.5px] text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      <ArrowUp className="size-4" />
-                    </Button>
-                  )}
-                </div>
-                <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-[0.63rem] text-muted-foreground">
-                  <span>
-                    {micOn
-                      ? "Toca el micrófono para cortar. Al terminar de hablar, vuelvo a escuchar."
-                      : "Enter para enviar. El micrófono activa la conversación hablada."}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Mic className="size-2.5" />
-                    {micSupported ? "dictado disponible" : "sin dictado en este navegador"}
-                  </span>
-                </div>
+                      {message.action.label}
+                      <ArrowUpRight
+                        className="size-3.5 transition-transform group-hover:-translate-y-px group-hover:translate-x-px"
+                        strokeWidth={1.5}
+                      />
+                    </a>
+                  )
+                ) : null}
+
+                {message.followUps?.length && !message.streaming ? (
+                  <div className="mt-1 flex flex-wrap gap-1.5">
+                    {message.followUps.map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        type="button"
+                        onClick={() => void ask(suggestion)}
+                        className="rounded-full border border-border px-2.5 py-1 text-left text-[12px] text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
               </div>
-            </form>
+            </article>
+          )
+        )}
+      </section>
+
+      <div ref={endRef} aria-hidden="true" className="h-2" />
+
+      <div
+        ref={composerRef}
+        className="sticky bottom-0 z-20 -mx-5 mt-2 border-t border-border/70 bg-background sm:-mx-6"
+      >
+        {voiceVisible ? (
+          <VoiceBar
+            state={orb}
+            micOn={micOn}
+            dictation={dictation}
+            error={voiceError}
+            playing={playing}
+            onToggleMic={toggleMic}
+            onStop={stopNarration}
+            micSupported={micSupported}
+          />
+        ) : null}
+
+        <Transcript captions={captions} />
+
+        {messages.length <= 1 ? (
+          <div className="flex flex-wrap gap-1.5 px-4 pt-2.5 pb-0.5 sm:px-5">
+            {VOICE_SUGGESTIONS.map((suggestion) => (
+              <button
+                key={suggestion}
+                type="button"
+                onClick={() => void ask(suggestion)}
+                className="rounded-full border border-border px-2.5 py-1 text-[12px] text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        ) : null}
+
+        <form
+          className="px-4 py-3 sm:px-5"
+          onSubmit={(event) => {
+            event.preventDefault()
+            void ask(input)
+          }}
+        >
+          <div className="flex items-end gap-2 border border-border px-3 py-2 transition-colors focus-within:border-foreground/30">
+            <Textarea
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey) {
+                  event.preventDefault()
+                  void ask(input)
+                }
+              }}
+              placeholder={micOn ? "Te escucho… o escribe aquí" : "Pregunta lo que necesites…"}
+              aria-label="Mensaje para el asistente"
+              rows={1}
+              className="max-h-32 min-h-9 flex-1 resize-none rounded-none border-0 bg-transparent px-0 py-1.5 text-[14px] shadow-none focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent"
+            />
+            <button
+              type="button"
+              onClick={toggleMic}
+              disabled={!micSupported}
+              aria-pressed={micOn}
+              aria-label={micLabel}
+              title={micLabel}
+              className={cn(
+                "flex size-8 shrink-0 items-center justify-center rounded-md transition-colors",
+                micOn
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                !micSupported && "cursor-not-allowed opacity-40"
+              )}
+            >
+              <Mic className="size-4" strokeWidth={1.5} />
+            </button>
+
+            {busy ? (
+              <button
+                type="button"
+                onClick={stopWriting}
+                aria-label="Detener la respuesta"
+                className="flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <Square className="size-3.5" strokeWidth={1.5} />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={!input.trim()}
+                aria-label="Enviar mensaje"
+                className="flex size-8 shrink-0 items-center justify-center rounded-md bg-foreground text-background transition-opacity hover:opacity-90 disabled:opacity-30"
+              >
+                <ArrowUp className="size-4" strokeWidth={1.75} />
+              </button>
+            )}
           </div>
 
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <VoicePanel
-              state={orb}
-              micOn={micOn}
-              dictation={dictation}
-              error={voiceError}
-              captions={captions}
-              playing={playing}
-              onToggleMic={toggleMic}
-              onPlay={() => void playPresentation()}
-              onStop={stopNarration}
-              micSupported={micSupported}
-            />
-            <p className="mt-3 px-1 text-[0.66rem] leading-5 text-muted-foreground">
-              La voz se genera en tu navegador con las voces del sistema. La
-              conversación se guarda en esta pestaña y se borra al cerrarla.
-            </p>
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-[11px] text-muted-foreground">
+            <PresentationLink onClick={() => void playPresentation()} />
+            <span className="hidden sm:inline">
+              Enter envía · Shift+Enter salto · la voz se genera en tu navegador
+            </span>
+            <span className="sm:hidden">Enter envía</span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )
