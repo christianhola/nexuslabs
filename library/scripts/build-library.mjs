@@ -305,20 +305,10 @@ const galleryBuild = spawnSync('bun', ['library/scripts/build-gallery.mjs'], {
 })
 if (galleryBuild.status !== 0) throw new Error('La galería no compiló')
 
+// build-gallery.mjs owns 404.html so demo deep links and the catalog share one
+// fallback. Writing another one here would overwrite that router hand-off.
 writeFileSync(join(LIB, 'library.json'), JSON.stringify({ generatedAt: new Date().toISOString(), basePrefix: BASE_PREFIX, built: onDisk, failed, whatsapp: Boolean(data.whatsapp) }, null, 2))
 writeFileSync(join(LIB, '.nojekyll'), '')
-writeFileSync(join(LIB, '404.html'), `<!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Volviendo al catálogo — NEXUS LABS</title>
-<meta name="robots" content="noindex">
-<style>html,body{height:100%;margin:0}body{display:grid;place-items:center;background:#08080a;color:#f7f3ea;font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center;padding:24px}a{color:#f3ce9f}.mark{width:44px;height:44px;border-radius:12px;margin:0 auto 16px;background:linear-gradient(135deg,#f3ce9f,#d8a273);color:#17130d;display:grid;place-items:center;font-weight:800}</style>
-</head><body><div><div class="mark">N</div><p>Volviendo al catálogo de NEXUS LABS…</p><p><a id="go" href="/">Entrar ahora</a></p></div>
-<script>
-var m = location.pathname.match(/^(.*\\/demos\\/[^/]+\\/)/);
-var target = m ? m[1] : (location.pathname.match(/^(.*\\/)(?:index\\.html)?$/) || [])[1] || '/';
-document.getElementById('go').href = target;
-setTimeout(function(){ location.replace(target); }, 900);
-</script></body></html>`)
 
 console.log(`\n${onDisk.length} demos listos, ${failed.length} fallos`)
 if (failed.length) console.log(failed.map((f) => ` - ${f.id}: ${f.error.slice(0, 160)}`).join('\n'))
