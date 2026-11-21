@@ -32,8 +32,28 @@
     </script>
     <script type="module" crossorigin src="/nexuslabs/assets/index-CO8UdQFI.js"></script>
     <link rel="stylesheet" crossorigin href="/nexuslabs/assets/index-C0ehawMb.css">
+    <link rel="stylesheet" href="/nexuslabs/assets/satellite-hero-v5.css">
   </head>
   <body>
     <div id="root"></div>
+  <template id="nexus-orbit-template">
+  <section class="nexus-orbit" aria-labelledby="satellite-title">
+    <div class="nexus-orbit__layout">
+      <div class="nexus-orbit__copy">
+        <h1 id="satellite-title" class="nexus-orbit__title font-display">Sitios con oficio.</h1>
+        <p class="nexus-orbit__summary">Plantillas web listas para explorar y adaptar a tu negocio.</p>
+        <a class="nexus-orbit__cta" href="/nexuslabs/plantillas">Ver catálogo<span class="nexus-orbit__arrow" aria-hidden="true">›</span></a>
+      </div>
+      <figure class="nexus-orbit__visual">
+        <div class="nexus-orbit__media" aria-hidden="true">
+          <img src="/nexuslabs/assets/satellite-v5.webp" alt="" width="1120" height="600" fetchpriority="high">
+          <video muted loop playsinline preload="none" data-mp4="/nexuslabs/assets/satellite-v5.mp4" data-webm="/nexuslabs/assets/satellite-v5-fallback.webm"></video>
+        </div>
+        <button type="button" class="nexus-orbit__playback" aria-label="Reproducir el satélite">▶</button>
+      </figure>
+    </div>
+  </section>
+</template>
+<script type="module" src="/nexuslabs/assets/satellite-hero-v5.js"></script>
   </body>
 </html>
