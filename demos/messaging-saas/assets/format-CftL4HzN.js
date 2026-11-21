@@ -1,0 +1,1 @@
+var e=(e,t=0)=>e.toLocaleString(`en-US`,{style:`currency`,currency:`USD`,minimumFractionDigits:t,maximumFractionDigits:t}),t=e=>e.toLocaleString(`en-US`),n=e=>new Date(e+`T12:00:00Z`).toLocaleDateString(`en-US`,{month:`short`,day:`numeric`,year:`numeric`,timeZone:`UTC`});export{e as n,t as r,n as t};

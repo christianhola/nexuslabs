@@ -1,0 +1,1 @@
+import{d as e,u as t}from"./Container-CBAs3Lqk.js";var n=t();function r({className:t}){return(0,n.jsx)(`div`,{className:e(`skeleton rounded-[8px]`,t),"aria-hidden":!0})}export{r as t};

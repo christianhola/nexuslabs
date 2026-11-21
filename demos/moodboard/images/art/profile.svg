@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<defs>
+  <filter id="brush" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="44" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="47"/>
+    <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.16 0"/>
+  </filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter></defs>
+<rect width="800" height="1000" fill="#e9c27a"/>
+  <rect x="0" y="0" width="400" height="1000" fill="#2f5e9c" opacity="0.92"/>
+  <g filter="url(#brush)">
+    <circle cx="610" cy="200" r="90" fill="#f4e3c3"/>
+    <path d="M250 1000 C230 860 260 760 330 700 C260 650 230 560 250 460 C270 330 350 250 450 250 C560 250 620 330 610 420 L660 470 L610 500 C620 540 610 570 590 590 C560 640 520 650 480 650 L470 720 C560 760 620 860 620 1000Z" fill="#c8553d"/>
+    <path d="M250 1000 C230 860 260 760 330 700 C260 650 230 560 250 460 C270 330 350 250 400 250 L400 1000Z" fill="#e48a6a"/>
+    <path d="M300 300 C340 220 470 200 560 260 C520 230 380 220 300 330 C280 380 270 440 280 470 C250 400 260 340 300 300Z" fill="#1f1b1a"/>
+    <path d="M470 400 C500 380 540 380 560 400 C540 420 500 420 470 400Z" fill="#fff8ec"/>
+    <circle cx="515" cy="400" r="12" fill="#1f1b1a"/>
+    <path d="M330 420 C350 400 380 400 395 420 C380 440 350 440 330 420Z" fill="#fff8ec"/>
+    <circle cx="362" cy="420" r="11" fill="#2f5e9c"/>
+    <path d="M520 560 C545 565 570 560 585 552" stroke="#7e2a1e" stroke-width="8" fill="none"/>
+    <path d="M0 860 L800 820 L800 1000 L0 1000Z" fill="#22303f" opacity="0.85"/>
+  </g>
+<rect width="800" height="1000" filter="url(#grain)"/>
+</svg>
