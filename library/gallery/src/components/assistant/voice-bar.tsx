@@ -29,6 +29,7 @@ export function VoiceBar({
   onToggleMic,
   onStop,
   micSupported,
+  voiceProvider = "browser",
 }: {
   state: OrbState
   micOn: boolean
@@ -38,23 +39,30 @@ export function VoiceBar({
   onToggleMic: () => void
   onStop: () => void
   micSupported: boolean
+  voiceProvider?: "elevenlabs" | "browser"
 }) {
   return (
     <div className="flex flex-col gap-1.5 border-b border-border/60 px-4 py-2.5 sm:px-5">
       <div className="flex items-center gap-2.5">
         <span className="relative size-6 shrink-0 overflow-hidden rounded-full border border-border/70">
-          <Orb colors={["#f3e0c4", "#a9714a"]} seed={7} state={state} />
+          <Orb colors={["#10A37F", "#0E8E6E"]} seed={7} state={state} />
         </span>
 
         <span className="flex items-center gap-1.5 text-[12px] text-foreground/80">
           <span
             className={cn(
               "size-1.5 rounded-full",
-              state === "idle" ? "bg-muted-foreground/50" : "bg-emerald-600 dark:bg-emerald-400"
+              state === "idle" ? "bg-muted-foreground/50" : "bg-[#10A37F]"
             )}
           />
           {stateLabel[state]}
         </span>
+
+        {voiceProvider === "elevenlabs" ? (
+          <span className="rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-[#10A37F]" style={{ borderColor: "rgba(16,163,127,0.28)", backgroundColor: "rgba(16,163,127,0.12)" }}>
+            Voz real
+          </span>
+        ) : null}
 
         {state === "talking" || state === "listening" ? (
           <span className="flex h-2.5 items-end gap-[2px]" aria-hidden="true">

@@ -11,6 +11,9 @@ import {
 } from "lucide-react"
 
 import { Shimmer } from "@/components/ui/shimmer"
+import { RichMessageRenderer } from "@/components/assistant/rich-renderer"
+import { AgentBeam } from "@/components/assistant/agent-beam"
+import { SpaceBackdropVideo } from "@/components/space-backdrop-video"
 import { Textarea } from "@/components/ui/textarea"
 import { Reasoning, ToolTrace, type ToolTraceItem } from "@/components/assistant/trace"
 import {
@@ -40,6 +43,12 @@ import {
   type Dictation,
 } from "@/lib/speech"
 import { cn } from "@/lib/utils"
+import {
+  getVoiceStatus,
+  speakWithElevenLabs,
+  stopAudio,
+  voiceAvailable as isElevenLabsAvailable,
+} from "@/lib/voice-backend"
 
 /* ------------------------------------------------------------------ */
 
@@ -112,6 +121,7 @@ export function AssistantPage() {
   const [voiceError, setVoiceError] = useState<string | null>(null)
   const [captions, setCaptions] = useState<Caption[]>([])
   const [playing, setPlaying] = useState(false)
+  const [voiceProvider, setVoiceProvider] = useState<"elevenlabs" | "browser">("browser")
 
   const endRef = useRef<HTMLDivElement>(null)
   const composerRef = useRef<HTMLDivElement>(null)
@@ -122,6 +132,7 @@ export function AssistantPage() {
   const narrationRef = useRef(0)
   const stopNarrationRef = useRef<() => void>(() => {})
   const speakingRef = useRef(false)
+  const elevenAudioRef = useRef<HTMLAudioElement | null>(null)
   const askRef = useRef<(question: string) => void>(() => {})
 
   const busy = phase !== "idle"
@@ -132,6 +143,10 @@ export function AssistantPage() {
 
   useEffect(() => {
     primeVoices()
+    void getVoiceStatus().then((status) => {
+      if (isElevenLabsAvailable(status)) setVoiceProvider("elevenlabs")
+      else setVoiceProvider("browser")
+    })
   }, [])
 
   useEffect(() => {
@@ -152,13 +167,16 @@ export function AssistantPage() {
     }
   }, [messages])
 
-  // Mantiene el final de la respuesta por encima del compositor pegajoso.
+  // Mantiene el final de la respuesta por encima del compositor pegajoso,
+  // pero solo si el usuario ya estaba cerca del final (no interrumpe scroll manual).
   useEffect(() => {
     const end = endRef.current
     const bar = composerRef.current
     if (!end || !bar) return
+    const distanceFromBottom = document.documentElement.scrollHeight - (window.scrollY + window.innerHeight)
+    if (distanceFromBottom > 120) return
     const overlap = end.getBoundingClientRect().bottom + 24 - bar.getBoundingClientRect().top
-    if (overlap > 0) window.scrollBy({ top: overlap })
+    if (overlap > 0) window.scrollBy({ top: overlap, behavior: "auto" })
   }, [messages, phase, captions.length, voiceVisible])
 
   useEffect(() => {
@@ -177,7 +195,7 @@ export function AssistantPage() {
 
   /* ---------------------------- Voz ---------------------------- */
 
-  const speakAnswer = useCallback(
+  const speakAnswerWebSpeech = useCallback(
     (text: string, label = "Respuesta leída") => {
       if (!voiceAvailable || !text.trim()) {
         setOrb(micRef.current ? "listening" : "idle")
@@ -259,6 +277,73 @@ export function AssistantPage() {
     [voiceAvailable]
   )
 
+  const speakAnswer = useCallback(
+    (text: string, label = "Respuesta leída") => {
+      if (!text.trim()) {
+        setOrb(micRef.current ? "listening" : "idle")
+        return
+      }
+
+      // Voz real con ElevenLabs; si no está disponible o falla, cae a Web Speech.
+      void (async () => {
+        setOrb("talking")
+        const audio = await speakWithElevenLabs(text)
+        if (!audio) {
+          setOrb(micRef.current ? "listening" : "idle")
+          speakAnswerWebSpeech(text, label)
+          return
+        }
+
+        const id = uid("answer")
+        const started = performance.now()
+        setCaptions((previous) => [
+          ...previous,
+          { id, label, text, time: clock(started), revealed: 0, active: true },
+        ])
+        speakingRef.current = true
+        elevenAudioRef.current = audio
+
+        const reveal = () => {
+          if (!speakingRef.current) return
+          const duration = Number.isFinite(audio.duration) && audio.duration > 0
+            ? audio.duration
+            : estimateSpeechMs(text) / 1000
+          const progress = Math.min(1, audio.currentTime / duration)
+          const revealed = Math.max(1, Math.floor(text.length * progress))
+          setCaptions((previous) =>
+            previous.map((caption) =>
+              caption.id === id ? { ...caption, revealed: Math.min(text.length, revealed) } : caption
+            )
+          )
+          if (progress < 1) requestAnimationFrame(reveal)
+        }
+        requestAnimationFrame(reveal)
+
+        audio.onended = () => {
+          speakingRef.current = false
+          setCaptions((previous) =>
+            previous.map((caption) =>
+              caption.id === id ? { ...caption, revealed: text.length, active: false } : caption
+            )
+          )
+          setOrb(micRef.current ? "listening" : "idle")
+          if (micRef.current) {
+            dictationRef.current?.start()
+            setOrb("listening")
+          }
+          elevenAudioRef.current = null
+        }
+        audio.onerror = () => {
+          speakingRef.current = false
+          setOrb(micRef.current ? "listening" : "idle")
+          elevenAudioRef.current = null
+          speakAnswerWebSpeech(text, label)
+        }
+      })()
+    },
+    [speakAnswerWebSpeech]
+  )
+
   const toggleMic = useCallback(() => {
     setVoiceError(null)
 
@@ -268,6 +353,8 @@ export function AssistantPage() {
       setDictation("")
       dictationRef.current?.stop()
       stopSpeaking()
+      stopAudio(elevenAudioRef.current)
+      elevenAudioRef.current = null
       speakingRef.current = false
       setOrb("idle")
       return
@@ -323,6 +410,8 @@ export function AssistantPage() {
     narrationRef.current += 1
     stopNarrationRef.current()
     stopSpeaking()
+    stopAudio(elevenAudioRef.current)
+    elevenAudioRef.current = null
     setPlaying(false)
     setOrb(micRef.current ? "listening" : "idle")
     setCaptions((previous) =>
@@ -446,6 +535,8 @@ export function AssistantPage() {
 
       if (playing) stopNarration()
       stopSpeaking()
+      stopAudio(elevenAudioRef.current)
+      elevenAudioRef.current = null
       speakingRef.current = false
 
       const run = ++runRef.current
@@ -553,7 +644,7 @@ export function AssistantPage() {
       setPhase("idle")
 
       const spokenPlan = plan.spoken || plan.text
-      if (micRef.current && voiceAvailable) {
+      if (micRef.current) {
         dictationRef.current?.stop()
         speakAnswer(spokenPlan)
       } else {
@@ -622,7 +713,9 @@ export function AssistantPage() {
   /* ------------------------------ Vista ------------------------------ */
 
   return (
-    <div className="mx-auto w-full max-w-[780px] px-5 pt-10 sm:px-6 sm:pt-14">
+    <div className="assistant-theme relative mx-auto w-full max-w-[780px] px-5 pt-10 sm:px-6 sm:pt-14">
+      <SpaceBackdropVideo src="/media/nasa/jwst-highlights.mp4" className="-z-10 hidden rounded-2xl sm:block" />
+      <AgentBeam />
       <header className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
         <div className="min-w-0">
           <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -654,9 +747,9 @@ export function AssistantPage() {
               <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 Tú
               </p>
-              <p className="mt-1.5 whitespace-pre-wrap text-[15px] leading-[1.65]">
-                {message.text}
-              </p>
+              <div className="mt-1.5 ml-auto w-fit max-w-[85%] rounded-2xl rounded-tr-sm border border-[rgba(16,163,127,0.28)] bg-[rgba(16,163,127,0.12)] px-4 py-2.5 text-[15px] leading-[1.65] text-foreground">
+                <p className="whitespace-pre-wrap">{message.text}</p>
+              </div>
             </div>
           ) : (
             <article key={message.id} className="py-5">
@@ -685,14 +778,30 @@ export function AssistantPage() {
                 {message.tools?.length ? <ToolTrace tools={message.tools} /> : null}
 
                 {message.text ? (
-                  <p
-                    className={cn(
-                      "whitespace-pre-wrap text-[14.5px] leading-[1.7] text-foreground/90",
-                      message.streaming && "nx-caret"
+                  <div className="w-fit max-w-full rounded-2xl rounded-tl-sm border border-border bg-[#050505] px-4 py-2.5">
+                    {message.streaming ? (
+                      <p
+                        className={cn(
+                          "whitespace-pre-wrap text-[14.5px] leading-[1.7] text-foreground/90",
+                          "nx-caret"
+                        )}
+                      >
+                        {message.text.slice(0, Math.min(message.visible, message.text.length))}
+                      </p>
+                    ) : (
+                      <RichMessageRenderer text={message.text} />
                     )}
-                  >
-                    {message.text.slice(0, Math.min(message.visible, message.text.length))}
-                  </p>
+                    {!message.streaming && message.text ? (
+                      <button
+                        type="button"
+                        onClick={() => void speakAnswer(message.text)}
+                        className="mt-2 inline-flex items-center gap-1 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        <Volume2 className="size-3" strokeWidth={1.5} />
+                        Leer respuesta
+                      </button>
+                    ) : null}
+                  </div>
                 ) : message.streaming ? null : null}
 
                 {message.cards?.length ? (
@@ -813,6 +922,7 @@ export function AssistantPage() {
             onToggleMic={toggleMic}
             onStop={stopNarration}
             micSupported={micSupported}
+            voiceProvider={voiceProvider}
           />
         ) : null}
 
@@ -825,7 +935,7 @@ export function AssistantPage() {
             void ask(input)
           }}
         >
-          <div className="flex items-end gap-2 border border-border px-3 py-2 transition-colors focus-within:border-foreground/30">
+          <div className="flex items-end gap-2 rounded-md border border-border bg-[#050505] px-3 py-2 transition-colors focus-within:border-[rgba(16,163,127,0.45)]">
             <Textarea
               value={input}
               onChange={(event) => setInput(event.target.value)}
@@ -872,7 +982,7 @@ export function AssistantPage() {
                 type="submit"
                 disabled={!input.trim()}
                 aria-label="Enviar mensaje"
-                className="flex size-8 shrink-0 items-center justify-center rounded-md bg-foreground text-background transition-opacity hover:opacity-90 disabled:opacity-30"
+                className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground transition-opacity hover:bg-[#0E8E6E] disabled:opacity-30"
               >
                 <ArrowUp className="size-4" strokeWidth={1.75} />
               </button>
@@ -882,7 +992,7 @@ export function AssistantPage() {
           <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-[11px] text-muted-foreground">
             <PresentationLink onClick={() => void playPresentation()} />
             <span className="hidden sm:inline">
-              Enter envía · Shift+Enter salto · la voz se genera en tu navegador
+              Enter envía · Shift+Enter salto de línea · Puedes escribir o usar el micrófono
             </span>
             <span className="sm:hidden">Enter envía</span>
           </div>

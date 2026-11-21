@@ -50,6 +50,11 @@ function libraryAssets(): Plugin {
 }
 
 export default defineConfig({
+  server: {
+    proxy: {
+      "/api": { target: "http://localhost:3001", changeOrigin: true },
+    },
+  },
   plugins: [react(), tailwindcss(), libraryAssets()],
   resolve: {
     alias: {

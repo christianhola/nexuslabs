@@ -7,10 +7,12 @@ import {
 } from "react-router-dom"
 
 import { Footer } from "@/components/footer"
+import { SmoothCursor } from "@/components/ui/smooth-cursor"
 import { Header } from "@/components/header"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { AssistantPage } from "@/pages/assistant-page"
+import SubagentDemoPage from "@/pages/subagent-demo"
 import { CatalogPage } from "@/pages/catalog-page"
 import { CommentsPage } from "@/pages/comments-page"
 import { ContactPage } from "@/pages/contact-page"
@@ -23,6 +25,7 @@ import {
   StudioPage,
 } from "@/pages/simple-pages"
 import { TemplatePage } from "@/pages/template-page"
+import { LegalPage } from "@/pages/legal-page"
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "")
 
@@ -40,7 +43,7 @@ export function App() {
   return (
     <BrowserRouter basename={base || "/"}>
       <TooltipProvider>
-        <div className="relative min-h-dvh overflow-x-clip bg-background">
+        <div className="relative min-h-dvh overflow-x-hidden bg-background">
           <ScrollToTop />
           <Header />
           <main>
@@ -55,12 +58,17 @@ export function App() {
               <Route path="/creditos" element={<CreditsPage />} />
               <Route path="/comentarios" element={<CommentsPage />} />
               <Route path="/asistente" element={<AssistantPage />} />
+              <Route path="/subagent-demo" element={<SubagentDemoPage />} />
               <Route path="/contacto" element={<ContactPage />} />
+              <Route path="/legal" element={<LegalPage />} />
+              <Route path="/privacidad" element={<LegalPage />} />
+              <Route path="/terminos" element={<LegalPage />} />
               <Route path="*" element={<HomePage />} />
             </Routes>
           </main>
           <Footer />
           <Toaster position="bottom-center" />
+          <SmoothCursor />
         </div>
       </TooltipProvider>
     </BrowserRouter>

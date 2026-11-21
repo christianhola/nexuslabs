@@ -21,7 +21,7 @@ export function NumberTicker({
   ...props
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const motionValue = useMotionValue(direction === "down" ? value : startValue)
+  const motionValue = useMotionValue(direction === "down" ? value : value)
   const springValue = useSpring(motionValue, {
     damping: 60,
     stiffness: 100,
@@ -61,12 +61,12 @@ export function NumberTicker({
     <span
       ref={ref}
       className={cn(
-        "inline-block tracking-wider text-black tabular-nums dark:text-white",
+        "inline-block tracking-wider tabular-nums text-foreground",
         className
       )}
       {...props}
     >
-      {startValue}
+      {value}
     </span>
   )
 }

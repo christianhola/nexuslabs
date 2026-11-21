@@ -649,6 +649,48 @@ const INTENTS: Array<{ id: string; words: string[]; build: Builder }> = [
       },
     }),
   },
+  {
+    id: "greeting",
+    words: ["hola", "buenos dias", "buenas tardes", "buenas noches", "que tal", "saludos", "hey", "hi"],
+    build: ({ rng }) => ({
+      text: join(
+        pick(rng, ["Hola. ¿En qué te ayudo hoy?", "Hola, aquí estoy. ¿Qué necesitas?", "Hola. Dime qué tienes en mente."]),
+        "Puedo buscar entre las 88 plantillas, explicarte plazos y licencias, o dejarte el correo listo cuando toque hablar con una persona.",
+        "También puedes dictarme la pregunta con el micrófono."
+      ),
+      tools: [{ id: "greet", name: "saludar", label: "Te saludo", detail: "sin búsquedas automáticas" }],
+      followUps: ["¿Qué plantilla va para un hotel?", "Preséntame la empresa", "¿Cuánto tarda un proyecto?"],
+    }),
+  },
+  {
+    id: "metrics",
+    words: ["metricas", "kpi", "kpis", "como va mi empresa", "mi empresa", "analisis", "reporte", "dashboard", "ventas", "ingresos", "flujo de caja", "cobros"],
+    build: () => ({
+      text: [
+        "Aquí tienes una vista ejecutiva de tu empresa, con los datos que tengo a mano.",
+        "",
+        "```kpi",
+        "{\"items\":[{\"label\":\"Ingresos Recuperables\",\"value\":48500,\"prefix\":\"$\",\"trend\":\"+18.4%\",\"icon\":\"dollar-sign\"},{\"label\":\"Facturas Vencidas\",\"value\":6,\"trend\":\"-2 vs mes ant.\",\"icon\":\"alert-circle\"},{\"label\":\"Tiempo Ahorrado\",\"value\":42,\"suffix\":\" min\",\"trend\":\"Automatizado\",\"icon\":\"zap\"}]}",
+        "```",
+        "",
+        "```chart",
+        "{\"type\":\"area\",\"title\":\"Flujo de Cobros vs. Pendientes (Q4)\",\"xKey\":\"mes\",\"yKey\":\"monto\",\"data\":[{\"mes\":\"Oct\",\"monto\":32000},{\"mes\":\"Nov\",\"monto\":41500},{\"mes\":\"Dic\",\"monto\":48500}]}",
+        "```",
+        "",
+        "```flow",
+        "{\"nodes\":[{\"id\":\"1\",\"label\":\"RAG: Política Comercial\"},{\"id\":\"2\",\"label\":\"MCP Postgres: 6 Facturas\"},{\"id\":\"3\",\"label\":\"Cola: 6 Recordatorios\"}],\"edges\":[{\"source\":\"1\",\"target\":\"2\"},{\"source\":\"2\",\"target\":\"3\"}]}",
+        "```",
+        "",
+        "Si quieres, profundizo en alguno de estos bloques o genero el reporte completo.",
+      ].join("\n"),
+      spoken: "Te dejo en pantalla las métricas, la gráfica y el flujo del proceso para que los revises.",
+      tools: [
+        { id: "metrics", name: "leer_metricas", label: "Cargo las métricas del negocio", detail: "ingresos · facturas · tiempo ahorrado" },
+        { id: "flow", name: "mapear_flujo", label: "Mapeo el flujo del proceso", detail: "RAG → Postgres → Cola" },
+      ],
+      followUps: ["¿Cómo se generan estos datos?", "Muéstrame más métricas", "Pedir un reporte por correo"],
+    }),
+  },
 ]
 
 function templateReply(rng: Rng, template: Template): Built {

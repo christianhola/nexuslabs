@@ -31,6 +31,7 @@ const columns = [
       { label: "Industrias", href: "/industrias" },
       { label: "Comentarios", href: "/comentarios" },
       { label: "Créditos", href: "/creditos" },
+      { label: "Privacidad y términos", href: "/legal" },
     ],
   },
   {

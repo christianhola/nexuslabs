@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { Menu, MessageCircle } from "lucide-react"
 
 import { BrandMark, Wordmark } from "@/components/brand"
@@ -105,6 +105,9 @@ function MenuLink({
 }
 
 export function Header() {
+  const location = useLocation()
+  const isActive = (href: string) =>
+    location.pathname === href || location.pathname.startsWith(href + "/")
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background">
       <div className="mx-auto flex h-16 w-full max-w-[1240px] items-center gap-5 px-5 sm:px-8">
@@ -163,7 +166,7 @@ export function Header() {
                   render={
                     <Link
                       to="/comentarios"
-                      className="h-8 px-3 text-[0.82rem] text-muted-foreground hover:text-foreground"
+                      className={`h-8 px-3 text-[0.82rem] hover:text-foreground ${isActive("/comentarios") ? "text-foreground font-medium" : "text-muted-foreground"}`}
                     >
                       Comentarios
                     </Link>
@@ -176,7 +179,7 @@ export function Header() {
                   render={
                     <Link
                       to="/asistente"
-                      className="h-8 px-3 text-[0.82rem] text-muted-foreground hover:text-foreground"
+                      className={`h-8 px-3 text-[0.82rem] hover:text-foreground ${isActive("/asistente") ? "text-foreground font-medium" : "text-muted-foreground"}`}
                     >
                       Asistente
                     </Link>
