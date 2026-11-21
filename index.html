@@ -32,8 +32,44 @@
     </script>
     <script type="module" crossorigin src="/nexuslabs/assets/index-CO8UdQFI.js"></script>
     <link rel="stylesheet" crossorigin href="/nexuslabs/assets/index-C0ehawMb.css">
-  </head>
+  <style>
+*{box-sizing:border-box}body{margin:0;font:16px system-ui,sans-serif;background:#aa967f;color:#0b0a09}#nexus-satellite-hero .hero{min-height:100svh;display:grid;align-items:center;grid-template-columns:.76fr 1.24fr;gap:32px;width:min(100%,1240px);margin:auto;padding:70px 40px}#nexus-satellite-hero .copy{position:relative;z-index:1}#nexus-satellite-hero .nexus-title{max-width:14ch;font-size:clamp(2.75rem,6vw,5.75rem);font-weight:500;line-height:.98;letter-spacing:-.055em;margin:0}#nexus-satellite-hero .cta{display:inline-flex;align-items:center;gap:24px;color:#fff;background:#0b0a09;text-decoration:none;font-weight:650;border-radius:12px;margin-top:36px;padding:6px 6px 6px 20px;min-height:56px;cursor:pointer}#nexus-satellite-hero .cta:focus-visible{outline:2px solid #0b0a09;outline-offset:4px}#nexus-satellite-hero .arrow{display:grid;place-items:center;width:44px;height:44px;border-radius:8px;background:#fff;color:#0b0a09;font-size:29px;line-height:1}#nexus-satellite-hero .figure{position:relative;width:100%;aspect-ratio:728/376}#nexus-satellite-hero .figure img,#nexus-satellite-hero .figure video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}#nexus-satellite-hero .figure{mask-image:linear-gradient(to right,transparent,#000 4%,#000 96%,transparent)}@media(max-width:760px){#nexus-satellite-hero .hero{grid-template-columns:1fr;align-content:center;gap:38px;padding:48px 24px}}@media(prefers-reduced-motion:reduce){#nexus-satellite-hero video{display:none}}
+#nexus-satellite-hero .nexus-play{grid-column:1/-1;justify-self:center;border:1px solid currentColor;border-radius:8px;padding:8px 14px;background:transparent;color:inherit;cursor:pointer}</style></head>
   <body>
     <div id="root"></div>
-  </body>
+  <template id="nexus-satellite-template"><section id="nexus-satellite-hero"><div class="hero"><div class="copy"><p class="nexus-title">Sitios con oficio.</p><a class="cta" href="/nexuslabs/plantillas">Ver catálogo<span class="arrow" aria-hidden="true">›</span></a></div><div class="figure" aria-hidden="true"><img src="/nexuslabs/preview-satelite/satellite-poster.webp" width="728" height="376" alt=""><video muted loop autoplay playsinline preload="none" poster="/nexuslabs/preview-satelite/satellite-poster.webp"></video></div><button class="nexus-play" type="button" hidden>Reproducir animación</button></div></section></template><script>
+(() => {
+  const root = document.getElementById('root');
+  const template = document.getElementById('nexus-satellite-template');
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  let current;
+  function syncPlayback() {
+    if (!current?.isConnected) return;
+    const video = current.querySelector('video');
+    const play = current.querySelector('.nexus-play');
+    play.hidden = true;
+    if (preference.matches) { video.pause(); return; }
+    video.muted = true;
+    video.defaultMuted = true;
+    if (!video.hasAttribute('src')) video.src = '/nexuslabs/preview-satelite/satellite-loop.mp4';
+    video.play().catch(() => { if (!preference.matches && video.isConnected) play.hidden = false; });
+  }
+  function mount() {
+    const studio = root.querySelector('section#inicio');
+    if (!studio || current?.isConnected) return;
+    current = template.content.firstElementChild.cloneNode(true);
+    current.querySelector('.cta').addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      const link = studio.querySelector('a[href="/nexuslabs/plantillas"]');
+      if (link) { event.preventDefault(); link.click(); }
+    });
+    current.querySelector('.nexus-play').addEventListener('click',syncPlayback);
+    studio.before(current);
+    syncPlayback();
+  }
+  preference.addEventListener('change',syncPlayback);
+  new MutationObserver(mount).observe(root,{childList:true,subtree:true});
+  mount();
+})();
+</script></body>
 </html>
