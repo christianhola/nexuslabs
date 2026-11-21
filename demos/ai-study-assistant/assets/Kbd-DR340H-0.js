@@ -1,0 +1,1 @@
+import{u as e}from"./Button-CshZm_2l.js";var t=e();function n({children:e}){return(0,t.jsx)(`kbd`,{className:`inline-grid h-6 min-w-6 place-items-center rounded-md border border-line-strong bg-white/5 px-1.5 font-mono text-[11.5px] text-soft`,children:e})}export{n as t};

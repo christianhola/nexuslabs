@@ -1,0 +1,1 @@
+import{x as e}from"./Container-CBAs3Lqk.js";import{t}from"./storage-X8vdmqSz.js";function n(){return t(`draft`,e)}var r=()=>Math.random().toString(36).slice(2,9);function i(e){return[e.title,e.subtitle,...e.blocks.map(e=>e.text??``)].join(` `).split(/\s+/).filter(Boolean).length}export{n,i as r,r as t};

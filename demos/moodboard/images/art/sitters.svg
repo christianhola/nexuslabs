@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 1000" width="760" height="1000">
+<defs>
+  <filter id="brush" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="33" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="36"/>
+    <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.16 0"/>
+  </filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter></defs>
+<rect width="760" height="1000" fill="#e3828c"/>
+  <rect width="760" height="1000" fill="#f2a7ae" opacity="0.4" filter="url(#soft)"/>
+  <g filter="url(#brush)">
+    <rect x="0" y="0" width="70" height="680" fill="#3c8a86"/>
+    <circle cx="35" cy="120" r="24" fill="#e7b7c6"/><circle cx="30" cy="300" r="20" fill="#f0c9a2"/><circle cx="40" cy="480" r="22" fill="#a8cfe0"/>
+    <path d="M560 420 L760 380 L760 760 L600 760Z" fill="#8a5f4a"/>
+    <path d="M0 680 L760 610 L760 1000 L0 1000Z" fill="#3e9c80"/>
+    <path d="M0 680 L760 610" stroke="#2b7a63" stroke-width="10"/>
+    <!-- left sitter -->
+    <path d="M90 690 C70 560 110 470 200 440 C290 470 330 560 300 690Z" fill="#9db6cf"/>
+    <path d="M120 660 C110 560 150 500 190 490 C230 520 240 600 230 660Z" fill="#f4f1ea"/>
+    <circle cx="200" cy="370" r="92" fill="#f4f1ea"/>
+    <path d="M128 330 C150 300 180 290 200 300 C190 260 150 250 120 270Z" fill="#1d1d1f"/>
+    <path d="M118 300 L120 220 L170 285Z" fill="#1d1d1f"/><path d="M282 300 L282 222 L232 285Z" fill="#f4f1ea"/>
+    <rect x="128" y="352" width="62" height="40" rx="18" fill="#6fd0c9" stroke="#1d1d1f" stroke-width="6"/>
+    <rect x="208" y="352" width="62" height="40" rx="18" fill="#6fd0c9" stroke="#1d1d1f" stroke-width="6"/>
+    <path d="M190 370 L208 370" stroke="#1d1d1f" stroke-width="6"/>
+    <path d="M190 420 L200 430 L210 420" stroke="#d9707f" stroke-width="5" fill="none"/>
+    <!-- right sitter -->
+    <path d="M400 640 C380 500 420 400 520 370 C620 400 650 500 630 640Z" fill="#a9c3dc"/>
+    <path d="M450 620 C440 520 480 450 520 440 C570 470 580 560 570 620Z" fill="#f7f4ee"/>
+    <circle cx="520" cy="300" r="88" fill="#f7f4ee"/>
+    <path d="M450 250 L452 170 L500 230Z" fill="#f7f4ee"/><path d="M590 250 L594 168 L544 230Z" fill="#1d1d1f"/>
+    <path d="M540 230 C580 220 610 250 606 290 C590 270 560 260 540 262Z" fill="#1d1d1f"/>
+    <rect x="448" y="282" width="64" height="40" rx="18" fill="#1d1d1f"/>
+    <rect x="528" y="282" width="64" height="40" rx="18" fill="#1d1d1f"/>
+    <path d="M470 380 L570 380" stroke="#1d1d1f" stroke-width="8"/>
+    <path d="M510 345 L520 354 L530 345" stroke="#d9707f" stroke-width="5" fill="none"/>
+    <!-- bottle and glasses -->
+    <rect x="335" y="520" width="48" height="160" rx="10" fill="#2f6b3f"/>
+    <rect x="350" y="460" width="18" height="70" fill="#2f6b3f"/>
+    <rect x="340" y="580" width="38" height="44" fill="#e9dcb4"/>
+    <path d="M430 600 C430 650 490 650 490 600Z" fill="#9b1b26" stroke="#e8e2dc" stroke-width="3"/>
+    <path d="M460 646 L460 720 M440 722 L480 722" stroke="#e8e2dc" stroke-width="4"/>
+    <path d="M260 640 C260 690 320 690 320 640Z" fill="#9b1b26" stroke="#e8e2dc" stroke-width="3"/>
+    <path d="M290 686 L290 760 M270 762 L310 762" stroke="#e8e2dc" stroke-width="4"/>
+    <ellipse cx="610" cy="820" rx="120" ry="50" fill="#d9d6cc"/>
+    <ellipse cx="570" cy="810" rx="34" ry="20" fill="#8f8a80"/><ellipse cx="640" cy="826" rx="34" ry="20" fill="#8f8a80"/><ellipse cx="660" cy="795" rx="30" ry="18" fill="#a29c90"/>
+  </g>
+<rect width="760" height="1000" filter="url(#grain)"/>
+</svg>

@@ -1,0 +1,1 @@
+import{i as e,u as t}from"./Button-CshZm_2l.js";var n=t();function r({className:t}){return(0,n.jsx)(`div`,{"aria-hidden":!0,className:e(`skeleton rounded-xl`,t)})}export{r as t};

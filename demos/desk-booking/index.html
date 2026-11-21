@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>DeskFlow: your office, organised</title>
+    <meta name="description" content="Book desks, meeting rooms, parking and lockers. See who's in the office and plan your week with your team." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/nexuslabs/demos/desk-booking/favicon.svg" />
+    <script type="module" crossorigin src="/nexuslabs/demos/desk-booking/assets/index-D7Uz2W8x.js"></script>
+    <link rel="stylesheet" crossorigin href="/nexuslabs/demos/desk-booking/assets/index-DR2uWARr.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  
+<style>
+#fb-bar,#fb-mail{position:fixed;z-index:2147483647;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;border-radius:999px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#fb-bar{left:16px;bottom:16px;display:flex;align-items:center;gap:9px;padding:7px 13px 7px 8px;color:#f7f3ea;background:rgba(10,10,14,.78);border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:.94;transition:opacity .25s,transform .25s}
+#fb-bar:hover{opacity:1;transform:translateY(-1px)}
+#fb-bar .mark{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#f3ce9f,#d8a273);color:#17130d;display:grid;place-items:center;font-size:10px;font-weight:800}
+#fb-bar .back{color:#f7f3ea;text-decoration:none}
+#fb-bar .name{color:rgba(247,243,234,.55);font-weight:500;max-width:20ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-left:1px solid rgba(255,255,255,.18);padding-left:9px}
+#fb-mail{right:16px;bottom:16px;display:inline-flex;align-items:center;gap:7px;padding:11px 15px;color:#17130d;background:#f3ce9f;border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#fb-mail:hover{background:#f8ddb9}
+#fb-mail svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#fb-fallback{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;padding:24px;background:rgba(8,8,10,.86);backdrop-filter:blur(8px);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f7f3ea}
+#fb-fallback[hidden]{display:none}
+#fb-fallback .box{max-width:380px;background:#111116;border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+#fb-fallback b{display:block;font-size:18px;margin-bottom:8px;color:#fff}
+#fb-fallback p{color:#a8a29a;margin:0 0 18px}
+#fb-fallback a,#fb-fallback button{display:inline-block;margin-right:8px;padding:10px 14px;border-radius:999px;font:600 12px/1 inherit;text-decoration:none;cursor:pointer}
+#fb-fallback .primary{background:#f3ce9f;color:#17130d;border:0}
+#fb-fallback .ghost{background:transparent;color:#f7f3ea;border:1px solid rgba(255,255,255,.2)}
+@media(max-width:620px){#fb-bar .name,#fb-mail span{display:none}#fb-mail{padding:12px}}
+</style>
+<div id="fb-bar" role="navigation" aria-label="Navegación de la demo">
+  <span class="mark" aria-hidden="true">N</span>
+  <a class="back" id="fb-back" href="/nexuslabs/">← Catálogo</a>
+  <span class="name">Desk booking · demo estática</span>
+</div>
+<a id="fb-mail" href="mailto:info@nexviro.art?cc=meridian%40nexviro.art&subject=NEXUS%20LABS%20%C2%B7%20Desk%20booking&body=Hola%20NEXUS%20LABS%20%F0%9F%91%8B%20Me%20interesa%20la%20plantilla%20%C2%ABDesk%20booking%C2%BB%20y%20quiero%20una%20versi%C3%B3n%20personalizada.%20La%20vi%20en%20%2Fplantillas-freebuff%2Fdemos%2Fdesk-booking%2F" data-name="Desk booking" data-email="info@nexviro.art" data-email-alt="meridian@nexviro.art" rel="nofollow"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg><span>Escribir</span></a>
+<div id="fb-fallback" hidden role="alert">
+  <div class="box">
+    <b>Esta demo no terminó de cargar</b>
+    <p>Puede ser la conexión o una ruta interna. Reintenta o vuelve al catálogo; el resto de la biblioteca sigue disponible.</p>
+    <button class="primary" type="button" onclick="location.reload()">Reintentar</button>
+    <a class="ghost" href="/nexuslabs/">Ir al catálogo</a>
+  </div>
+</div>
+<script>(function(){var base="/nexuslabs/demos/desk-booking/";
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;if(!a)return;if(a.target&&a.target!=='_self')return;var h=a.getAttribute('href');if(h&&h.charAt(0)==='/'&&h.indexOf(base)!==0){e.preventDefault();location.href=base+h.slice(1);}},true);
+document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&!t.dataset.fbBroken){t.dataset.fbBroken='1';t.style.visibility='hidden';}},true);
+var m=document.getElementById('fb-mail');if(m){var n=m.getAttribute('data-name'),to=m.getAttribute('data-email'),cc=m.getAttribute('data-email-alt');var subject='NEXUS LABS · '+n;var msg='Hola NEXUS LABS 👋 Me interesa la plantilla «'+n+'» y quiero una versión personalizada. La vi en '+location.href;m.href='mailto:'+to+'?cc='+encodeURIComponent(cc)+'&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(msg);}
+function guard(){var r=document.getElementById('root');if(!r||r.children.length)return;if((r.textContent||'').trim().length)return;var f=document.getElementById('fb-fallback');if(f)f.hidden=false;}
+setTimeout(guard,9000);window.addEventListener('load',function(){setTimeout(guard,3000)});
+})();</script></body>
+</html>

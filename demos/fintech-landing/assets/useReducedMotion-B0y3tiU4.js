@@ -1,0 +1,1 @@
+import{Ht as e,zt as t}from"./Button-B4UuE87a.js";var n=e(t(),1),r=`(prefers-reduced-motion: reduce)`;function i(e){let t=window.matchMedia(r);return t.addEventListener(`change`,e),()=>t.removeEventListener(`change`,e)}function a(){return(0,n.useSyncExternalStore)(i,()=>window.matchMedia(r).matches,()=>!1)}export{a as t};

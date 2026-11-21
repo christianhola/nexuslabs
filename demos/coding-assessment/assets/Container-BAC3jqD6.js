@@ -1,0 +1,1 @@
+import{f as e,p as t}from"./Card-DKPZELB4.js";var n=t();function r({children:t,className:r,wide:i}){return(0,n.jsx)(`div`,{className:e(`mx-auto w-full px-4 sm:px-6 lg:px-8`,i?`max-w-[1360px]`:`max-w-[1200px]`,r),children:t})}export{r as t};
