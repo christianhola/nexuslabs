@@ -29,6 +29,7 @@ editorial.innerHTML = `
       <div>
         <h2 id="nexus-inicio-proyecto">Cómo empieza tu proyecto</h2>
         <a href="${base}/contacto">Solicitar un proyecto</a>
+        <div><a href="https://nexus-labs-workspace.cleardumpling.chatgpt.site/">Probar el workspace editable</a></div>
       </div>
       <ol class="nexus-editorial__steps"></ol>
     </div>
