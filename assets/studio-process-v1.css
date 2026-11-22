@@ -1,0 +1,80 @@
+.nexus-studio-process {
+  border-top: 1px solid var(--border);
+}
+
+.nexus-studio-process__layout {
+  display: grid;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 5rem) 1.25rem;
+}
+
+.nexus-studio-process h2 {
+  max-width: 13ch;
+  font-size: clamp(2.45rem, 5vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+}
+
+.nexus-studio-process__intro {
+  max-width: 32ch;
+  margin-top: 1rem;
+}
+
+.nexus-studio-process p {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.nexus-studio-process__link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.24em;
+}
+
+.nexus-studio-process__steps {
+  margin: 0;
+  padding-inline-start: 2.25rem;
+  list-style: decimal-leading-zero outside;
+}
+
+.nexus-studio-process__steps li {
+  border-top: 1px solid var(--border);
+  padding: 0.9rem 0 0.95rem 0.4rem;
+}
+
+.nexus-studio-process__steps li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.nexus-studio-process__steps li::marker {
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.nexus-studio-process h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.nexus-studio-process__steps p {
+  margin-top: 0.35rem;
+}
+
+@media (min-width: 640px) {
+  .nexus-studio-process__layout {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 920px) {
+  .nexus-studio-process__layout {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(3rem, 7vw, 7.5rem);
+  }
+}
