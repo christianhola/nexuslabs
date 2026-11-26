@@ -9,7 +9,7 @@ import { assetUrl } from "@/lib/site"
 export function Industries({ showHeading = true }: { showHeading?: boolean }) {
   return (
     <section className="relative py-16 sm:py-20">
-      <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {showHeading && (
           <SectionHead
             eyebrow="Diez territorios, un mismo criterio"
@@ -42,17 +42,20 @@ export function Industries({ showHeading = true }: { showHeading?: boolean }) {
                 className="group flex h-full flex-col"
                 aria-label={`Ver plantillas de ${industry.label}`}
               >
-                <div className="overflow-hidden bg-muted/40">
+                <div className="relative overflow-hidden rounded-2xl border border-border bg-background/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-primary/35 group-hover:shadow-[0_20px_45px_-20px_rgba(255,255,255,0.2)]">
                   {industry.cover ? (
-                    <img
-                      src={assetUrl(industry.cover)}
-                      alt=""
-                      width={640}
-                      height={440}
-                      loading="lazy"
-                      decoding="async"
-                      className="aspect-[4/3] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img
+                        src={assetUrl(industry.cover)}
+                        alt=""
+                        width={640}
+                        height={480}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.05] group-active:scale-[1.02]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                    </div>
                   ) : (
                     <div className="aspect-[4/3] w-full bg-muted" />
                   )}
