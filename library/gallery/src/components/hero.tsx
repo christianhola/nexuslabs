@@ -166,7 +166,7 @@ export function Hero() {
                     alt={`Portada de la plantilla ${first.name}`}
                     width={840}
                     height={525}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04] group-active:scale-[1.02]"
                   />

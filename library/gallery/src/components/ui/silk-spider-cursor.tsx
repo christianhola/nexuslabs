@@ -835,6 +835,11 @@ export default function SilkSpiderCursor({
     }
     window.addEventListener("scroll", markDirty, { passive: true, capture: true })
     window.addEventListener("resize", markDirty)
+    // Timestamp del último scroll: el modelo se carga cuando la página lleva
+    // un rato quieta, para no meter su bloqueo en mitad de un gesto.
+    let lastScrollAt = 0
+    const noteScroll = () => { lastScrollAt = performance.now() }
+    window.addEventListener("scroll", noteScroll, { passive: true, capture: true })
 
     // ---------------- spider state (page px, y down) ----------------
     const sp = {
@@ -1133,20 +1138,52 @@ export default function SilkSpiderCursor({
         }, undefined, () => done(null))
       })
     const own = modelSrc === DEFAULT_MODEL
-    Promise.all([loadTex(own ? topTextureSrc ?? DEFAULT_TOP : topTextureSrc ?? ""), loadTex(own ? faceTextureSrc ?? DEFAULT_FACE : faceTextureSrc ?? "")]).then(([top, front]) => {
-      if (disposed || !modelSrc) return
-      loader.load(
-        modelSrc,
-        (gltf) => {
-          if (disposed) return
-          rig = buildRig(gltf.scene, top, front, own ? DEFAULT_TIPS : null)
-          body.add(rig.root)
-          placeFeet()
-        },
-        undefined,
-        () => {},
-      )
-    })
+    // Decodificar el GLB y montar el rig cuesta más de un segundo de hilo
+    // principal. Al montar, eso cae justo cuando el usuario empieza a leer y a
+    // desplazarse; se espera a que la página esté cargada y sin scroll reciente
+    // (con un tope duro para que la araña no se quede sin cargar nunca).
+    const mountedAt = performance.now()
+    let modelStarted = false
+    const startModel = () => {
+      if (disposed || modelStarted || !modelSrc) return
+      modelStarted = true
+      Promise.all([loadTex(own ? topTextureSrc ?? DEFAULT_TOP : topTextureSrc ?? ""), loadTex(own ? faceTextureSrc ?? DEFAULT_FACE : faceTextureSrc ?? "")]).then(([top, front]) => {
+        if (disposed || !modelSrc) return
+        loader.load(
+          modelSrc,
+          (gltf) => {
+            if (disposed) return
+            rig = buildRig(gltf.scene, top, front, own ? DEFAULT_TIPS : null)
+            body.add(rig.root)
+            placeFeet()
+          },
+          undefined,
+          () => {},
+        )
+      })
+    }
+    const waitForQuiet = () => {
+      if (disposed || modelStarted) return
+      const elapsed = performance.now() - mountedAt
+      const quietFor = performance.now() - lastScrollAt
+      const ready = document.readyState === "complete" && quietFor > 700
+      if (ready || elapsed > 9000) {
+        const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number })
+          .requestIdleCallback
+        const run = () => {
+          if (performance.now() - lastScrollAt < 400) {
+            window.setTimeout(waitForQuiet, 500)
+            return
+          }
+          startModel()
+        }
+        if (ric) ric(run, { timeout: 1500 })
+        else window.setTimeout(run, 300)
+        return
+      }
+      window.setTimeout(waitForQuiet, 300)
+    }
+    window.setTimeout(waitForQuiet, 400)
 
     // ---------------- per-frame ----------------
     const knee = [0, 0, 0, 0, 0, 0]
@@ -1994,6 +2031,7 @@ export default function SilkSpiderCursor({
       stop()
       ro.disconnect()
       window.removeEventListener("scroll", markDirty, { capture: true })
+      window.removeEventListener("scroll", noteScroll, { capture: true })
       window.removeEventListener("resize", markDirty)
       document.removeEventListener("visibilitychange", vis)
       window.removeEventListener("pointermove", pm)
